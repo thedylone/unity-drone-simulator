@@ -4,32 +4,37 @@ using UnityEngine;
 
 public class KeyboardController : MonoBehaviour
 {
+    public float Speed = 1f;
+    public KeyCode Forward = KeyCode.W;
+    public KeyCode Backward = KeyCode.S;
+    public KeyCode Left = KeyCode.A;
+    public KeyCode Right = KeyCode.D;
+    
     // Start is called before the first frame update
-    float speed;
     void Start()
     {
-        speed = 5f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(Forward))
         {
-            rb.AddForce(Vector3.forward * speed, ForceMode.Force);
+            rb.AddForce(Vector3.forward * Speed, ForceMode.Force);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(Backward))
         {
-            rb.AddForce(Vector3.back * speed, ForceMode.Force);
+            rb.AddForce(Vector3.back * Speed, ForceMode.Force);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(Left))
         {
-            rb.AddForce(Vector3.left * speed, ForceMode.Force);
+            rb.AddForce(Vector3.left * Speed, ForceMode.Force);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(Right))
         {
-            rb.AddForce(Vector3.right * speed, ForceMode.Force);
+            rb.AddForce(Vector3.right * Speed, ForceMode.Force);
         }
     }
 }
