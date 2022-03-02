@@ -1,70 +1,68 @@
-# drone
-dsta project
+# drone versus drone
 
-## tasks completed
-### blender
-for modelling of the environment to use in unity
-- [x] created scene, ground
-- [x] created obstacles
-> - buildings
-> - trees
-- [x] attached obstacles to ground using particle system (hair)
-> - able to choose how many obstacles to appear  
-> - able to randomise the properties of the obstacles:
-> > - scale
-> > - location
-> > - rotation
-> > - "weightedness" - how often each obstacle appears
-- [x] added 2 more types of trees, more realistic
-- [x] used Count for the randomisation
+drone
 
-### unity
-for controls and simulation
-- [x] imported scene from blender
-- [x] added drones into scene
-- [x] added 2 cameras
-> - 1 for world view
-> - 1 for view from drone above
-- [x] added script to control drone below
-> with WASD movement
-- [x] added rigid body collisions between drone and obstacles
-- [x] update to 2020.3.30f1
-> - was accidentally on older 2019.4.10f1
-- [x] formatted to naming and layout conventions
-> - renamed class KeyboardController
-- [x] used Public Variables (Speed, KeyCode) for KeyboardController
-- [x] attached KeyboardController to both drones
-> - arrow keys for Drone A
-> - WASD for Drone B
-- [x] reloaded new scene and make Prefab for the scene
-- [x] added Package [Live Capture](https://docs.unity3d.com/Packages/com.unity.live-capture@2.0/manual/index.html)
-- [x] set up Live Capture
-> - created Take Recorder
-> - created Virtual Camera Actor
-> - created Virtual Camera Device
-- [ ] connect VLC to Companion App Server
-> - VLC was unable to connect
-- [ ] troubleshoot RTSP connection
-> - tried connecting using [SharpRTSP Client](https://github.com/ngraziano/SharpRTSP)
-> > - able to connect to test RTSP server
-> > - issues when connected to Unity's Companion App Server
+## Contents
 
-## to-do
-### blender
-- [ ] create more obstacles
-> birds, branches etc.
-- [ ] improve current obstacles
-> e.g. make trees more detailed, more realistic, branches and leaves
-- [ ] ability to finetune randomisation
-> possible to enforce minimum gap between obstacles?
+- [blender](#blender)
+    - [installation](#installation)
+    - [setup](#setup)
+- [unity](#unity)
+    - [installation](#installation-1)
+    - [setup](#setup-1)
+    - [system requirements](#system-requirements)
 
-### unity
-- [ ] output camera feed from drone
-> RTSP from camera
+## blender
 
+easy modelling of the scenes for unity. with procedural generation.
 
-## others
-- [model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
-- potential issue when drone goes under an obstacle, blocked from vision?
-- maximum height of obstacles - can they reach height of drone above?
-> current height is set at 55m
+### installation
+
+- install Blender v3 and later
+    - earlier versions not guaranteed
+
+### setup
+
+TBC
+
+## unity
+
+engine simulation with RTSP streaming capabilities
+
+based on [FFmpegOut](https://github.com/keijiro/FFmpegOut), with changes to FFmpeg to output RTSP stream
+
+### installation
+
+- install Unity 2020.3.30f1 or later
+- this repository already includes FFmpegOut and the Binary package
+
+### setup
+
+- open Scenes folder and select Template
+    - Template comes with a Main Camera pre-configured
+- import scene from blender or create entirely within unity
+    - for physics e.g. collision, select all elements in scene from Blender and add:
+        - Rigidbody
+        - Mesh Collider
+        - Is Kinematic if necessary
+- (optional) attach controller scripts onto models
+- if not using Template or other pre-configured scenes:
+    - create a camera (or use existing camera)
+    - follow steps in [FFmpegOut](https://github.com/keijiro/FFmpegOut/blob/master/README.md)
+        - add Camera Capture component
+        - (optional) add Frame Rate Controller component
+- does not come with RTSP server. consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to create the server.
+- simply connect to the RTSP server with a RTSP client e.g. VLC
+
+### system requirements
+
+for FFmpegOut:
+
+- Unity 2018.3 or later
+- Windows: Direct3D 11
+- macOS: Metal
+- Linux: Vulkan
+
+FFmpegOut only supports desktop platforms.
+
+FFmpegOut works not only on the legacy rendering paths (forward/deferred) but also on the standard scriptable render pipelines (LWRP/HDRP).
