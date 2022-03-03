@@ -40,7 +40,6 @@ namespace FFmpegOut
                 + " -video_size " + width + "x" + height
                 + " -framerate " + frameRate
                 + " -loglevel warning -i - " + preset.GetOptions()
-                + " -pix_fmt yuv420p"
                 + " -f rtsp -rtsp_transport tcp " + outputPath
             );
             }
