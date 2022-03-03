@@ -14,29 +14,48 @@ namespace FFmpegOut
         public static FFmpegSession Create(
             string name,
             int width, int height, float frameRate,
-            FFmpegPreset preset
+            FFmpegPreset preset, bool rtsp, string path
         )
         {
-            name += System.DateTime.Now.ToString(" yyyy MMdd HHmmss");
-            var path = name.Replace(" ", "_") + preset.GetSuffix();
-            return CreateWithOutputPath(path, width, height, frameRate, preset);
+            if (path == "")
+            {
+                name += System.DateTime.Now.ToString(" yyyy MMdd HHmmss");
+                path = name.Replace(" ", "_") + preset.GetSuffix();
+            }
+
+            return CreateWithOutputPath(path, width, height, frameRate, preset, rtsp);
         }
 
         public static FFmpegSession CreateWithOutputPath(
             string outputPath,
             int width, int height, float frameRate,
-            FFmpegPreset preset
+            FFmpegPreset preset, bool enableRTSP
         )
         {
-            return new FFmpegSession(
+            if (enableRTSP)
+            {
+                return new FFmpegSession(
                 "-y -re -f rawvideo -vcodec rawvideo -pixel_format rgba"
                 + " -colorspace bt709"
                 + " -video_size " + width + "x" + height
                 + " -framerate " + frameRate
                 + " -loglevel warning -i - " + preset.GetOptions()
                 + " -pix_fmt yuv420p"
-                + " -f rtsp -rtsp_transport tcp rtsp://127.0.0.1:8554/stream"
+                + " -f rtsp -rtsp_transport tcp " + outputPath
             );
+            }
+            else
+            {
+                return new FFmpegSession(
+                "-y -f rawvideo -vcodec rawvideo -pixel_format rgba"
+                + " -colorspace bt709"
+                + " -video_size " + width + "x" + height
+                + " -framerate " + frameRate
+                + " -loglevel warning -i - " + preset.GetOptions()
+                + " \"" + outputPath + "\""
+            );
+            }
+
         }
 
         public static FFmpegSession CreateWithArguments(string arguments)

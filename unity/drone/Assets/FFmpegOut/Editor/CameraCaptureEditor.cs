@@ -16,6 +16,10 @@ namespace FFmpegOut
         SerializedProperty _preset;
         SerializedProperty _frameRate;
 
+        SerializedProperty _enableRTSP;
+
+        SerializedProperty _path;
+
         GUIContent[] _presetLabels;
         int[] _presetOptions;
 
@@ -37,6 +41,8 @@ namespace FFmpegOut
             _height = serializedObject.FindProperty("_height");
             _preset = serializedObject.FindProperty("_preset");
             _frameRate = serializedObject.FindProperty("_frameRate");
+            _enableRTSP = serializedObject.FindProperty("_enableRTSP");
+            _path = serializedObject.FindProperty("_path");
 
             var presets = FFmpegPreset.GetValues(typeof(FFmpegPreset));
             _presetLabels = presets.Cast<FFmpegPreset>().
@@ -56,6 +62,9 @@ namespace FFmpegOut
 
             EditorGUILayout.IntPopup(_preset, _presetLabels, _presetOptions);
             EditorGUILayout.PropertyField(_frameRate);
+
+            EditorGUILayout.PropertyField(_enableRTSP);
+            EditorGUILayout.PropertyField(_path);
 
             serializedObject.ApplyModifiedProperties();
         }
