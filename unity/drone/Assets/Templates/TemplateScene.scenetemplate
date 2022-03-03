@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TemplateScene
   m_EditorClassIdentifier: 
   templateScene: {fileID: 102900000, guid: f344c1ce3124c0946ba2bb1fa11391a8, type: 3}
-  templateName: 
-  description: 
+  templateName: Main Template
+  description: Camera wiith FFmepg scripts
   preview: {fileID: 0}
   dependencies: []
   templatePipeline: {fileID: 0}
