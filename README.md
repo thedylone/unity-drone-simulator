@@ -51,6 +51,10 @@ based on [FFmpegOut](https://github.com/keijiro/FFmpegOut), with changes to FFmp
     - follow steps in [FFmpegOut](https://github.com/keijiro/FFmpegOut/blob/master/README.md)
         - add Camera Capture component
         - (optional) add Frame Rate Controller component
+    - use preset “H.264 NVIDIA” or “HEVC NVIDIA” for good quality
+    - tick Enable RTSP for RTSP output
+    - specify output path e.g. `rtsp://127.0.0.1:8554/stream`
+    - if RTSP disabled and path is blank, will save a recording to the root Unity folder instead
 - does not come with RTSP server. consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to create the server.
 - simply connect to the RTSP server with a RTSP client e.g. VLC
 
