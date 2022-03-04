@@ -58,13 +58,12 @@ namespace FFmpegOut
             {
                 EditorGUILayout.PropertyField(_width);
                 EditorGUILayout.PropertyField(_height);
+                EditorGUILayout.PropertyField(_enableRTSP);
+                EditorGUILayout.PropertyField(_path);
             }
 
             EditorGUILayout.IntPopup(_preset, _presetLabels, _presetOptions);
             EditorGUILayout.PropertyField(_frameRate);
-
-            EditorGUILayout.PropertyField(_enableRTSP);
-            EditorGUILayout.PropertyField(_path);
 
             serializedObject.ApplyModifiedProperties();
         }
