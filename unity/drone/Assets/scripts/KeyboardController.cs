@@ -24,7 +24,9 @@ public class KeyboardController : MonoBehaviour
 
         Rigidbody rb = GetComponent<Rigidbody>();
 
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance))
+        int layerMask = 1 << 3;
+
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance, layerMask))
         {
             transform.Translate(0, (HoverDistance - hit.distance), 0);
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
