@@ -7,6 +7,7 @@ public class KeyboardController : MonoBehaviour
 {
     public float Speed = 1f;
     public float HoverDistance = 10f;
+    public int Layer = 3;
     public KeyCode Forward = KeyCode.W;
     public KeyCode Backward = KeyCode.S;
     public KeyCode Left = KeyCode.A;
