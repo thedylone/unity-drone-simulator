@@ -187,8 +187,8 @@ MonoBehaviour:
   _height: 1080
   _preset: 5
   _frameRate: 30
-  _enableRTSP: 0
-  _path: output
+  _enableRTSP: 1
+  _path: rtsp://localhost:8554/stream
 --- !u!81 &62956201
 AudioListener:
   m_ObjectHideFlags: 0

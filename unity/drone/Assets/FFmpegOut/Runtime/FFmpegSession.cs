@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEditor;
 using System.Collections.Generic;
 
 namespace FFmpegOut
@@ -11,12 +12,26 @@ namespace FFmpegOut
     {
         #region Factory methods
 
+        const string RTSPWarningDecisionKey = "Example.RTSPWarningDecision";
         public static FFmpegSession Create(
             string name,
             int width, int height, float frameRate,
             FFmpegPreset preset, bool rtsp, string path
         )
         {
+            if (rtsp)
+            {
+                if (!EditorUtility.DisplayDialog("RTSP Server Required", "Ensure you have a RTSP server running!", "OK", "Record instead", DialogOptOutDecisionType.ForThisSession, RTSPWarningDecisionKey))
+                {
+                    rtsp = false;
+                    path = "";
+                }
+                else if (path == "")
+                {
+                    path = "rtsp://localhost:8554/stream";
+                    EditorUtility.DisplayDialog("RTSP Server", "RTSP URL set to " + path, "OK");
+                }
+            }
             if (path == "")
             {
                 name += System.DateTime.Now.ToString(" yyyy MMdd HHmmss");
