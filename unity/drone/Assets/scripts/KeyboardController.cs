@@ -7,6 +7,7 @@ public class KeyboardController : MonoBehaviour
 {
     public float Speed = 1f;
     public float HoverDistance = 10f;
+    public int layer = 3;
     public KeyCode Forward = KeyCode.W;
     public KeyCode Backward = KeyCode.S;
     public KeyCode Left = KeyCode.A;
@@ -25,7 +26,7 @@ public class KeyboardController : MonoBehaviour
 
         Rigidbody rb = GetComponent<Rigidbody>();
 
-        int layerMask = 1 << 3;
+        int layerMask = 1 << layer;
 
         if (Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance, layerMask))
         {
