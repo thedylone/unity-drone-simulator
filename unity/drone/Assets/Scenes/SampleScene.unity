@@ -515,7 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 1920
   _height: 1080
-  _preset: 1
+  _preset: 5
   _frameRate: 30
   _enableRTSP: 1
   _path: rtsp://127.0.0.1:8554/stream
@@ -589,6 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
+  EnableHover: 0
   HoverDistance: 10
   Layer: 3
   Forward: 119
@@ -824,6 +825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
+  EnableHover: 0
   HoverDistance: 55
   Layer: 3
   Forward: 273
