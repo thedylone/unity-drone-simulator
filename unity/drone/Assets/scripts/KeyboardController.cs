@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class KeyboardController : MonoBehaviour
 {
     public float Speed = 1f;
