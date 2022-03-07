@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 696089497}
   - component: {fileID: 696089496}
   - component: {fileID: 696089495}
+  - component: {fileID: 696089501}
   - component: {fileID: 696089500}
   m_Layer: 0
   m_Name: drone a
@@ -283,7 +284,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696089494}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86a1b87c2b33fa43ad065917c07b9e5, type: 3}
   m_Name: 
@@ -389,6 +390,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &696089501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696089494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d84d4dd7396df4490066368bc6dab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  EnableHover: 0
+  HoverDistance: 10
+  Layer: 3
 --- !u!1001 &941558401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1227,7 +1244,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942838301}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e55bddfe16e69224c8c4b4eb165695d4, type: 3}
   m_Name: 
@@ -1241,7 +1258,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942838301}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a66fbd5ffe9b9d64da304996f1919f40, type: 3}
   m_Name: 
