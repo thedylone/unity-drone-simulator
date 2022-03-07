@@ -1227,12 +1227,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942838301}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e55bddfe16e69224c8c4b4eb165695d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameRate: 30
+  _frameRate: 60
   _offlineMode: 1
 --- !u!114 &1942838306
 MonoBehaviour:
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942838301}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a66fbd5ffe9b9d64da304996f1919f40, type: 3}
   m_Name: 
@@ -1249,9 +1249,9 @@ MonoBehaviour:
   _width: 1920
   _height: 1080
   _preset: 5
-  _frameRate: 30
+  _frameRate: 60
   _enableRTSP: 1
-  _path: rtsp://localhost:8554/stream
+  _path: rtsp://localhost:8554/drone
 --- !u!1 &1979487428 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7184425808944323844, guid: c10bf67959e7b4242ba6baa1d8ef7a24,
