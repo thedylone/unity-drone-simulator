@@ -34,21 +34,9 @@ public class KeyboardController : MonoBehaviour
             transform.Translate(0, (HoverDistance - hit.distance), 0);
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         }
-        if (Input.GetKey(Forward))
-        {
-            rb.AddForce(Vector3.forward * Speed, ForceMode.Force);
-        }
-        if (Input.GetKey(Backward))
-        {
-            rb.AddForce(Vector3.back * Speed, ForceMode.Force);
-        }
-        if (Input.GetKey(Left))
-        {
-            rb.AddForce(Vector3.left * Speed, ForceMode.Force);
-        }
-        if (Input.GetKey(Right))
-        {
-            rb.AddForce(Vector3.right * Speed, ForceMode.Force);
-        }
+        float horizontalInput = Input.GetAxis("Keyboard Horizontal");
+        float verticalInput = Input.GetAxis("Keyboard Vertical");
+
+        rb.AddForce(horizontalInput * Speed, 0, verticalInput * Speed);
     }
 }
