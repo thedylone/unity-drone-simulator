@@ -245,10 +245,10 @@ public class ControllerManager : MonoBehaviour {
 	}
 	// for stabilised angle control
 	Vector3 controlAngles(float userElevatorInput) {
-		float userRudderInput = Input.GetAxis ("Rudder") * (invertAxisR ? -1 : 1);
-		float userAileronInput = Input.GetAxis ("Aileron") * (invertAxisA ? -1 : 1);
-		userRudderInput = 0;
-		userAileronInput = 0;
+		// float userRudderInput = Input.GetAxis ("Rudder") * (invertAxisR ? -1 : 1);
+		// float userAileronInput = Input.GetAxis ("Aileron") * (invertAxisA ? -1 : 1);
+		float userRudderInput = 0;
+		float userAileronInput = 0;
 		//float userElevatorInput = Input.GetAxis ("Elevator") * (invertAxisE ? -1 : 1);
 
 		float boost = Input.GetAxis ("Boost");

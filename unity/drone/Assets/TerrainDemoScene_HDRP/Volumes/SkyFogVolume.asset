@@ -134,7 +134,7 @@ MonoBehaviour:
   active: 1
   enable:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   localClouds:
     m_OverrideState: 1
     m_Value: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
     m_Value: 1500
   cloudThickness:
     m_OverrideState: 1
-    m_Value: 800
+    m_Value: 1000
   fadeInMode:
     m_OverrideState: 1
     m_Value: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
     m_Value: 0
   cloudPreset:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 1
   cumulusMap:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -205,7 +205,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 64
   customDensityCurve:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       serializedVersion: 2
       m_Curve:
@@ -219,8 +219,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.2
-        value: 1
+        time: 0.15417023
+        value: 0.9905739
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -228,8 +228,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.4833404
-        value: 0.68584424
+        time: 0.5208465
+        value: 0.9426802
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -237,13 +237,13 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.8
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        time: 0.6833313
+        value: 0.9834404
+        inSlope: 0.15759939
+        outSlope: 0.15759939
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 1
         outWeight: 0
       - serializedVersion: 3
         time: 1
@@ -347,13 +347,13 @@ MonoBehaviour:
     m_Value: 0.45
   densityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.295
+    m_Value: 0.32
   shapeFactor:
     m_OverrideState: 1
-    m_Value: 0.681
+    m_Value: 0.45
   shapeScale:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 9.14
   shapeOffset:
     m_OverrideState: 1
     m_Value: {x: 0.28, y: 10.5, z: -0.33}
@@ -368,7 +368,7 @@ MonoBehaviour:
     m_Value: 1
   ambientLightProbeDimmer:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.3
   sunLightDimmer:
     m_OverrideState: 1
     m_Value: 1

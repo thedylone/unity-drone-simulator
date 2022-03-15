@@ -30,7 +30,7 @@ MonoBehaviour:
     m_Value: {r: 0.9575472, g: 0.9810317, b: 1, a: 1}
   maxFogDistance:
     m_OverrideState: 1
-    m_Value: 10000
+    m_Value: 10014.6
   mipFogMaxMip:
     m_OverrideState: 1
     m_Value: 0.3
@@ -42,13 +42,13 @@ MonoBehaviour:
     m_Value: 2000
   baseHeight:
     m_OverrideState: 1
-    m_Value: -40
+    m_Value: 5
   maximumHeight:
     m_OverrideState: 1
     m_Value: 300
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 900
+    m_Value: 910.5
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 0
@@ -437,7 +437,7 @@ MonoBehaviour:
   active: 1
   enable:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   localClouds:
     m_OverrideState: 1
     m_Value: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
     m_Value: 1500
   cloudThickness:
     m_OverrideState: 1
-    m_Value: 380
+    m_Value: 1000
   fadeInMode:
     m_OverrideState: 1
     m_Value: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
     m_Value: 0
   cloudPreset:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 4
   cumulusMap:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -650,13 +650,13 @@ MonoBehaviour:
     m_Value: 0.45
   densityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.295
+    m_Value: 0.45
   shapeFactor:
     m_OverrideState: 1
-    m_Value: 0.681
+    m_Value: 0.43
   shapeScale:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 5
   shapeOffset:
     m_OverrideState: 1
     m_Value: {x: 0.28, y: 10.5, z: -0.33}
