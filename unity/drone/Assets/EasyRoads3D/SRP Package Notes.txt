@@ -1,0 +1,13 @@
+Imported HDRP version: 10.3.2
+
+Demo Scene Steps:
+
+1) Upgrade built-in materials to HDRP
+   Edit > Render Pipeline > HD Render Pipeline > Upgrade from Builtin pipeline > Upgrade Project Materials to High definition Materials
+
+2) Select the Directional Light object, this should update the lighting if necessary
+
+3) Terrain, when the terrain is not updated a new terrain material can be assigned using the URP or HDRP TerrainLit shader
+
+4) Refresh the road network in the case of unexpected shadows surrounding the roads and crossings: General Settings > Scene Settings > Refresh Road Network 
+

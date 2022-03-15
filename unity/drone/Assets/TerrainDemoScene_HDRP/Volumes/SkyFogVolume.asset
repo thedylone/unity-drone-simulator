@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   enable:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   localClouds:
     m_OverrideState: 1
