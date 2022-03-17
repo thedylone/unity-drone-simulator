@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -557,10 +557,7 @@ MonoBehaviour:
   EnableHover: 0
   HoverDistance: 55
   Layer: 3
-  Forward: 273
-  Backward: 274
-  Left: 276
-  Right: 275
+  converter: {fileID: 0}
 --- !u!135 &696089496
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1151,14 +1148,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367431093}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 25, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5000002, z: 2.5000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1941267010}
   m_RootOrder: 18
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!81 &1367431095
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1563,13 +1560,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
-  EnableHover: 0
+  EnableHover: 1
   HoverDistance: 10
   Layer: 3
-  Forward: 119
-  Backward: 115
-  Left: 97
-  Right: 100
+  converter: {fileID: 1941267017}
 --- !u!54 &1941267013
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1578,8 +1572,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941267009}
   serializedVersion: 2
-  m_Mass: 0.4
-  m_Drag: 1
+  m_Mass: 1.375
+  m_Drag: 0
   m_AngularDrag: 0.01
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -1648,6 +1642,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRPM: 14000
+--- !u!114 &1941267017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941267009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd15d8e6094ab3d459c545491024a48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSpeed: 15
+  MaxTiltAngle: 25
+  tiltSpeed: 1
+  Responsiveness: 25
+  vx: 0.1
+  vy: 0.1
 --- !u!1 &1942838301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,6 +2079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Phantom
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c10bf67959e7b4242ba6baa1d8ef7a24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10bf67959e7b4242ba6baa1d8ef7a24, type: 3}

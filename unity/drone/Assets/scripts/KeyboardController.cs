@@ -9,10 +9,7 @@ public class KeyboardController : MonoBehaviour
     public bool EnableHover = false;
     public float HoverDistance = 10f;
     public int Layer = 3;
-    public KeyCode Forward = KeyCode.W;
-    public KeyCode Backward = KeyCode.S;
-    public KeyCode Left = KeyCode.A;
-    public KeyCode Right = KeyCode.D;
+    public VelocityConverter converter;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +34,7 @@ public class KeyboardController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Keyboard Horizontal");
         float verticalInput = Input.GetAxis("Keyboard Vertical");
 
-        rb.AddForce(horizontalInput * Speed, 0, verticalInput * Speed);
+        // rb.AddForce(horizontalInput * Speed, 0, verticalInput * Speed);
+        converter.Convert(horizontalInput, verticalInput);
     }
 }
