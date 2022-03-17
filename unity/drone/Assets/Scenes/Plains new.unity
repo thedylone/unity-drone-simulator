@@ -1655,9 +1655,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSpeed: 15
-  MaxTiltAngle: 25
+  MaxTiltDeg: 25
   tiltSpeed: 1
-  vx: 0
+  vx: 0.1
   vy: 0
 --- !u!1 &1942838301
 GameObject:

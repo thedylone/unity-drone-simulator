@@ -43,10 +43,10 @@ public class VelocityConverter : MonoBehaviour
         float currentTiltx = transform.rotation.eulerAngles.z;
         float currentTilty = transform.rotation.eulerAngles.x;
 
-        float dx = vx * MaxSpeed - ux;
-        float dy = vy * MaxSpeed - uy;
+        float dx = vx * MaxSpeed * 2 - ux;
+        float dy = vy * MaxSpeed * 2 - uy;
 
-        float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Abs(Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * dx * dx) * 180 / Mathf.PI)) * Mathf.Sign(dx);
+        float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Abs(Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI)) * Mathf.Sign(dx);
         float tilty = Mathf.Min(MaxTiltDeg, Mathf.Abs(Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI)) * Mathf.Sign(dy);
         
         // rb.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
