@@ -1599,49 +1599,6 @@ MonoBehaviour:
   xSpeed: 0
   ySpeed: 2000
   zSpeed: 0
---- !u!114 &1941267015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941267009}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eab67c1218941d40a830c214be7288e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anglesControl: 1
-  tiltAngle: 20
-  rollSensitivity: 100
-  pitchSensitivity: 100
-  yawSensitivity: 100
-  tiltAngleKp: 4
-  yawAngleKp: 2
-  tiltRateKp: 10
-  yawRateKp: 10
-  heightControl: 1
-  verticalSpeedSensitivity: 3
-  heightSensitivity: 3000
-  verticalSpeedKp: 2
-  squareMapping: 1
-  invertAxisT: 0
-  invertAxisR: 0
-  invertAxisE: 0
-  invertAxisA: 0
---- !u!114 &1941267016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941267009}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feefb5ffcabe7e543a19e01bc785f5b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxRPM: 14000
 --- !u!114 &1941267017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,6 +1616,23 @@ MonoBehaviour:
   tiltSpeed: 25
   vx: 0
   vy: 0
+--- !u!114 &1941267018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941267009}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a139693b6d761b45a20c5529a8a9335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSpeed: 15
+  MaxTiltDeg: 25
+  tiltSpeed: 1
+  vx: 0.5
+  vy: 0.5
 --- !u!1 &1942838301
 GameObject:
   m_ObjectHideFlags: 0

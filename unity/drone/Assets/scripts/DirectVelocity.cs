@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class VelocityConverter : MonoBehaviour
+public class DirectVelocity : MonoBehaviour
 {
     public float MaxSpeed = 15f;
     public float MaxTiltDeg = 25f;
@@ -44,8 +44,8 @@ public class VelocityConverter : MonoBehaviour
         currentTiltx *= -1;
         float currentTilty = transform.rotation.eulerAngles.x > 180 ? transform.rotation.eulerAngles.x - 360 : transform.rotation.eulerAngles.x;
 
-        float dx = vx * MaxSpeed + (vx * MaxSpeed - ux) * 1;
-        float dy = vy * MaxSpeed + (vy * MaxSpeed - uy) * 1;
+        float dx = vx * MaxSpeed * 3 - 2 * ux;
+        float dy = vy * MaxSpeed * 2 - uy;
 
         float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dx);
         float tilty = Mathf.Min(MaxTiltDeg, Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dy);
@@ -55,8 +55,9 @@ public class VelocityConverter : MonoBehaviour
 
         rb.rotation = Quaternion.Euler(new Vector3(tilty, 0, -tiltx));
         
-        float fx = mass * 9.81f * Mathf.Tan(currentTiltx * Mathf.PI / 180) - drag * ux * ux * Mathf.Sign(ux);
-        float fy = mass * 9.81f * Mathf.Tan(currentTilty * Mathf.PI / 180) - drag * uy * uy * Mathf.Sign(uy);
-        rb.AddForce(fx, 0, fy);
+        // float fx = mass * 9.81f * Mathf.Tan(currentTiltx * Mathf.PI / 180) - drag * ux * ux * Mathf.Sign(ux);
+        // float fy = mass * 9.81f * Mathf.Tan(currentTilty * Mathf.PI / 180) - drag * uy * uy * Mathf.Sign(uy);
+        // rb.AddForce(fx, 0, fy);
+        rb.velocity = new Vector3(vx * MaxSpeed, 0, vy * MaxSpeed);
     }
 }
