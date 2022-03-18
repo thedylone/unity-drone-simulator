@@ -18,10 +18,10 @@ public class VelocityConverter : MonoBehaviour
     private float mass;
     private float drag;
 
-    void Update()
-    {
-        Convert(vx, vy);
-    }
+    // void Update()
+    // {
+    //     Convert(vx, vy);
+    // }
 
     public void Convert(float vx, float vy)
     {

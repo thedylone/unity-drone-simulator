@@ -9,7 +9,7 @@ public class KeyboardController : MonoBehaviour
     public bool EnableHover = false;
     public float HoverDistance = 10f;
     public int Layer = 3;
-    public VelocityConverter converter;
+    public DirectVelocity converter;
 
     // Start is called before the first frame update
     void Start()

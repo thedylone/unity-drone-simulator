@@ -8,6 +8,7 @@ public class DirectVelocity : MonoBehaviour
 {
     public float MaxSpeed = 15f;
     public float MaxTiltDeg = 25f;
+    public bool EnableTilt;
     public float tiltSpeed = 1;
     [Range(-1, 1)]
     public float vx = 0.5f;
@@ -18,10 +19,10 @@ public class DirectVelocity : MonoBehaviour
     private float mass;
     private float drag;
 
-    void Update()
-    {
-        Convert(vx, vy);
-    }
+    // void Update()
+    // {
+    //     Convert(vx, vy);
+    // }
 
     public void Convert(float vx, float vy)
     {
@@ -35,26 +36,30 @@ public class DirectVelocity : MonoBehaviour
         vx = Mathf.Min(Mathf.Abs(vx), 1) * Mathf.Sign(vx);
         vy = Mathf.Min(Mathf.Abs(vy), 1) * Mathf.Sign(vy);
 
-        // float trueTiltx = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vx * vx) * Mathf.Sign(vx);
-        float trueTiltx = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vx * vx);
-        // float trueTilty = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vy * vy) * Mathf.Sign(vy);
-        float trueTilty = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vy * vy);
+        if (EnableTilt)
+        {
+            // float trueTiltx = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vx * vx) * Mathf.Sign(vx);
+            float trueTiltx = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vx * vx);
+            // float trueTilty = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vy * vy) * Mathf.Sign(vy);
+            float trueTilty = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vy * vy);
 
-        float currentTiltx = transform.rotation.eulerAngles.z > 180 ? transform.rotation.eulerAngles.z - 360 : transform.rotation.eulerAngles.z;
-        currentTiltx *= -1;
-        float currentTilty = transform.rotation.eulerAngles.x > 180 ? transform.rotation.eulerAngles.x - 360 : transform.rotation.eulerAngles.x;
+            float currentTiltx = transform.rotation.eulerAngles.z > 180 ? transform.rotation.eulerAngles.z - 360 : transform.rotation.eulerAngles.z;
+            currentTiltx *= -1;
+            float currentTilty = transform.rotation.eulerAngles.x > 180 ? transform.rotation.eulerAngles.x - 360 : transform.rotation.eulerAngles.x;
 
-        float dx = vx * MaxSpeed * 3 - 2 * ux;
-        float dy = vy * MaxSpeed * 2 - uy;
+            float dx = vx * MaxSpeed * 3 - 2 * ux;
+            float dy = vy * MaxSpeed * 2 - uy;
 
-        float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dx);
-        float tilty = Mathf.Min(MaxTiltDeg, Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dy);
-        
-        tiltx = tiltx < currentTiltx ? Mathf.Max(tiltx, currentTiltx - tiltSpeed * Time.deltaTime) : Mathf.Min(tiltx, currentTiltx + tiltSpeed * Time.deltaTime);
-        tilty = tilty < currentTilty ? Mathf.Max(tilty, currentTilty - tiltSpeed * Time.deltaTime) : Mathf.Min(tilty, currentTilty + tiltSpeed * Time.deltaTime);
+            float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dx);
+            float tilty = Mathf.Min(MaxTiltDeg, Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dy);
 
-        rb.rotation = Quaternion.Euler(new Vector3(tilty, 0, -tiltx));
-        
+            tiltx = tiltx < currentTiltx ? Mathf.Max(tiltx, currentTiltx - tiltSpeed * Time.deltaTime) : Mathf.Min(tiltx, currentTiltx + tiltSpeed * Time.deltaTime);
+            tilty = tilty < currentTilty ? Mathf.Max(tilty, currentTilty - tiltSpeed * Time.deltaTime) : Mathf.Min(tilty, currentTilty + tiltSpeed * Time.deltaTime);
+
+            rb.rotation = Quaternion.Euler(new Vector3(tilty, 0, -tiltx));
+        }
+
+
         // float fx = mass * 9.81f * Mathf.Tan(currentTiltx * Mathf.PI / 180) - drag * ux * ux * Mathf.Sign(ux);
         // float fy = mass * 9.81f * Mathf.Tan(currentTilty * Mathf.PI / 180) - drag * uy * uy * Mathf.Sign(uy);
         // rb.AddForce(fx, 0, fy);
