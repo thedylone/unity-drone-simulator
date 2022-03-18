@@ -40,20 +40,22 @@ public class VelocityConverter : MonoBehaviour
         // float trueTilty = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vy * vy) * Mathf.Sign(vy);
         float trueTilty = Mathf.Atan(Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) * vy * vy);
 
-        float currentTiltx = transform.rotation.eulerAngles.z;
-        float currentTilty = transform.rotation.eulerAngles.x;
+        float currentTiltx = transform.rotation.eulerAngles.z > 180 ? transform.rotation.eulerAngles.z - 360 : transform.rotation.eulerAngles.z;
+        currentTiltx *= -1;
+        float currentTilty = transform.rotation.eulerAngles.x > 180 ? transform.rotation.eulerAngles.x - 360 : transform.rotation.eulerAngles.x;
 
         float dx = vx * MaxSpeed * 2 - ux;
         float dy = vy * MaxSpeed * 2 - uy;
 
-        float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Abs(Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI)) * Mathf.Sign(dx);
-        float tilty = Mathf.Min(MaxTiltDeg, Mathf.Abs(Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI)) * Mathf.Sign(dy);
+        float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dx);
+        float tilty = Mathf.Min(MaxTiltDeg, Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dy);
         
-        // rb.MoveRotation(Quaternion.Euler(new Vector3(0, 0, 0)));
-        // transform.Rotate(tilty * 180 / Mathf.PI, 0, tiltx * 180 / Mathf.PI, Space.Self);
+        tiltx = tiltx < currentTiltx ? Mathf.Max(tiltx, currentTiltx - tiltSpeed * Time.deltaTime) : Mathf.Min(tiltx, currentTiltx + tiltSpeed * Time.deltaTime);
+        tilty = tilty < currentTilty ? Mathf.Max(tilty, currentTilty - tiltSpeed * Time.deltaTime) : Mathf.Min(tilty, currentTilty + tiltSpeed * Time.deltaTime);
+
         rb.rotation = Quaternion.Euler(new Vector3(tilty, 0, -tiltx));
         
-        float fx = mass * 9.81f * Mathf.Tan(-currentTiltx * Mathf.PI / 180) - drag * ux * ux * Mathf.Sign(ux);
+        float fx = mass * 9.81f * Mathf.Tan(currentTiltx * Mathf.PI / 180) - drag * ux * ux * Mathf.Sign(ux);
         float fy = mass * 9.81f * Mathf.Tan(currentTilty * Mathf.PI / 180) - drag * uy * uy * Mathf.Sign(uy);
         rb.AddForce(fx, 0, fy);
     }

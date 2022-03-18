@@ -1554,13 +1554,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941267009}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86a1b87c2b33fa43ad065917c07b9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
-  EnableHover: 1
+  EnableHover: 0
   HoverDistance: 10
   Layer: 3
   converter: {fileID: 1941267017}
@@ -1656,8 +1656,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 15
   MaxTiltDeg: 25
-  tiltSpeed: 1
-  vx: 0.1
+  tiltSpeed: 25
+  vx: 0
   vy: 0
 --- !u!1 &1942838301
 GameObject:
