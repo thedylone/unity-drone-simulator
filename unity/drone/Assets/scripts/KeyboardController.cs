@@ -26,10 +26,14 @@ public class KeyboardController : MonoBehaviour
 
         int layerMask = 1 << Layer;
 
-        if (EnableHover && Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance, layerMask))
+        if (EnableHover)
         {
-            transform.Translate(0, (HoverDistance - hit.distance), 0);
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.useGravity = true;
+            if (Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance, layerMask))
+            {
+                transform.Translate(0, (HoverDistance - hit.distance), 0);
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            }
         }
         float horizontalInput = Input.GetAxis("Keyboard Horizontal");
         float verticalInput = Input.GetAxis("Keyboard Vertical");
