@@ -38,7 +38,13 @@ public class KeyboardController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Keyboard Horizontal");
         float verticalInput = Input.GetAxis("Keyboard Vertical");
 
-        // rb.AddForce(horizontalInput * Speed, 0, verticalInput * Speed);
-        converter.Convert(horizontalInput, verticalInput);
+        if (converter)
+        {
+            converter.Convert(horizontalInput, verticalInput);
+        }
+        else
+        {
+            rb.AddForce(horizontalInput * Speed, 0, verticalInput * Speed);
+        }
     }
 }
