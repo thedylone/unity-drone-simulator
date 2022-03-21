@@ -47,8 +47,8 @@ public class DirectVelocity : MonoBehaviour
             currentTiltx *= -1;
             float currentTilty = transform.rotation.eulerAngles.x > 180 ? transform.rotation.eulerAngles.x - 360 : transform.rotation.eulerAngles.x;
 
-            float dx = vx * MaxSpeed * 3 - 2 * ux;
-            float dy = vy * MaxSpeed * 2 - uy;
+            float dx = vx * MaxSpeed + (vx * MaxSpeed - ux) * 1;
+            float dy = vy * MaxSpeed + (vy * MaxSpeed - uy) * 1;
 
             float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dx);
             float tilty = Mathf.Min(MaxTiltDeg, Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dy);
