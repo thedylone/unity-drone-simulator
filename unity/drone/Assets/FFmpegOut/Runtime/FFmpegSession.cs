@@ -55,7 +55,7 @@ namespace FFmpegOut
                 + " -video_size " + width + "x" + height
                 + " -framerate " + frameRate
                 + " -loglevel warning -i - " + preset.GetOptions()
-                + " -f rtsp -rtsp_transport tcp " + outputPath
+                + " -f rtsp -rtsp_transport tcp -muxdelay 0.1 " + outputPath
             );
             }
             else
