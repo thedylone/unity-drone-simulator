@@ -44,7 +44,7 @@ def state_update():
     #Centralise camera frame
     deltas[0] = ((camera_md[2] + camera_md[4]) / 2) - (x_res / 2)
     deltas[1] = ((camera_md[3] + camera_md[5]) / 2) - (y_res / 2)
-    camera_chase()
+    
 
 def send_cmd():
     #use this function to transmit data
@@ -74,7 +74,7 @@ def camera_chase():
     #Normalise wrt throttle control
     velo[0] = velo[0] / top_vxy * xy_normal
     velo[1] = velo[1] / top_vxy * xy_normal
-    send_cmd()
+    
 
 def main():
     while True:
@@ -82,5 +82,7 @@ def main():
         if data != None: # if NEW data has been received since last ReadReceivedData function call
             camera_md[2:6] = map(float,data.split(','))
             state_update()
+            camera_chase()
+            send_cmd()
 
 main()
