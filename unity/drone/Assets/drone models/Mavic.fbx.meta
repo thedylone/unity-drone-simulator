@@ -3,7 +3,12 @@ guid: d02ed726e9252df49bd0545f3faf659a
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FinalDJI
+    second: {fileID: 2100000, guid: 67b0e44a62ebb81498c4f1cdb932065d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
