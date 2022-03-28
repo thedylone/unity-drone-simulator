@@ -28,7 +28,8 @@ namespace FFmpegOut
         // - No target texture is specified in the camera.
         bool ShouldShowFormatOptions
         {
-            get {
+            get
+            {
                 if (targets.Length > 1) return true;
                 var camera = ((Component)target).GetComponent<Camera>();
                 return camera.targetTexture == null;
@@ -58,10 +59,10 @@ namespace FFmpegOut
             {
                 EditorGUILayout.PropertyField(_width);
                 EditorGUILayout.PropertyField(_height);
-                EditorGUILayout.PropertyField(_enableRTSP);
-                EditorGUILayout.PropertyField(_path);
             }
-
+            
+            EditorGUILayout.PropertyField(_enableRTSP);
+            EditorGUILayout.PropertyField(_path);
             EditorGUILayout.IntPopup(_preset, _presetLabels, _presetOptions);
             EditorGUILayout.PropertyField(_frameRate);
 
