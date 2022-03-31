@@ -78,7 +78,7 @@ public class ClientObject : MonoBehaviour
 
     private void HandleMessage(string message) // where the received messages will be processed
     {
-        var inputs = message.Split(' ');
+        var inputs = message.Split(',');
         float vx = float.Parse(inputs[0]);
         float vy = float.Parse(inputs[1]);
         Converter.Convert(vx, vy);
