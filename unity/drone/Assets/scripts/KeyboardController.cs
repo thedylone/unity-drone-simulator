@@ -9,10 +9,7 @@ public class KeyboardController : MonoBehaviour
     public bool EnableHover = false;
     public float HoverDistance = 10f;
     public int Layer = 3;
-    public KeyCode Forward = KeyCode.W;
-    public KeyCode Backward = KeyCode.S;
-    public KeyCode Left = KeyCode.A;
-    public KeyCode Right = KeyCode.D;
+    public DirectVelocity converter;
 
     // Start is called before the first frame update
     void Start()
@@ -29,26 +26,25 @@ public class KeyboardController : MonoBehaviour
 
         int layerMask = 1 << Layer;
 
-        if (EnableHover && Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance, layerMask))
+        if (EnableHover)
         {
-            transform.Translate(0, (HoverDistance - hit.distance), 0);
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.useGravity = true;
+            if (Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance, layerMask))
+            {
+                transform.Translate(0, (HoverDistance - hit.distance), 0);
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            }
         }
-        if (Input.GetKey(Forward))
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        if (converter)
         {
-            rb.AddForce(Vector3.forward * Speed, ForceMode.Force);
+            converter.Convert(horizontalInput, verticalInput);
         }
-        if (Input.GetKey(Backward))
+        else
         {
-            rb.AddForce(Vector3.back * Speed, ForceMode.Force);
-        }
-        if (Input.GetKey(Left))
-        {
-            rb.AddForce(Vector3.left * Speed, ForceMode.Force);
-        }
-        if (Input.GetKey(Right))
-        {
-            rb.AddForce(Vector3.right * Speed, ForceMode.Force);
+            rb.AddForce(horizontalInput * Speed, 0, verticalInput * Speed);
         }
     }
 }

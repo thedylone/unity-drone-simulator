@@ -19,23 +19,11 @@ namespace FFmpegOut
             FFmpegPreset preset, bool rtsp, string path
         )
         {
-            if (rtsp)
-            {
-                if (!EditorUtility.DisplayDialog("RTSP Server Required", "Ensure you have a RTSP server running!", "OK", "Record instead", DialogOptOutDecisionType.ForThisSession, RTSPWarningDecisionKey))
-                {
-                    rtsp = false;
-                    path = "";
-                }
-                else if (path == "")
-                {
-                    path = "rtsp://localhost:8554/stream";
-                    EditorUtility.DisplayDialog("RTSP Server", "RTSP URL set to " + path, "OK");
-                }
-            }
             if (path == "")
             {
                 name += System.DateTime.Now.ToString(" yyyy MMdd HHmmss");
                 path = name.Replace(" ", "_") + preset.GetSuffix();
+                rtsp = false;
             }
 
             return CreateWithOutputPath(path, width, height, frameRate, preset, rtsp);
@@ -50,12 +38,12 @@ namespace FFmpegOut
             if (enableRTSP)
             {
                 return new FFmpegSession(
-                "-y -re -f rawvideo -vcodec rawvideo -pixel_format rgba"
+                "-y -f rawvideo -vcodec rawvideo -pixel_format rgba"
                 + " -colorspace bt709"
                 + " -video_size " + width + "x" + height
                 + " -framerate " + frameRate
                 + " -loglevel warning -i - " + preset.GetOptions()
-                + " -f rtsp -rtsp_transport tcp " + outputPath
+                + " -f rtsp -muxdelay 0.1 -preset ultrafast -tune fastdecode -crf 0 " + outputPath
             );
             }
             else

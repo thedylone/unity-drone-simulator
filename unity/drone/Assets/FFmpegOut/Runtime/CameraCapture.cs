@@ -10,7 +10,7 @@ namespace FFmpegOut
     public sealed class CameraCapture : MonoBehaviour
     {
         #region Public properties
-
+        [SerializeField] public Camera TargetCamera;
         [SerializeField] int _width = 1920;
 
         public int width
@@ -118,7 +118,7 @@ namespace FFmpegOut
             if (_tempRT != null)
             {
                 // Dispose the frame texture.
-                GetComponent<Camera>().targetTexture = null;
+                TargetCamera.GetComponent<Camera>().targetTexture = null;
                 Destroy(_tempRT);
                 _tempRT = null;
             }
@@ -143,7 +143,7 @@ namespace FFmpegOut
 
         void Update()
         {
-            var camera = GetComponent<Camera>();
+            var camera = TargetCamera.GetComponent<Camera>();
 
             // Lazy initialization
             if (_session == null)
