@@ -1,2 +1,10 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+*.cs        text eol=lf diff=csharp
+*.shader    text eol=lf linguist-detectable=false
+*.cginc     text eol=lf
+*.hlsl      text eol=lf
+*.compute   text eol=lf
+
+*.meta      text eol=lf
