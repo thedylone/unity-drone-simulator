@@ -74,7 +74,13 @@ public class NetMqListener
 
 public class ClientObject : MonoBehaviour
 {
-    public string Path;
+    [SerializeField] string _path = "tcp://localhost:5556";
+
+    public string path
+    {
+        get { return _path; }
+        set { _path = value; }
+    }
     public DirectVelocity Converter;
     private NetMqListener _netMqListener;
 
@@ -107,11 +113,11 @@ public class ClientObject : MonoBehaviour
     {
         if (_netMqListener == null)
         {
-            Debug.Log("starting zmq client at" + Path);
+            Debug.Log("starting zmq client at " + _path);
             _netMqListener = new NetMqListener(HandleMessage);
-            _netMqListener.Path = Path;
+            _netMqListener.Path = _path;
             _netMqListener.Start();
-            Debug.Log("started zmq client at" + Path);
+            Debug.Log("started zmq client at " + _path);
         }
         _netMqListener.Update();
     }

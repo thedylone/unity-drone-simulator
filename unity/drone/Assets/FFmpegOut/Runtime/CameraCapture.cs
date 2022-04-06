@@ -13,18 +13,18 @@ namespace FFmpegOut
         [SerializeField] public Camera TargetCamera;
         [SerializeField] int _width = 1920;
 
-        public int width
+        public string width
         {
-            get { return _width; }
-            set { _width = value; }
+            get { return _width.ToString(); }
+            set { _width = int.Parse(value); }
         }
 
         [SerializeField] int _height = 1080;
 
-        public int height
+        public string height
         {
-            get { return _height; }
-            set { _height = value; }
+            get { return _height.ToString(); }
+            set { _height = int.Parse(value); }
         }
 
         [SerializeField] FFmpegPreset _preset;
@@ -37,10 +37,10 @@ namespace FFmpegOut
 
         [SerializeField] float _frameRate = 60;
 
-        public float frameRate
+        public string frameRate
         {
-            get { return _frameRate; }
-            set { _frameRate = value; }
+            get { return _frameRate.ToString(); }
+            set { _frameRate = int.Parse(value); }
         }
 
         [SerializeField] bool _enableRTSP = false;
