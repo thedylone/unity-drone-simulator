@@ -5,12 +5,12 @@ public static class AppHelper
      #endif
      public static void Quit()
      {
-         #if UNITY_EDITOR
-         UnityEditor.EditorApplication.isPlaying = false;
-         #elif UNITY_WEBPLAYER
-         Application.OpenURL(webplayerQuitURL);
-         #else
-         Application.Quit();
-         #endif
+        //  #if UNITY_EDITOR
+        //  UnityEditor.EditorApplication.isPlaying = false;
+        //  #elif UNITY_WEBPLAYER
+        //  Application.OpenURL(webplayerQuitURL);
+        //  #else
+        //  Application.Quit();
+        //  #endif
      }
  }

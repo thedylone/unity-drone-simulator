@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class DataGenerator : MonoBehaviour
 {
-    public GameObject TargetDrone;
-    public Camera cam;
-    public GameObject Light;
-    public GameObject Terrain;
-    public GameObject DroneGroup;
+    public GameObject TargetObject;
+    public Camera TargetCamera;
     public int FilesLimit = 25;
     public string SavePath;
+    public GameObject[] RandomizeObjects;
     private float screenWidth;
     private float screenHeight;
     private float minX;
@@ -28,15 +26,12 @@ public class DataGenerator : MonoBehaviour
         if (frame >= 2)
         {
             frame = 0;
-            if (Light) Light.GetComponent<Randomizer>().Randomize();
-            if (Terrain) Terrain.GetComponent<Randomizer>().Randomize();
-            if (DroneGroup) DroneGroup.GetComponent<Randomizer>().Randomize();
-            cam.GetComponent<Randomizer>().Randomize();
-            TargetDrone.GetComponent<Randomizer>().Randomize();
 
-            if (CheckInFrame(TargetDrone, cam))
+            Randomize();
+
+            if (CheckInFrame(TargetObject, TargetCamera))
             {
-                GenerateOutput(cam);
+                GenerateOutput(TargetCamera);
                 // Debug.Log("in frame");
             }
         }
@@ -117,6 +112,12 @@ public class DataGenerator : MonoBehaviour
     {
         if (SavePath.Length == 0) SavePath = Application.dataPath;
         // outputs camera image to jpg
+        if (Camera.targetTexture == null)
+        {
+            RenderTexture tempRT = new RenderTexture(Camera.pixelWidth, Camera.pixelHeight, 24, GetTargetFormat(Camera));
+            tempRT.antiAliasing = GetAntiAliasingLevel(Camera);
+            Camera.targetTexture = tempRT;
+        }
         RenderTexture activeRenderTexture = RenderTexture.active;
         RenderTexture.active = Camera.targetTexture;
 
@@ -133,8 +134,26 @@ public class DataGenerator : MonoBehaviour
         File.WriteAllBytes(SavePath + "/images/" + fileCounter + ".jpg", bytes); // change to .png for png files
 
         // outputs position data in specific format
-        File.WriteAllText(SavePath + "/labels/" + fileCounter + ".txt", "0.0 0 0.0 " + minX + " " + minY + " " + maxX + " " + maxY + " 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+        File.WriteAllText(SavePath + "/labels/" + fileCounter + ".txt", "drone 0.0 0 0.0 " + minX + " " + minY + " " + maxX + " " + maxY + " 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
 
         fileCounter++;
+    }
+
+    RenderTextureFormat GetTargetFormat(Camera camera)
+    {
+        return camera.allowHDR ? RenderTextureFormat.DefaultHDR : RenderTextureFormat.Default;
+    }
+
+    int GetAntiAliasingLevel(Camera camera)
+    {
+        return camera.allowMSAA ? QualitySettings.antiAliasing : 1;
+    }
+
+    public void Randomize()
+    {
+        foreach (GameObject obj in RandomizeObjects)
+        {
+            obj.GetComponent<Randomizer>().Randomize();
+        }
     }
 }

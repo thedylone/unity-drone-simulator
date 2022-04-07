@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4071.5469, g: 2781.2734, b: 2636.2305, a: 1}
+  m_IndirectSpecularColor: {r: 4074.7305, g: 2778.8867, b: 2623.6094, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242253855}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3127b41fc7fdfd43bd3c4f30f51f167, type: 3}
   m_Name: 
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696089494}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86a1b87c2b33fa43ad065917c07b9e5, type: 3}
   m_Name: 
@@ -761,7 +761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 1
   MaxTiltDeg: 25
-  EnableTilt: 0
+  EnableTilt: 1
   tiltSpeed: 1
   vx: 0
   vy: 0
@@ -1314,7 +1314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1367431094
 Transform:
   m_ObjectHideFlags: 0
@@ -1529,18 +1529,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441368815}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e16986f974fcef428d821a681570ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetDrone: {fileID: 1666787833}
-  cam: {fileID: 1942838304}
-  Light: {fileID: 1927383314}
-  Terrain: {fileID: 0}
-  DroneGroup: {fileID: 922789948}
-  FilesLimit: 6000
+  TargetObject: {fileID: 1666787833}
+  TargetCamera: {fileID: 1942838304}
+  FilesLimit: 10
   SavePath: C:\Users\Intern\Documents\dylan\data\side
+  RandomizeObjects:
+  - {fileID: 1666787833}
 --- !u!4 &1441368817
 Transform:
   m_ObjectHideFlags: 0
@@ -1658,7 +1657,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581582804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 967ee1d8b83836e4591910e579f1cae2, type: 3}
   m_Name: 
@@ -1818,8 +1817,8 @@ MonoBehaviour:
   RandomPosition: 1
   MinPosX: 10
   MaxPosX: 25
-  MinPosY: 0
-  MaxPosY: 0
+  MinPosY: 10
+  MaxPosY: 30
   MinPosZ: -10
   MaxPosZ: 10
   RandomRotation: 1
@@ -1855,7 +1854,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666787833}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86a1b87c2b33fa43ad065917c07b9e5, type: 3}
   m_Name: 
@@ -1864,7 +1863,7 @@ MonoBehaviour:
   EnableHover: 0
   HoverDistance: 10
   Layer: 3
-  converter: {fileID: 0}
+  converter: {fileID: 1666787846}
 --- !u!65 &1666787841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2249,7 +2248,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941267009}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86a1b87c2b33fa43ad065917c07b9e5, type: 3}
   m_Name: 
@@ -2325,7 +2324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 1
   MaxTiltDeg: 25
-  EnableTilt: 0
+  EnableTilt: 1
   tiltSpeed: 1
   vx: 0.5
   vy: 0.5
@@ -2559,8 +2558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66fbd5ffe9b9d64da304996f1919f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 1280
-  _height: 720
+  _width: 1920
+  _height: 1080
   _preset: 1
   _frameRate: 30
   _enableRTSP: 1
