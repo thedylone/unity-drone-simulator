@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class KeyboardController : MonoBehaviour
 {
-    public float Speed = 1f;
     public bool EnableHover = false;
     public float HoverDistance = 10f;
     public int Layer = 3;
     public DirectVelocity converter;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    GameObject drone;
+    float speed;
 
     // Update is called once per frame
     void Update()
     {
         RaycastHit hit;
 
-        Rigidbody rb = GetComponent<Rigidbody>();
+        speed = GetComponent<DroneController>()._MaxSpeed;
+        drone = GetComponent<DroneController>().Drone;
+
+        Rigidbody rb = drone.GetComponent<Rigidbody>();
 
         int layerMask = 1 << Layer;
 
@@ -44,7 +42,7 @@ public class KeyboardController : MonoBehaviour
         }
         else
         {
-            rb.AddForce(horizontalInput * Speed, 0, verticalInput * Speed);
+            rb.AddForce(horizontalInput * speed, 0, verticalInput * speed);
         }
     }
 }

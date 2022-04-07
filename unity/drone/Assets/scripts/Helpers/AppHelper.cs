@@ -16,4 +16,8 @@ public class AppHelper : MonoBehaviour
         Application.Quit();
 #endif
     }
+    public static void ToggleFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
 }

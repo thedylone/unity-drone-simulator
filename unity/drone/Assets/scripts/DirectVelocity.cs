@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class DirectVelocity : MonoBehaviour
 {
-    public float MaxSpeed = 15f;
     public float MaxTiltDeg = 25f;
     public bool EnableTilt;
     public float tiltSpeed = 1;
@@ -14,6 +11,7 @@ public class DirectVelocity : MonoBehaviour
     public float vx = 0.5f;
     [Range(-1, 1)]
     public float vy = 0.5f;
+    private GameObject drone;
 
     private Rigidbody rb;
     private float mass;
@@ -26,9 +24,11 @@ public class DirectVelocity : MonoBehaviour
 
     public void Convert(float vx, float vy)
     {
-        rb = GetComponent<Rigidbody>();
+        float MaxSpeed = GetComponent<DroneController>()._MaxSpeed;
+        drone = GetComponent<DroneController>().Drone;
+        rb = drone.GetComponent<Rigidbody>();
         mass = rb.mass;
-        rb.drag = 0;
+        // rb.drag = 0;
         drag = mass * 9.81f * Mathf.Tan(MaxTiltDeg * Mathf.PI / 180) / (MaxSpeed * MaxSpeed);
         float ux = rb.velocity.x;
         float uy = rb.velocity.z;

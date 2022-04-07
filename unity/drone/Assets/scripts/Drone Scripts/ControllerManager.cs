@@ -188,14 +188,14 @@ public class ControllerManager : MonoBehaviour {
 	// for manual height control
 	float controlThrottle(Vector4 controlSignal)
 	{
-		//float userInput = Input.GetAxis("Throttle") * (invertAxisT ? -1 : 1);
-		float userInput = controlSignal.w * (invertAxisT ? -1 : 1);
+		float userInput = Input.GetAxis("Drone Throttle") * (invertAxisT ? -1 : 1);
+		// float userInput = controlSignal.w * (invertAxisT ? -1 : 1);
 		float throttle = heightSensitivity * userInput;
 		return throttle;
 	}
 	// for stabilised height control
 	float controlVerticalSpeed() {
-		float userInput = Input.GetAxis ("Throttle") * (invertAxisT ? -1 : 1);
+		float userInput = Input.GetAxis ("Drone Throttle") * (invertAxisT ? -1 : 1);
 		verticalSpeedRef = verticalSpeedSensitivity * userInput;
 		return heightLoop(verticalSpeedRef);
 	}
@@ -216,15 +216,15 @@ public class ControllerManager : MonoBehaviour {
 	}
 	// for manual angle control
 	Vector3 controlRates(Vector4 controlSignal) {
-		/*float userRudderInput = Input.GetAxis ("Rudder") * (invertAxisR ? -1 : 1);
-		float userAileronInput = Input.GetAxis ("Aileron") * (invertAxisA ? -1 : 1);
-		float userElevatorInput = Input.GetAxis ("Elevator") * (invertAxisE ? -1 : 1);*/
+		float userRudderInput = Input.GetAxis ("Drone Rudder") * (invertAxisR ? -1 : 1);
+		float userAileronInput = Input.GetAxis ("Drone Aileron") * (invertAxisA ? -1 : 1);
+		float userElevatorInput = Input.GetAxis ("Drone Elevator") * (invertAxisE ? -1 : 1);
 		
-		float userRudderInput = controlSignal.x * (invertAxisR ? -1 : 1);
-		float userAileronInput = controlSignal.y * (invertAxisA ? -1 : 1);
-		float userElevatorInput = controlSignal.z * (invertAxisE ? -1 : 1);
+		// float userRudderInput = controlSignal.x * (invertAxisR ? -1 : 1);
+		// float userAileronInput = controlSignal.y * (invertAxisA ? -1 : 1);
+		// float userElevatorInput = controlSignal.z * (invertAxisE ? -1 : 1);
 
-		float boost = Input.GetAxis ("Boost");
+		float boost = Input.GetAxis ("Drone Boost");
 		commandsMultiplier = 1 + boost;
 
 		if (squareMapping) {
@@ -245,13 +245,13 @@ public class ControllerManager : MonoBehaviour {
 	}
 	// for stabilised angle control
 	Vector3 controlAngles(float userElevatorInput) {
-		float userRudderInput = Input.GetAxis ("Rudder") * (invertAxisR ? -1 : 1);
-		float userAileronInput = Input.GetAxis ("Aileron") * (invertAxisA ? -1 : 1);
-		userRudderInput = 0;
-		userAileronInput = 0;
+		float userRudderInput = Input.GetAxis ("Drone Rudder") * (invertAxisR ? -1 : 1);
+		float userAileronInput = Input.GetAxis ("Drone Aileron") * (invertAxisA ? -1 : 1);
+		// userRudderInput = 0;
+		// userAileronInput = 0;
 		//float userElevatorInput = Input.GetAxis ("Elevator") * (invertAxisE ? -1 : 1);
 
-		float boost = Input.GetAxis ("Boost");
+		float boost = Input.GetAxis ("Drone Boost");
 		commandsMultiplier = 1 + boost;
 		
 		if (squareMapping) {
