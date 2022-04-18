@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3727.8076, g: 2372.418, b: 1868.582, a: 1}
+  m_IndirectSpecularColor: {r: 3702.963, g: 2380.912, b: 1920.1914, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6984,6 +6984,7 @@ GameObject:
   - component: {fileID: 846169676}
   - component: {fileID: 846169679}
   - component: {fileID: 846169680}
+  - component: {fileID: 846169681}
   m_Layer: 5
   m_Name: Drone B button
   m_TagString: Untagged
@@ -7175,6 +7176,20 @@ MonoBehaviour:
   - {fileID: 634847274}
   - {fileID: 125398452}
   - {fileID: 2024610305}
+--- !u!114 &846169681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846169674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dba018427a792844a37f1e8f75dc874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dropdown: {fileID: 2119856301}
+  DroneController: {fileID: 1126855377}
 --- !u!1 &856898099
 GameObject:
   m_ObjectHideFlags: 0
@@ -9714,7 +9729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7702b7fd810e64c8608a19b0411c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Drone: {fileID: 18459602}
+  Drone: {fileID: 1941267009}
   _MaxSpeed: 1
 --- !u!1 &1134667662
 GameObject:
@@ -18415,7 +18430,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c10bf67959e7b4242ba6baa1d8ef7a24,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c10bf67959e7b4242ba6baa1d8ef7a24,
         type: 3}
@@ -18515,9 +18530,8 @@ GameObject:
   - component: {fileID: 2119856303}
   - component: {fileID: 2119856302}
   - component: {fileID: 2119856301}
-  - component: {fileID: 2119856300}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: Drone B model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18545,20 +18559,6 @@ RectTransform:
   m_AnchoredPosition: {x: -90, y: 0}
   m_SizeDelta: {x: -220, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2119856300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119856298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dba018427a792844a37f1e8f75dc874, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dropdown: {fileID: 2119856301}
-  DroneController: {fileID: 1126855377}
 --- !u!114 &2119856301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18687,32 +18687,47 @@ PrefabInstance:
     - target: {fileID: 7962600901835176286, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901835176286, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901835176286, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 529
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901835176286, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 279.5
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901835176286, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600901906625976, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600901906625976, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901978641220, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_Name
       value: Drone A Side
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600901978641220, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901978641221, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
@@ -18822,12 +18837,22 @@ PrefabInstance:
     - target: {fileID: 7962600901984567825, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901984567825, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600902307877445, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600902307877445, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 7962600902443060072, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
@@ -18847,27 +18872,27 @@ PrefabInstance:
     - target: {fileID: 7962600902604738194, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7962600902604738194, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7962600902604738194, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 529
       objectReference: {fileID: 0}
     - target: {fileID: 7962600902604738194, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 279.5
       objectReference: {fileID: 0}
     - target: {fileID: 7962600902604738194, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 7962600902651579177, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
@@ -18877,17 +18902,37 @@ PrefabInstance:
     - target: {fileID: 7962600903142890010, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7962600903142890010, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600903170237821, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600903170237821, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600903170237821, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600903170237821, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 7962600903173398407, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 335
       objectReference: {fileID: 0}
     - target: {fileID: 7962600903373701529, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}

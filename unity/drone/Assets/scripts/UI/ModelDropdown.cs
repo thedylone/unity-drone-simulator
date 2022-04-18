@@ -19,6 +19,7 @@ public class ModelDropdown : MonoBehaviour
         {
             DroneArray[i].SetActive(false);
         }
+        DroneController.Drone = DroneArray[0];
     }
     void addDropdown()
     {
