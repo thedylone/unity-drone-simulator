@@ -43,7 +43,7 @@ namespace FFmpegOut
                 + " -video_size " + width + "x" + height
                 + " -framerate " + frameRate
                 + " -loglevel warning -i - " + preset.GetOptions()
-                + " -f rtsp -muxdelay 0.1 " + outputPath
+                + " -f rtsp -rtsp_transport udp -muxdelay 0.1 " + outputPath
             );
             }
             else

@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class ResetObjects : MonoBehaviour
 {
-    public GameObject[] GameObjects;
-    private Vector3[] initialPositions;
-    private Quaternion[] initialRotations;
+    public static GameObject[] DroneControllers;
+    private static Vector3[] initialPositions;
+    private static Quaternion[] initialRotations;
     void Start()
     {
-        initialPositions = new Vector3[GameObjects.Length];
-        initialRotations = new Quaternion[GameObjects.Length];
-        for (int i = 0; i < GameObjects.Length; i++)
+        DroneControllers = GameObject.FindGameObjectsWithTag("GameController");
+        initialPositions = new Vector3[DroneControllers.Length];
+        initialRotations = new Quaternion[DroneControllers.Length];
+        for (int i = 0; i < DroneControllers.Length; i++)
         {
-            initialPositions[i] = GameObjects[i].transform.position;
-            initialRotations[i] = GameObjects[i].transform.rotation;
+            initialPositions[i] = DroneControllers[i].GetComponent<DroneController>().Drone.transform.position;
+            initialRotations[i] = DroneControllers[i].GetComponent<DroneController>().Drone.transform.rotation;
         }
     }
-    public void Restart()
+    public static void Restart()
     {
-        for (int i = 0; i < GameObjects.Length; i++)
+        for (int i = 0; i < DroneControllers.Length; i++)
         {
-            GameObjects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
-            GameObjects[i].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            GameObjects[i].transform.position = initialPositions[i];
-            GameObjects[i].transform.rotation = initialRotations[i];
+            DroneControllers[i].GetComponent<DroneController>().Drone.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            DroneControllers[i].GetComponent<DroneController>().Drone.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            DroneControllers[i].GetComponent<DroneController>().Drone.transform.position = initialPositions[i];
+            DroneControllers[i].GetComponent<DroneController>().Drone.transform.rotation = initialRotations[i];
         }
     }
 }
