@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3702.963, g: 2380.912, b: 1920.1914, a: 1}
+  m_IndirectSpecularColor: {r: 3727.8076, g: 2372.418, b: 1868.582, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -973,13 +973,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 125398453}
   m_TextComponent: {fileID: 928222913}
   m_Placeholder: {fileID: 861467983}
-  m_ContentType: 2
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 1
+  m_CharacterValidation: 2
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -3718,7 +3718,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491828821}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
@@ -3737,7 +3737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4180,13 +4180,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 634847275}
   m_TextComponent: {fileID: 1431737149}
   m_Placeholder: {fileID: 1578190998}
-  m_ContentType: 2
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 1
+  m_CharacterValidation: 2
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -13092,13 +13092,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1592055797}
   m_TextComponent: {fileID: 690758149}
   m_Placeholder: {fileID: 1752728582}
-  m_ContentType: 2
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 1
+  m_CharacterValidation: 2
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -18676,6 +18676,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7962600901537989073, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600901537989073, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600901537989073, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600901537989073, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1647243626}
@@ -18856,6 +18871,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7962600902443060072, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600902443060072, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600902443060072, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600902443060072, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1647243626}
@@ -18933,6 +18963,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600903373701529, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600903373701529, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962600903373701529, guid: 4f7d9277478cf93419043e0f05d54bfe,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7962600903373701529, guid: 4f7d9277478cf93419043e0f05d54bfe,
         type: 3}
