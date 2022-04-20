@@ -15,6 +15,16 @@ public class Prefs : MonoBehaviour
     {
         SetPlayerPrefs();
     }
+    void OnDisable()
+    {
+        Debug.Log("disabled");
+        SavePlayerPrefs();
+    }
+    void OnDestroy()
+    {
+        Debug.Log("destroyed");
+        SavePlayerPrefs();
+    }
     public void LoadPlayerPrefs()
     {
         foreach (InputField input in InputFields)

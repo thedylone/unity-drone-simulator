@@ -14,6 +14,7 @@ public class TestCaseUI : MonoBehaviour
     public GameObject PrefabPanel;
     private bool _saveStarted = false;
     private bool _loadStarted = false;
+    private string _currentFile;
     void Start()
     {
         TestCaseManager.RefreshTestCases();
@@ -23,10 +24,12 @@ public class TestCaseUI : MonoBehaviour
             panel.transform.SetParent(ScrollContent.transform, false);
             panel.GetComponentInChildren<Text>().text = testcase;
             var buttons = panel.GetComponentsInChildren<Button>();
-            buttons[0].onClick.AddListener(delegate {
+            buttons[0].onClick.AddListener(delegate
+            {
                 SetFileInput(testcase);
             });
-            buttons[1].onClick.AddListener(delegate {
+            buttons[1].onClick.AddListener(delegate
+            {
                 ToggleLoad(testcase);
             });
         }
@@ -59,9 +62,15 @@ public class TestCaseUI : MonoBehaviour
     {
         if (!_saveStarted)
         {
+            if (_currentFile != _filename)
+            {
+                TestCaseManager.StopLoadCase();
+                _loadStarted = false;
+            }
             _loadStarted = !_loadStarted;
             if (_loadStarted)
             {
+                _currentFile = _filename;
                 OutputText.text = "running " + _filename;
                 OutputText.text = _filename + (await TestCaseManager.LoadCase(_filename) ? " passed" : " failed");
                 _loadStarted = false;

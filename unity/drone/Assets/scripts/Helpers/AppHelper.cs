@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class AppHelper : MonoBehaviour
@@ -19,5 +20,10 @@ public class AppHelper : MonoBehaviour
     public static void ToggleFullscreen()
     {
         Screen.fullScreen = !Screen.fullScreen;
+    }
+    public static void SwitchScene(string sceneName)
+    {
+        Debug.Log("switching to "+sceneName);
+        SceneManager.LoadScene(sceneName);   
     }
 }
