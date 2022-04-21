@@ -6,7 +6,6 @@ using NetMQ.Sockets;
 
 public class NetMqListener
 {
-    public string Path;
     private readonly Thread _listenerWorker;
 
     private bool _listenerCancelled;
@@ -22,7 +21,7 @@ public class NetMqListener
         AsyncIO.ForceDotNet.Force();
         using (var subSocket = new PullSocket())
         {
-            subSocket.Connect(Path);
+            subSocket.Connect(Settings.ZmqPath);
             // subSocket.Subscribe("");
             while (!_listenerCancelled)
             {
@@ -74,13 +73,6 @@ public class NetMqListener
 
 public class ClientObject : MonoBehaviour
 {
-    [SerializeField] string _path = "tcp://localhost:5556";
-
-    public string path
-    {
-        get { return _path; }
-        set { _path = value; }
-    }
     public DirectVelocity Converter;
     private NetMqListener _netMqListener;
 
@@ -113,11 +105,10 @@ public class ClientObject : MonoBehaviour
     {
         if (_netMqListener == null)
         {
-            Debug.Log("starting zmq client at " + _path);
+            Debug.Log("starting zmq client at " + Settings.ZmqPath);
             _netMqListener = new NetMqListener(HandleMessage);
-            _netMqListener.Path = _path;
             _netMqListener.Start();
-            Debug.Log("started zmq client at " + _path);
+            Debug.Log("started zmq client at " + Settings.ZmqPath);
         }
         _netMqListener.Update();
     }

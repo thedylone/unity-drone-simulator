@@ -45,7 +45,7 @@ namespace FFmpegOut
 
         [SerializeField] bool _enableRTSP = false;
 
-        [SerializeField] string _path = "output";
+        [SerializeField] string _path = "rtsp://localhost:";
 
         public string path
         {

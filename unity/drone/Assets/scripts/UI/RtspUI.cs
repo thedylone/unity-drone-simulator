@@ -15,24 +15,18 @@ public class RtspUI : MonoBehaviour
     void Start()
     {
         updateOutputText();
-        PortField.onValueChanged.AddListener(delegate
-        {
-            PortChange();
-        });
-        UrlField.onValueChanged.AddListener(delegate
-        {
-            UrlChange();
-        });
+        PortField.onValueChanged.AddListener(portChange);
+        UrlField.onValueChanged.AddListener(urlChange);
     }
-    public void PortChange()
+    void portChange(string port)
     {
-        // code to change rtsp settings
+        Settings.RtspPort = port;
         updateOutputText();
     }
 
-    public void UrlChange()
+    void urlChange(string url)
     {
-        // code to change rtsp settings
+        Settings.RtspUrl = url;
         updateOutputText();
     }
 
