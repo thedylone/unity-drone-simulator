@@ -45,14 +45,6 @@ namespace FFmpegOut
 
         [SerializeField] bool _enableRTSP = false;
 
-        [SerializeField] string _path = "rtsp://localhost:";
-
-        public string path
-        {
-            get { return _path; }
-            set { _path = value; }
-        }
-
         #endregion
 
         #region Private members
@@ -131,6 +123,32 @@ namespace FFmpegOut
             }
         }
 
+        void OnDestroy()
+        {
+            if (_session != null)
+            {
+                // Close and dispose the FFmpeg session.
+                _session.Close();
+                _session.Dispose();
+                _session = null;
+            }
+
+            if (_tempRT != null)
+            {
+                // Dispose the frame texture.
+                TargetCamera.GetComponent<Camera>().targetTexture = null;
+                Destroy(_tempRT);
+                _tempRT = null;
+            }
+
+            if (_blitter != null)
+            {
+                // Destroy the blitter game object.
+                Destroy(_blitter);
+                _blitter = null;
+            }
+        }
+
         IEnumerator Start()
         {
             // Sync with FFmpeg pipe thread at the end of every frame.
@@ -164,7 +182,7 @@ namespace FFmpegOut
                     gameObject.name,
                     camera.targetTexture.width,
                     camera.targetTexture.height,
-                    _frameRate, preset, _enableRTSP, _path
+                    _frameRate, preset, _enableRTSP, "rtsp://localhost:" + Settings.RtspPort + "/" + Settings.RtspUrl
                 );
 
                 _startTime = Time.time;

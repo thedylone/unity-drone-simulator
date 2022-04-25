@@ -7,7 +7,7 @@ public class Prefs : MonoBehaviour
 {
     public InputField[] InputFields;
     
-    void Start()
+    void Awake()
     {
         LoadPlayerPrefs();
     }
@@ -17,12 +17,10 @@ public class Prefs : MonoBehaviour
     }
     void OnDisable()
     {
-        Debug.Log("disabled");
         SavePlayerPrefs();
     }
     void OnDestroy()
     {
-        Debug.Log("destroyed");
         SavePlayerPrefs();
     }
     public void LoadPlayerPrefs()

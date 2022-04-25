@@ -17,7 +17,7 @@ public class KeyboardController : MonoBehaviour
     {
         RaycastHit hit;
 
-        speed = GetComponent<DroneController>()._MaxSpeed;
+        speed = GetComponent<DroneController>().MaxSpeed;
         drone = GetComponent<DroneController>().Drone;
 
         Rigidbody rb = drone.GetComponent<Rigidbody>();

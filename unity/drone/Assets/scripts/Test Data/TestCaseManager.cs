@@ -40,7 +40,7 @@ public class TestCaseManager : MonoBehaviour
                 _sw = File.AppendText(TestCasesPath + SaveFile + ".txt");
             }
             // _sw.WriteLine(Target.Drone.transform.localPosition.ToString("f3"));
-            Vector3 v = Target.Drone.GetComponent<Rigidbody>().velocity / float.Parse(Target.MaxSpeed);
+            Vector3 v = Target.Drone.GetComponent<Rigidbody>().velocity /Target.MaxSpeed;
             _sw.WriteLine(v);
         }
 
@@ -55,7 +55,7 @@ public class TestCaseManager : MonoBehaviour
             if ((s = _sr.ReadLine()) != null)
             {
                 // Target.Drone.transform.localPosition = StringToVector3(s);
-                Target.Drone.GetComponent<Rigidbody>().velocity = StringToVector3(s) * float.Parse(Target.MaxSpeed);
+                Target.Drone.GetComponent<Rigidbody>().velocity = StringToVector3(s) * Target.MaxSpeed;
             }
             else
             {

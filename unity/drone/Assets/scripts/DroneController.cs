@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class DroneController : MonoBehaviour
 {
-    public GameObject Drone;
-    public float _MaxSpeed;
-    public string MaxSpeed
+    public GameObject Drone = Settings.DroneBModel;
+    public float MaxSpeed;
+    void Start()
     {
-        get { return _MaxSpeed.ToString(); }
-        set { _MaxSpeed = float.Parse(value); }
+        if (gameObject.name == "Drone A controller")
+        {
+            MaxSpeed = Settings.DroneASpeed;
+        }
+        else
+        {
+            Drone = Instantiate(Settings.DroneBModel, new Vector3(0,15,0), new Quaternion(0,0,0,0));
+            Drone.AddComponent<Rigidbody>().useGravity = false;
+            MaxSpeed = Settings.DroneBSpeed;
+        }
     }
 }

@@ -12,11 +12,14 @@ public class DronesUI : MonoBehaviour
     List<GameObject> droneModels;
     void Start()
     {
+        droneAChange(DroneASpeedField.text);
+        droneBChange(DroneBSpeedField.text);
         loadResources();
         updateDropdownOptions();
         DroneASpeedField.onEndEdit.AddListener(droneAChange);
         DroneBSpeedField.onEndEdit.AddListener(droneBChange);
         DroneBDropdown.onValueChanged.AddListener(dropdownChange);
+        dropdownChange(DroneBDropdown.value);
     }
 
     void loadResources()

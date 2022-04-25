@@ -7,10 +7,10 @@ public class DirectVelocity : MonoBehaviour
     public float MaxTiltDeg = 25f;
     public bool EnableTilt;
     public float tiltSpeed = 1;
-    [Range(-1, 1)]
-    public float vx = 0.5f;
-    [Range(-1, 1)]
-    public float vy = 0.5f;
+    // [Range(-1, 1)]
+    // public float vx = 0.5f;
+    // [Range(-1, 1)]
+    // public float vy = 0.5f;
     private GameObject drone;
 
     private Rigidbody rb;
@@ -24,7 +24,7 @@ public class DirectVelocity : MonoBehaviour
 
     public void Convert(float vx, float vy)
     {
-        float MaxSpeed = GetComponent<DroneController>()._MaxSpeed;
+        float MaxSpeed = GetComponent<DroneController>().MaxSpeed;
         drone = GetComponent<DroneController>().Drone;
         rb = drone.GetComponent<Rigidbody>();
         mass = rb.mass;

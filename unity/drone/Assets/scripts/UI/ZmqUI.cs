@@ -9,6 +9,7 @@ public class ZmqUI : MonoBehaviour
 
     void Start()
     {
+        Settings.ZmqPath = PathField.text;
         PathField.onValueChanged.AddListener(pathChange);
     }
     void pathChange(string path)
