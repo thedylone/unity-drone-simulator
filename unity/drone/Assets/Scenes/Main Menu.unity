@@ -4898,7 +4898,7 @@ PrefabInstance:
     - target: {fileID: 720411628296132803, guid: ed28846584f524f4eac8997a8abed478,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 720411628296132803, guid: ed28846584f524f4eac8997a8abed478,
         type: 3}
@@ -5044,6 +5044,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Refresh Models
+      objectReference: {fileID: 0}
+    - target: {fileID: 720411628675431467, guid: ed28846584f524f4eac8997a8abed478,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 720411628675431467, guid: ed28846584f524f4eac8997a8abed478,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 720411628675431467, guid: ed28846584f524f4eac8997a8abed478,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 720411628675431467, guid: ed28846584f524f4eac8997a8abed478,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 720411628675431467, guid: ed28846584f524f4eac8997a8abed478,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 720411628675431467, guid: ed28846584f524f4eac8997a8abed478,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed28846584f524f4eac8997a8abed478, type: 3}
@@ -6857,7 +6887,7 @@ PrefabInstance:
     - target: {fileID: 7224246102981590254, guid: 0bf7029e5b69d2e459d3ed21e6cd5411,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7224246102981590254, guid: 0bf7029e5b69d2e459d3ed21e6cd5411,
         type: 3}
