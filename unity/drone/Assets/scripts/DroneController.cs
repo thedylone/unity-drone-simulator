@@ -19,6 +19,7 @@ public class DroneController : MonoBehaviour
             Drone.transform.parent = DroneGroup.transform;
             Drone.transform.localPosition = new Vector3(0, 55 - Settings.DroneDistance, 0);
             Drone.AddComponent<Rigidbody>().useGravity = false;
+            Drone.AddComponent<MeshRenderer>();
             MaxSpeed = Settings.DroneBSpeed;
         }
     }

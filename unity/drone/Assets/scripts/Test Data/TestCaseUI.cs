@@ -35,6 +35,12 @@ public class TestCaseUI : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        _saveStarted = false;
+        _loadStarted = false;
+    }
+
     public void SetFileInput(string _filename)
     {
         FileInput.text = _filename;
@@ -72,7 +78,8 @@ public class TestCaseUI : MonoBehaviour
             {
                 _currentFile = _filename;
                 OutputText.text = "running " + _filename;
-                OutputText.text = _filename + (await TestCaseManager.LoadCase(_filename) ? " passed" : " failed");
+                string result = await TestCaseManager.LoadCase(_filename) ? " passed" : " failed";
+                if (OutputText) OutputText.text = _filename + result;
                 _loadStarted = false;
             }
             else
@@ -98,9 +105,13 @@ public class TestCaseUI : MonoBehaviour
                 OutputText.text = "running all cases\n";
                 foreach (string file in TestCaseManager.TestCases)
                 {
-                    if (_loadStarted) OutputText.text += file + (await TestCaseManager.LoadCase(file) ? " passed\n" : " failed\n");
+                    if (_loadStarted)
+                    {
+                        string result = (await TestCaseManager.LoadCase(file) ? " passed" : " failed") + "\n";
+                        if (OutputText) OutputText.text += file + result;
+                    }
                 }
-                OutputText.text += "running completed";
+                if (OutputText) OutputText.text += "running completed";
                 _loadStarted = false;
             }
             else

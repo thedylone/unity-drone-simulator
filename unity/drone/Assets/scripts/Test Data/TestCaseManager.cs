@@ -26,6 +26,11 @@ public class TestCaseManager : MonoBehaviour
         RefreshTestCases();
     }
 
+    void OnDisable()
+    {
+        StopLoadCase();
+    }
+
     public void FixedUpdate()
     {
         if (_saveStarted)
