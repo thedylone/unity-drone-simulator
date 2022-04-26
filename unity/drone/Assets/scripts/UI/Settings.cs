@@ -12,6 +12,7 @@ public static class Settings
     public static string ZmqPath;
 
     // drones settings
+    public static float DroneDistance;
     public static float DroneASpeed;
     public static float DroneBSpeed;
     public static GameObject DroneBModel;
