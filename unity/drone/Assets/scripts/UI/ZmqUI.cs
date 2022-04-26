@@ -6,14 +6,16 @@ using UnityEngine.UI;
 public class ZmqUI : MonoBehaviour
 {
     public InputField PathField;
+    public Text OutputText;
 
     void Start()
     {
-        Settings.ZmqPath = PathField.text;
+        pathChange(PathField.text);
         PathField.onValueChanged.AddListener(pathChange);
     }
     void pathChange(string path)
     {
         Settings.ZmqPath = path;
+        OutputText.text = "ZeroMQ will connect to:\n" + path;
     }
 }

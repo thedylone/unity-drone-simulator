@@ -9,6 +9,7 @@ public class DronesUI : MonoBehaviour
     public InputField DroneASpeedField;
     public InputField DroneBSpeedField;
     public Dropdown DroneBDropdown;
+    public Text OutputText;
     List<GameObject> droneModels;
     void Start()
     {
@@ -42,6 +43,6 @@ public class DronesUI : MonoBehaviour
     void dropdownChange(int index)
     {
         Settings.DroneBModel = droneModels[index];
-        Debug.Log(Settings.DroneBModel.name);
+        OutputText.text = "Drone model selected:\n" + Settings.DroneBModel.name;
     }
 }
