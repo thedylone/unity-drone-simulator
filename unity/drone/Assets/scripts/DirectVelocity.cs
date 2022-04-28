@@ -6,16 +6,16 @@ public class DirectVelocity : MonoBehaviour
 {
     public float MaxTiltDeg = 25f;
     public bool EnableTilt;
-    public float tiltSpeed = 1;
+    public float TiltSpeed = 1;
     // [Range(-1, 1)]
     // public float vx = 0.5f;
     // [Range(-1, 1)]
     // public float vy = 0.5f;
-    private GameObject drone;
+    GameObject drone;
 
-    private Rigidbody rb;
-    private float mass;
-    private float drag;
+    Rigidbody rb;
+    float mass;
+    float drag;
 
     // void Update()
     // {
@@ -53,8 +53,8 @@ public class DirectVelocity : MonoBehaviour
             float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dx);
             float tilty = Mathf.Min(MaxTiltDeg, Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dy);
 
-            tiltx = tiltx < currentTiltx ? Mathf.Max(tiltx, currentTiltx - tiltSpeed * Time.deltaTime) : Mathf.Min(tiltx, currentTiltx + tiltSpeed * Time.deltaTime);
-            tilty = tilty < currentTilty ? Mathf.Max(tilty, currentTilty - tiltSpeed * Time.deltaTime) : Mathf.Min(tilty, currentTilty + tiltSpeed * Time.deltaTime);
+            tiltx = tiltx < currentTiltx ? Mathf.Max(tiltx, currentTiltx - TiltSpeed * Time.deltaTime) : Mathf.Min(tiltx, currentTiltx + TiltSpeed * Time.deltaTime);
+            tilty = tilty < currentTilty ? Mathf.Max(tilty, currentTilty - TiltSpeed * Time.deltaTime) : Mathf.Min(tilty, currentTilty + TiltSpeed * Time.deltaTime);
 
             rb.rotation = Quaternion.Euler(new Vector3(tilty, 0, -tiltx));
         }

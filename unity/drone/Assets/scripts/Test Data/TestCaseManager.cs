@@ -13,13 +13,13 @@ public class TestCaseManager : MonoBehaviour
     public DroneController Target;
     public Camera Camera;
     public static string SaveFile;
-    private static bool _saveStarted = false;
-    private static StreamWriter _sw;
+    private static bool s_saveStarted = false;
+    private static StreamWriter s_sw;
 
     public static string LoadFile;
-    private static bool _loadStarted = false;
-    private static StreamReader _sr;
-    private static bool _passCase = true;
+    private static bool s_loadStarted = false;
+    private static StreamReader s_sr;
+    private static bool s_passCase = true;
 
     public void Start()
     {
@@ -33,31 +33,31 @@ public class TestCaseManager : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (_saveStarted)
+        if (s_saveStarted)
         {
-            if (_sw == null)
+            if (s_sw == null)
             {
                 if (!Directory.Exists(TestCasesPath))
                 {
                     Directory.CreateDirectory(TestCasesPath);
                 }
                 File.Delete(TestCasesPath + SaveFile + ".txt");
-                _sw = File.AppendText(TestCasesPath + SaveFile + ".txt");
+                s_sw = File.AppendText(TestCasesPath + SaveFile + ".txt");
             }
-            // _sw.WriteLine(Target.Drone.transform.localPosition.ToString("f3"));
+            // s_sw.WriteLine(Target.Drone.transform.localPosition.ToString("f3"));
             Vector3 v = Target.Drone.GetComponent<Rigidbody>().velocity /Target.MaxSpeed;
-            _sw.WriteLine(v);
+            s_sw.WriteLine(v);
         }
 
-        if (_loadStarted)
+        if (s_loadStarted)
         {
             string s;
-            if (_sr == null)
+            if (s_sr == null)
             {
-                _sr = File.OpenText(TestCasesPath + LoadFile + ".txt");
+                s_sr = File.OpenText(TestCasesPath + LoadFile + ".txt");
                 s = "";
             }
-            if ((s = _sr.ReadLine()) != null)
+            if ((s = s_sr.ReadLine()) != null)
             {
                 // Target.Drone.transform.localPosition = StringToVector3(s);
                 Target.Drone.GetComponent<Rigidbody>().velocity = StringToVector3(s) * Target.MaxSpeed;
@@ -69,7 +69,7 @@ public class TestCaseManager : MonoBehaviour
             if (!DroneCheck.CheckInFrame(Target.Drone, Camera))
             {
                 // Debug.Log("fail: " + LoadFile);
-                _passCase = false;
+                s_passCase = false;
                 StopLoadCase();
             }
         }
@@ -82,7 +82,7 @@ public class TestCaseManager : MonoBehaviour
 
     public static void SaveCase(string file)
     {
-        if (!_loadStarted)
+        if (!s_loadStarted)
         {
             if (file == "")
             {
@@ -91,36 +91,36 @@ public class TestCaseManager : MonoBehaviour
                 while (File.Exists(TestCasesPath + file + ".txt")) file = String.Format("case{0}", ++i); ;
             }
             SaveFile = file;
-            _saveStarted = true;
+            s_saveStarted = true;
         }
     }
 
     public static void StopSaveCase()
     {
-        _saveStarted = false;
-        if (_sw != null) _sw.Dispose();
-        _sw = null;
+        s_saveStarted = false;
+        if (s_sw != null) s_sw.Dispose();
+        s_sw = null;
     }
 
     public static async Task<bool> LoadCase(string file)
     {
         ResetObjects.Restart();
         LoadFile = file;
-        _loadStarted = true;
-        _passCase = true;
-        while (_loadStarted)
+        s_loadStarted = true;
+        s_passCase = true;
+        while (s_loadStarted)
         {
             await Task.Delay(100);
         }
-        return _passCase;
+        return s_passCase;
         // await Task.CompletedTask;
     }
 
     public static void StopLoadCase()
     {
-        _loadStarted = false;
-        if (_sr != null) _sr.Dispose();
-        _sr = null;
+        s_loadStarted = false;
+        if (s_sr != null) s_sr.Dispose();
+        s_sr = null;
     }
 
     public static Vector3 StringToVector3(string sVector)

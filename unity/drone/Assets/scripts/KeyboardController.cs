@@ -12,7 +12,6 @@ public class KeyboardController : MonoBehaviour
     GameObject drone;
     float speed;
 
-    // Update is called once per frame
     void Update()
     {
         RaycastHit hit;

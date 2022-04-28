@@ -14,7 +14,7 @@ public class DronesUI : MonoBehaviour
     public Dropdown DroneBDropdown;
     public Text OutputText;
     List<GameObject> droneModels;
-    static string droneModelsPath = Application.streamingAssetsPath + "/Drone Models/";
+    private static string s_droneModelsPath = Application.streamingAssetsPath + "/Drone Models/";
     Shader hdrpLit;
     public Material DroneMaterial;
     void Start()
@@ -42,9 +42,9 @@ public class DronesUI : MonoBehaviour
         droneModels = new List<GameObject>(Resources.LoadAll<GameObject>("Drone Models"));
 
         // import from streamingassets
-        if (Directory.Exists(droneModelsPath))
+        if (Directory.Exists(s_droneModelsPath))
         {
-            foreach (string file in Directory.GetFiles(droneModelsPath).Where(name => !name.EndsWith(".meta")))
+            foreach (string file in Directory.GetFiles(s_droneModelsPath).Where(name => !name.EndsWith(".meta")))
             {
                 if (Path.GetFileName(file).ToUpper().EndsWith(".OBJ"))
                 {
@@ -76,7 +76,7 @@ public class DronesUI : MonoBehaviour
         }
         else
         {
-            Directory.CreateDirectory(droneModelsPath);
+            Directory.CreateDirectory(s_droneModelsPath);
         }
     }
     void distanceChange(string distance)

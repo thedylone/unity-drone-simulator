@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class Timestamp : MonoBehaviour
 {
-    public Text m_TimestampText;
+    public Text TimestampText;
 
     void Start()
     {
-        m_TimestampText.text = "timestamp: 0";
+        TimestampText.text = "timestamp: 0";
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_TimestampText.text = "timestamp: " + Time.time;
+        TimestampText.text = "timestamp: " + Time.time;
     }
 }

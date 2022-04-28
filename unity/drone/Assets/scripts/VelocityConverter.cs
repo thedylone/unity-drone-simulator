@@ -9,14 +9,14 @@ public class VelocityConverter : MonoBehaviour
     public float MaxSpeed = 15f;
     public float MaxTiltDeg = 25f;
     public float tiltSpeed = 1;
-    [Range(-1, 1)]
-    public float vx = 0.5f;
-    [Range(-1, 1)]
-    public float vy = 0.5f;
+    // [Range(-1, 1)]
+    // public float vx = 0.5f;
+    // [Range(-1, 1)]
+    // public float vy = 0.5f;
 
-    private Rigidbody rb;
-    private float mass;
-    private float drag;
+    Rigidbody rb;
+    float mass;
+    float drag;
 
     // void Update()
     // {
@@ -49,12 +49,12 @@ public class VelocityConverter : MonoBehaviour
 
         float tiltx = Mathf.Min(MaxTiltDeg, Mathf.Atan(dx * dx * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dx);
         float tilty = Mathf.Min(MaxTiltDeg, Mathf.Atan(dy * dy * drag / (9.81f * mass)) * 180 / Mathf.PI) * Mathf.Sign(dy);
-        
+
         tiltx = tiltx < currentTiltx ? Mathf.Max(tiltx, currentTiltx - tiltSpeed * Time.deltaTime) : Mathf.Min(tiltx, currentTiltx + tiltSpeed * Time.deltaTime);
         tilty = tilty < currentTilty ? Mathf.Max(tilty, currentTilty - tiltSpeed * Time.deltaTime) : Mathf.Min(tilty, currentTilty + tiltSpeed * Time.deltaTime);
 
         rb.rotation = Quaternion.Euler(new Vector3(tilty, 0, -tiltx));
-        
+
         float fx = mass * 9.81f * Mathf.Tan(currentTiltx * Mathf.PI / 180) - drag * ux * ux * Mathf.Sign(ux);
         float fy = mass * 9.81f * Mathf.Tan(currentTilty * Mathf.PI / 180) - drag * uy * uy * Mathf.Sign(uy);
         rb.AddForce(fx, 0, fy);
