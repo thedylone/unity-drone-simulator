@@ -12,14 +12,17 @@ public class RtspUI : MonoBehaviour
     public InputField PortField;
     public InputField UrlField;
     public Text[] OutputTextList;
+    public Toggle TimestampToggle;
 
     void Start()
     {
         Settings.RtspPort = PortField.text;
         Settings.RtspUrl = UrlField.text;
+        Settings.TimestampToggle = TimestampToggle.isOn;
         updateOutputText();
         PortField.onValueChanged.AddListener(portChange);
         UrlField.onValueChanged.AddListener(urlChange);
+        TimestampToggle.onValueChanged.AddListener(timestampChange);
     }
     void portChange(string port)
     {
@@ -33,6 +36,10 @@ public class RtspUI : MonoBehaviour
         updateOutputText();
     }
 
+    void timestampChange(bool isOn)
+    {
+        Settings.TimestampToggle = isOn;
+    }
     void updateOutputText()
     {
         // string[] ipAddressList = GetLocalIPAddresses();

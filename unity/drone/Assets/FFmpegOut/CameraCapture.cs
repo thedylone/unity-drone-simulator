@@ -110,7 +110,7 @@ namespace FFmpegOut
             if (_tempRT != null)
             {
                 // Dispose the frame texture.
-                TargetCamera.GetComponent<Camera>().targetTexture = null;
+                if(TargetCamera) TargetCamera.GetComponent<Camera>().targetTexture = null;
                 Destroy(_tempRT);
                 _tempRT = null;
             }
@@ -136,7 +136,7 @@ namespace FFmpegOut
             if (_tempRT != null)
             {
                 // Dispose the frame texture.
-                TargetCamera.GetComponent<Camera>().targetTexture = null;
+                if(TargetCamera) TargetCamera.GetComponent<Camera>().targetTexture = null;
                 Destroy(_tempRT);
                 _tempRT = null;
             }

@@ -6,7 +6,13 @@ using UnityEngine.UI;
 public class Timestamp : MonoBehaviour
 {
     public Text TimestampText;
+    private bool _enabled;
 
+    void Awake()
+    {
+        _enabled = Settings.TimestampToggle;
+        GetComponent<Canvas>().enabled = _enabled;
+    }
     void Start()
     {
         TimestampText.text = "timestamp: 0";
@@ -15,6 +21,6 @@ public class Timestamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimestampText.text = "timestamp: " + Time.time;
+        if (_enabled) TimestampText.text = "timestamp: " + Time.time;
     }
 }

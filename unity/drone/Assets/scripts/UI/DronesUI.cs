@@ -14,6 +14,8 @@ public class DronesUI : MonoBehaviour
     public Dropdown DroneBDropdown;
     public Text OutputText;
     List<GameObject> droneModels;
+    public Camera PreviewCamera;
+    GameObject previewModel;
     private static string s_droneModelsPath = Application.streamingAssetsPath + "/Drone Models/";
     Shader hdrpLit;
     public Material DroneMaterial;
@@ -99,6 +101,19 @@ public class DronesUI : MonoBehaviour
     void dropdownChange(int index)
     {
         Settings.DroneBModel = droneModels[index];
+        updatePreview(droneModels[index]);
         OutputText.text = "Drone model selected:\n" + Settings.DroneBModel.name;
+    }
+    void updatePreview(GameObject model)
+    {
+        if (previewModel) Destroy(previewModel);
+        previewModel = Instantiate(model, new Vector3(100, 100, 100), new Quaternion(0, 0, 0, 0));
+        if (previewModel.TryGetComponent<Rigidbody>(out Rigidbody rb)) Destroy(rb);
+        float sizeX = previewModel.GetComponentsInChildren<Renderer>().Select(c => c.bounds.size.x).Max();
+        float sizeY = previewModel.GetComponentsInChildren<Renderer>().Select(c => c.bounds.size.y).Max();
+        // float sizeZ = previewModel.GetComponentsInChildren<Renderer>().Select(c => c.bounds.size.z).Max();
+        float distance = Mathf.Max(sizeX, sizeY) / (2.0f * Mathf.Tan(0.5f * PreviewCamera.fieldOfView * Mathf.Deg2Rad));
+        PreviewCamera.transform.position = new Vector3(PreviewCamera.transform.position.x, 100 + distance * 2.0f * Mathf.Tan(PreviewCamera.transform.eulerAngles.x * Mathf.PI / 180), 100 - distance * 2.0f);
+        // PreviewCamera.transform.LookAt(previewModel.transform.position);
     }
 }
