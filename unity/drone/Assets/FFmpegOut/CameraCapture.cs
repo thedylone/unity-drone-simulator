@@ -11,22 +11,14 @@ namespace FFmpegOut
     {
         #region Public properties
         [SerializeField] public Camera TargetCamera;
-        [SerializeField] int _width = 1920;
-
-        public string width
+        int _width
         {
-            get { return _width.ToString(); }
-            set { _width = int.Parse(value); }
+            get { return Settings.RtspWidth != 0 ? Settings.RtspWidth : 1920; }
         }
-
-        [SerializeField] int _height = 1080;
-
-        public string height
+        int _height
         {
-            get { return _height.ToString(); }
-            set { _height = int.Parse(value); }
+            get { return Settings.RtspHeight != 0 ? Settings.RtspHeight : 1080; }
         }
-
         [SerializeField] FFmpegPreset _preset;
 
         public FFmpegPreset preset
@@ -35,15 +27,15 @@ namespace FFmpegOut
             set { _preset = value; }
         }
 
-        [SerializeField] float _frameRate = 60;
-
-        public string frameRate
+        float _frameRate
         {
-            get { return _frameRate.ToString(); }
-            set { _frameRate = int.Parse(value); }
+            get { return Settings.RtspFrameRate != 0 ? Settings.RtspFrameRate : 30; }
         }
-
         [SerializeField] bool _enableRTSP = false;
+        string _path
+        {
+            get { return Settings.RtspPort != null || Settings.RtspUrl != null ? "rtsp://localhost:" + Settings.RtspPort + "/" + Settings.RtspUrl : ""; }
+        }
 
         #endregion
 
@@ -91,12 +83,6 @@ namespace FFmpegOut
 
         #region MonoBehaviour implementation
 
-        void OnValidate()
-        {
-            _width = Mathf.Max(8, _width);
-            _height = Mathf.Max(8, _height);
-        }
-
         void OnDisable()
         {
             if (_session != null)
@@ -110,7 +96,7 @@ namespace FFmpegOut
             if (_tempRT != null)
             {
                 // Dispose the frame texture.
-                if(TargetCamera) TargetCamera.GetComponent<Camera>().targetTexture = null;
+                if (TargetCamera) TargetCamera.GetComponent<Camera>().targetTexture = null;
                 Destroy(_tempRT);
                 _tempRT = null;
             }
@@ -136,7 +122,7 @@ namespace FFmpegOut
             if (_tempRT != null)
             {
                 // Dispose the frame texture.
-                if(TargetCamera) TargetCamera.GetComponent<Camera>().targetTexture = null;
+                if (TargetCamera) TargetCamera.GetComponent<Camera>().targetTexture = null;
                 Destroy(_tempRT);
                 _tempRT = null;
             }
@@ -182,7 +168,7 @@ namespace FFmpegOut
                     gameObject.name,
                     camera.targetTexture.width,
                     camera.targetTexture.height,
-                    _frameRate, preset, _enableRTSP, "rtsp://localhost:" + Settings.RtspPort + "/" + Settings.RtspUrl
+                    _frameRate, preset, _enableRTSP, _path
                 );
 
                 _startTime = Time.time;

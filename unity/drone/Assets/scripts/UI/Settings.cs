@@ -8,6 +8,9 @@ public static class Settings
     public static string RtspPort;
     public static string RtspUrl;
     public static bool TimestampToggle;
+    public static int RtspWidth;
+    public static int RtspHeight;
+    public static int RtspFrameRate;
 
     // zmq settings
     public static string ZmqPath;

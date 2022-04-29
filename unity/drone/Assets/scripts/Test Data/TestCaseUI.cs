@@ -40,6 +40,25 @@ public class TestCaseUI : MonoBehaviour
         _saveStarted = false;
         _loadStarted = false;
     }
+    void updateTestCases()
+    {
+        TestCaseManager.RefreshTestCases();
+        foreach (string testcase in TestCaseManager.TestCases)
+        {
+            var panel = Object.Instantiate(PrefabPanel, Vector3.zero, Quaternion.identity) as GameObject;
+            panel.transform.SetParent(ScrollContent.transform, false);
+            panel.GetComponentInChildren<Text>().text = testcase;
+            var buttons = panel.GetComponentsInChildren<Button>();
+            buttons[0].onClick.AddListener(delegate
+            {
+                SetFileInput(testcase);
+            });
+            buttons[1].onClick.AddListener(delegate
+            {
+                ToggleLoad(testcase);
+            });
+        }
+    }
 
     public void SetFileInput(string _filename)
     {
@@ -54,11 +73,13 @@ public class TestCaseUI : MonoBehaviour
             if (_saveStarted)
             {
                 SaveButton.GetComponentInChildren<Text>().text = "stop save";
+                if (OutputText) OutputText.text = "save in progress";
                 TestCaseManager.SaveCase(FileInput.text);
             }
             else
             {
                 SaveButton.GetComponentInChildren<Text>().text = "start save";
+                if (OutputText) OutputText.text = "save completed";
                 TestCaseManager.StopSaveCase();
             }
         }

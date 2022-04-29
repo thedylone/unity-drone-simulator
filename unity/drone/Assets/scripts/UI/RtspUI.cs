@@ -13,16 +13,25 @@ public class RtspUI : MonoBehaviour
     public InputField UrlField;
     public Text[] OutputTextList;
     public Toggle TimestampToggle;
+    public InputField WidthField;
+    public InputField HeightField;
+    public InputField FrameRateField;
 
     void Start()
     {
         Settings.RtspPort = PortField.text;
         Settings.RtspUrl = UrlField.text;
         Settings.TimestampToggle = TimestampToggle.isOn;
+        Settings.RtspWidth = int.Parse(WidthField.text);
+        Settings.RtspHeight = int.Parse(HeightField.text);
+        Settings.RtspFrameRate = int.Parse(FrameRateField.text);
         updateOutputText();
         PortField.onValueChanged.AddListener(portChange);
         UrlField.onValueChanged.AddListener(urlChange);
         TimestampToggle.onValueChanged.AddListener(timestampChange);
+        WidthField.onValueChanged.AddListener(widthChange);
+        HeightField.onValueChanged.AddListener(heightChange);
+        FrameRateField.onValueChanged.AddListener(frameRateChange);
     }
     void portChange(string port)
     {
@@ -39,6 +48,18 @@ public class RtspUI : MonoBehaviour
     void timestampChange(bool isOn)
     {
         Settings.TimestampToggle = isOn;
+    }
+    void widthChange(string width)
+    {
+        Settings.RtspWidth = int.Parse(width);
+    }
+    void heightChange(string height)
+    {
+        Settings.RtspHeight = int.Parse(height);
+    }
+    void frameRateChange(string frameRate)
+    {
+        Settings.RtspFrameRate = int.Parse(frameRate);
     }
     void updateOutputText()
     {

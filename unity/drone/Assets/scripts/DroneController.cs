@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DroneController : MonoBehaviour
 {
-    public GameObject Drone = Settings.DroneBModel;
+    public GameObject Drone;
     public GameObject DroneGroup;
     public float MaxSpeed;
     void Awake()
@@ -15,12 +15,13 @@ public class DroneController : MonoBehaviour
         }
         else
         {
+            MaxSpeed = Settings.DroneBSpeed;
             Drone = Instantiate(Settings.DroneBModel);
             Drone.transform.parent = DroneGroup.transform;
             Drone.transform.localPosition = new Vector3(0, 55 - Settings.DroneDistance, 0);
-            Drone.AddComponent<Rigidbody>().useGravity = false;
+            Drone.AddComponent<Rigidbody>();
+            Drone.GetComponent<Rigidbody>().useGravity = false;
             Drone.AddComponent<MeshRenderer>();
-            MaxSpeed = Settings.DroneBSpeed;
         }
     }
 }

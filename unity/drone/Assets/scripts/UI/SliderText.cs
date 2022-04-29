@@ -9,11 +9,13 @@ public class SliderText : MonoBehaviour
     public InputField InputField;
     public void UpdateInputFromSlider(float sliderValue)
     {
-        InputField.text = sliderValue.ToString("f3");
+        InputField.text = sliderValue.ToString("f1");
     }
 
-    public void UpdateSliderFromInput(string InputValue)
+    public void UpdateSliderFromInput(string inputValue)
     {
-        Slider.value = float.Parse(InputValue);
+        float _inputValue = Mathf.Clamp(float.Parse(inputValue), Slider.minValue, Slider.maxValue);
+        InputField.text = _inputValue.ToString();
+        Slider.value = _inputValue;
     }
 }

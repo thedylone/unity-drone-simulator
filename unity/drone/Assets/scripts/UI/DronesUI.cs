@@ -17,7 +17,6 @@ public class DronesUI : MonoBehaviour
     public Camera PreviewCamera;
     GameObject previewModel;
     private static string s_droneModelsPath = Application.streamingAssetsPath + "/Drone Models/";
-    Shader hdrpLit;
     public Material DroneMaterial;
     void Start()
     {
