@@ -134,7 +134,7 @@ public class DataGenerator : MonoBehaviour
         File.WriteAllBytes(SavePath + "/" + fileCounter + ".jpg", bytes); // change to .png for png files
 
         // outputs position data in specific format
-        File.WriteAllText(SavePath + "/" + fileCounter + ".txt", "drone 0.0 0 0.0 " + minX + " " + (screenHeight - maxY) + " " + maxX + " " + (screenHeight - minY) + " 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+        File.WriteAllText(SavePath + "/" + fileCounter + ".txt", "drone 0.0 0 0.0 " + Mathf.RoundToInt(minX).ToString("f2") + " " + Mathf.RoundToInt(screenHeight - maxY).ToString("f2") + " " + Mathf.RoundToInt(maxX).ToString("f2") + " " + Mathf.RoundToInt(screenHeight - minY).ToString("f2") + " 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
 
         fileCounter++;
     }
