@@ -8,9 +8,13 @@ public class DataGenerator : MonoBehaviour
 {
     public GameObject TargetObject;
     public Camera TargetCamera;
+    public Material Material;
     public int FilesLimit = 25;
     public string SavePath;
     public GameObject[] RandomizeObjects;
+    public int MinRange = 10;
+    public int MaxRange = 50;
+    public int Step = 10;
     private float screenWidth;
     private float screenHeight;
     private float minX;
@@ -18,6 +22,8 @@ public class DataGenerator : MonoBehaviour
     private float minY;
     private float maxY;
     private int fileCounter = 0;
+    public int FileStartingNumber = 0;
+    private int interval;
     private int frame = 0;
 
     void Update()
@@ -27,11 +33,13 @@ public class DataGenerator : MonoBehaviour
         {
             frame = 0;
 
+            interval = Mathf.FloorToInt(fileCounter * (MaxRange - MinRange) / (FilesLimit * Step));
+
             Randomize();
 
             if (CheckInFrame(TargetObject, TargetCamera))
             {
-                GenerateOutput(TargetCamera);
+                GenerateOutput(TargetCamera, SavePath);
                 // Debug.Log("in frame");
             }
         }
@@ -43,21 +51,39 @@ public class DataGenerator : MonoBehaviour
         camera = camera.GetComponent<Camera>();
         screenWidth = camera.pixelWidth;
         screenHeight = camera.pixelHeight;
+        List<Vector3> worldCorners = new List<Vector3>();
+        List<Vector3> averageCentre = new List<Vector3>();
+        foreach (Renderer renderer in target.GetComponentsInChildren<Renderer>())
+        {
+            Vector3 c = renderer.bounds.center;
+            Vector3 e = renderer.bounds.extents;
+            averageCentre.Add(c);
+            worldCorners.AddRange(new[]
+            {new Vector3(c.x + e.x, c.y + e.y, c.z + e.z),
+            new Vector3(c.x + e.x, c.y + e.y, c.z - e.z),
+            new Vector3(c.x + e.x, c.y - e.y, c.z + e.z),
+            new Vector3(c.x + e.x, c.y - e.y, c.z - e.z),
+            new Vector3(c.x - e.x, c.y + e.y, c.z + e.z),
+            new Vector3(c.x - e.x, c.y + e.y, c.z - e.z),
+            new Vector3(c.x - e.x, c.y - e.y, c.z + e.z),
+            new Vector3(c.x - e.x, c.y - e.y, c.z - e.z)
+            });
+        }
 
-        Vector3 c = target.GetComponent<Renderer>().bounds.center;
-        Vector3 e = target.GetComponent<Renderer>().bounds.extents;
+        // Vector3 c = target.GetComponent<Renderer>().bounds.center;
+        // Vector3 e = target.GetComponent<Renderer>().bounds.extents;
 
         // positions of corners of bounding box
-        Vector3[] worldCorners = new[] {
-            new Vector3( c.x + e.x, c.y + e.y, c.z + e.z ),
-            new Vector3( c.x + e.x, c.y + e.y, c.z - e.z ),
-            new Vector3( c.x + e.x, c.y - e.y, c.z + e.z ),
-            new Vector3( c.x + e.x, c.y - e.y, c.z - e.z ),
-            new Vector3( c.x - e.x, c.y + e.y, c.z + e.z ),
-            new Vector3( c.x - e.x, c.y + e.y, c.z - e.z ),
-            new Vector3( c.x - e.x, c.y - e.y, c.z + e.z ),
-            new Vector3( c.x - e.x, c.y - e.y, c.z - e.z ),
-        };
+        // Vector3[] worldCorners = new[] {
+        //     new Vector3( c.x + e.x, c.y + e.y, c.z + e.z ),
+        //     new Vector3( c.x + e.x, c.y + e.y, c.z - e.z ),
+        //     new Vector3( c.x + e.x, c.y - e.y, c.z + e.z ),
+        //     new Vector3( c.x + e.x, c.y - e.y, c.z - e.z ),
+        //     new Vector3( c.x - e.x, c.y + e.y, c.z + e.z ),
+        //     new Vector3( c.x - e.x, c.y + e.y, c.z - e.z ),
+        //     new Vector3( c.x - e.x, c.y - e.y, c.z + e.z ),
+        //     new Vector3( c.x - e.x, c.y - e.y, c.z - e.z ),
+        // };
         // convert from world position to screen position
         IEnumerable<Vector3> screenCorners = worldCorners.Select(corner => camera.WorldToScreenPoint(corner));
         maxX = screenCorners.Max(corner => corner.x);
@@ -72,7 +98,7 @@ public class DataGenerator : MonoBehaviour
         {
             RaycastHit hit;
             // Debug.DrawLine(camera.transform.position, c, Color.red);
-            if (Physics.Linecast(camera.transform.position, c, out hit))
+            if (Physics.Linecast(camera.transform.position, new Vector3(averageCentre.Average(c => c.x), averageCentre.Average(c => c.y), averageCentre.Average(c => c.z)), out hit))
             { if (hit.transform.name != target.name) return false; }
             return true;
         }
@@ -85,7 +111,7 @@ public class DataGenerator : MonoBehaviour
         {
             RaycastHit hit;
             Debug.DrawLine(camera.transform.position, c, Color.red);
-            if (Physics.Linecast(camera.transform.position, c, out hit))
+            if (Physics.Linecast(camera.transform.position, new Vector3(averageCentre.Average(c => c.x), averageCentre.Average(c => c.y), averageCentre.Average(c => c.z)), out hit))
             { if (hit.transform.name != target.name) return false; }
             return true;
         }
@@ -99,7 +125,7 @@ public class DataGenerator : MonoBehaviour
         {
             RaycastHit hit;
             Debug.DrawLine(camera.transform.position, c, Color.red);
-            if (Physics.Linecast(camera.transform.position, c, out hit))
+            if (Physics.Linecast(camera.transform.position, new Vector3(averageCentre.Average(c => c.x), averageCentre.Average(c => c.y), averageCentre.Average(c => c.z)), out hit))
             { if (hit.transform.name != target.name) return false; }
             return true;
         }
@@ -108,9 +134,11 @@ public class DataGenerator : MonoBehaviour
 
     }
 
-    public void GenerateOutput(Camera Camera)
+    public void GenerateOutput(Camera Camera, string SavePath)
     {
-        if (SavePath.Length == 0) SavePath = Application.dataPath;
+        if (SavePath.Length == 0) SavePath = Application.dataPath + "/generated/";
+        SavePath += "/" + interval;
+        Directory.CreateDirectory(SavePath);
         // outputs camera image to jpg
         if (Camera.targetTexture == null)
         {
@@ -128,13 +156,17 @@ public class DataGenerator : MonoBehaviour
         image.Apply();
         RenderTexture.active = activeRenderTexture;
 
-        byte[] bytes = image.EncodeToJPG(); // change to .EncodeToPNG() for png files
+        byte[] bytes = image.EncodeToPNG(); // change to .EncodeToPNG() for png files
         Destroy(image);
 
-        File.WriteAllBytes(SavePath + "/images/" + fileCounter + ".jpg", bytes); // change to .png for png files
+        // File.WriteAllBytes(SavePath + "/" + (fileCounter + FileStartingNumber) + ".png", bytes); // change to .png for png files
 
         // outputs position data in specific format
-        File.WriteAllText(SavePath + "/labels/" + fileCounter + ".txt", "drone 0.0 0 0.0 " + minX + " " + minY + " " + maxX + " " + maxY + " 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+        File.WriteAllText(SavePath + "/" + (fileCounter + FileStartingNumber) + ".txt", "drone 0.0 0 0.0 " + Mathf.RoundToInt(minX).ToString("f2") + " " + Mathf.RoundToInt(screenHeight - maxY).ToString("f2") + " " + Mathf.RoundToInt(maxX).ToString("f2") + " " + Mathf.RoundToInt(screenHeight - minY).ToString("f2") + " 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
+
+        ImageSynthesis synth = Camera.GetComponent<ImageSynthesis>();
+        synth.OnSceneChange();
+        synth.Save((fileCounter + FileStartingNumber) + "", path: SavePath);
 
         fileCounter++;
     }
@@ -151,9 +183,16 @@ public class DataGenerator : MonoBehaviour
 
     public void Randomize()
     {
+        Material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
         foreach (GameObject obj in RandomizeObjects)
         {
-            obj.GetComponent<Randomizer>().Randomize();
+            Randomizer random = obj.GetComponent<Randomizer>();
+            if (random.UseInterval)
+            {
+                random.MinPosY = MinRange + Step * interval;
+                random.MaxPosY = MinRange + Step * (interval + 1);
+            }
+            random.Randomize();
         }
     }
 }

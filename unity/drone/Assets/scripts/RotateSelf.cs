@@ -14,7 +14,7 @@ public class RotateSelf : MonoBehaviour
 
     void Awake()
     {
-        
+
         props[0] = prop1;
         props[1] = prop2;
         props[2] = prop3;
@@ -27,7 +27,7 @@ public class RotateSelf : MonoBehaviour
         {
             if (props[i] != null)
             {
-                props[i].transform.Rotate(xSpeed * Time.deltaTime, ySpeed * Time.deltaTime, zSpeed * Time.deltaTime, Space.Self);
+                props[i].transform.Rotate(xSpeed * Time.deltaTime, ySpeed * Time.deltaTime, zSpeed * Time.deltaTime * Random.Range(0.9f, 1.1f), Space.Self);
             }
         }
 

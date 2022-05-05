@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Randomizer : MonoBehaviour
 {
+    public bool UseInterval;
     public bool RandomPosition;
     public float MinPosX;
     public float MaxPosX;
