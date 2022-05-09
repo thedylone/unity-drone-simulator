@@ -18,4 +18,8 @@ public class SliderText : MonoBehaviour
         InputField.text = _inputValue.ToString();
         Slider.value = _inputValue;
     }
+    void Start()
+    {
+        Slider.value = float.Parse(InputField.text);
+    }
 }

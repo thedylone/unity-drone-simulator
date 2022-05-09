@@ -14,6 +14,7 @@ public static class Settings
 
     // zmq settings
     public static string ZmqPath;
+    public static float ZmqDelay;
 
     // drones settings
     public static float DroneDistance;

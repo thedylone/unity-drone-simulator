@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Threading;
 using NetMQ;
@@ -28,7 +29,7 @@ public class NetMqListener
                 string msg;
                 // msg = subSocket.ReceiveFrameString();
                 if (!subSocket.TryReceiveFrameString(out msg)) continue;
-                Debug.Log(msg);
+                // Debug.Log(msg);
                 _messageQueue.Enqueue(msg);
             }
             subSocket.Close();
@@ -81,7 +82,8 @@ public class ClientObject : MonoBehaviour
         var inputs = message.Split(',');
         float vx = float.Parse(inputs[0]);
         float vy = float.Parse(inputs[1]);
-        Converter.Convert(vx, vy);
+        // Converter.Convert(vx, vy);
+        StartCoroutine(WaitConvert(vx, vy));
 
         // Debug.Log(splittedStrings);
         // if (splittedStrings.Length != 3) return;
@@ -90,6 +92,13 @@ public class ClientObject : MonoBehaviour
         // var z = float.Parse(splittedStrings[2]);
         // transform.position = new Vector3(x, y, z);
 
+    }
+
+    IEnumerator WaitConvert(float vx, float vy)
+    {
+        yield return new WaitForSeconds(Settings.ZmqDelay);
+        Debug.Log(vx + "," + vy);
+        Converter.Convert(vx, vy);
     }
 
     // private void Start()
