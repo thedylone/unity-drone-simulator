@@ -207,7 +207,7 @@ namespace Siccity.GLTFUtility {
 			GLTFTexture.ImportTask textureTask = new GLTFTexture.ImportTask(gltfObject.textures, imageTask);
 			textureTask.RunSynchronously();
 			GLTFMaterial.ImportTask materialTask = new GLTFMaterial.ImportTask(gltfObject.materials, textureTask, importSettings);
-			materialTask.RunSynchronously();
+			// materialTask.RunSynchronously();
 			GLTFMesh.ImportTask meshTask = new GLTFMesh.ImportTask(gltfObject.meshes, accessorTask, bufferViewTask, materialTask, importSettings);
 			meshTask.RunSynchronously();
 			GLTFSkin.ImportTask skinTask = new GLTFSkin.ImportTask(gltfObject.skins, accessorTask);
@@ -308,7 +308,7 @@ namespace Siccity.GLTFUtility {
 			GLTFTexture.ImportTask textureTask = new GLTFTexture.ImportTask(gltfObject.textures, imageTask);
 			importTasks.Add(textureTask);
 			GLTFMaterial.ImportTask materialTask = new GLTFMaterial.ImportTask(gltfObject.materials, textureTask, importSettings);
-			importTasks.Add(materialTask);
+			// importTasks.Add(materialTask);
 			GLTFMesh.ImportTask meshTask = new GLTFMesh.ImportTask(gltfObject.meshes, accessorTask, bufferViewTask, materialTask, importSettings);
 			importTasks.Add(meshTask);
 			GLTFSkin.ImportTask skinTask = new GLTFSkin.ImportTask(gltfObject.skins, accessorTask);
