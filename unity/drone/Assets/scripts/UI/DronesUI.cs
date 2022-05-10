@@ -35,6 +35,7 @@ public class DronesUI : MonoBehaviour
     {
         loadResources();
         updateDropdownOptions();
+        updatePreview(droneModels[0]);
     }
     void loadResources()
     {
