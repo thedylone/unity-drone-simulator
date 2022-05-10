@@ -17,8 +17,6 @@ public class Timestamp : MonoBehaviour
     {
         TimestampText.text = "timestamp: 0";
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (_enabled) TimestampText.text = "timestamp: " + Time.time;

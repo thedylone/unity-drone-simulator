@@ -25,6 +25,7 @@ public class KeyboardController : MonoBehaviour
 
         if (EnableHover)
         {
+            // keep target at a fixed distance above objects below it regardless of height
             rb.useGravity = true;
             if (Physics.Raycast(transform.position, -Vector3.up, out hit, HoverDistance, layerMask))
             {

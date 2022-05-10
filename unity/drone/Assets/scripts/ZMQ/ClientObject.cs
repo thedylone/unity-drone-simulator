@@ -77,7 +77,8 @@ public class ClientObject : MonoBehaviour
     public DirectVelocity Converter;
     private NetMqListener _netMqListener;
 
-    private void HandleMessage(string message) // where the received messages will be processed
+    // where the received messages will be processed
+    private void HandleMessage(string message)
     {
         var inputs = message.Split(',');
         float vx = float.Parse(inputs[0]);
@@ -96,6 +97,7 @@ public class ClientObject : MonoBehaviour
 
     IEnumerator WaitConvert(float vx, float vy)
     {
+        // introduce delay (delay is set in settings)
         yield return new WaitForSeconds(Settings.ZmqDelay);
         Debug.Log(vx + "," + vy);
         Converter.Convert(vx, vy);

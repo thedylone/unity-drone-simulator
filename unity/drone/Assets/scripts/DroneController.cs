@@ -16,6 +16,7 @@ public class DroneController : MonoBehaviour
         else
         {
             MaxSpeed = Settings.DroneBSpeed;
+            // instantiate drone B and set up properties
             Drone = Instantiate(Settings.DroneBModel);
             Drone.transform.parent = DroneGroup.transform;
             Drone.transform.localPosition = new Vector3(0, 55 - Settings.DroneDistance, 0);

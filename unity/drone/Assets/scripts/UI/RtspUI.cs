@@ -64,6 +64,7 @@ public class RtspUI : MonoBehaviour
     void updateOutputText()
     {
         // string[] ipAddressList = GetLocalIPAddresses();
+        // retrieve all available IP addresses
         NetworkInterfaceIP[] ipAddressList = GetLocalIPAddresses();
         string output = "Connect to the RTSP stream:";
         if (ipAddressList.Length == 0)
@@ -113,16 +114,14 @@ public class RtspUI : MonoBehaviour
         // return ipAddressList.ToArray();
         return niIPList.ToArray();
     }
-}
-
-public class NetworkInterfaceIP
-{
-    public NetworkInterfaceIP(NetworkInterface networkInterface, UnicastIPAddressInformation unicastIPAddressInformation)
+    public struct NetworkInterfaceIP
     {
-        Nic = networkInterface;
-        Ip = unicastIPAddressInformation;
+        public NetworkInterfaceIP(NetworkInterface networkInterface, UnicastIPAddressInformation unicastIPAddressInformation)
+        {
+            Nic = networkInterface;
+            Ip = unicastIPAddressInformation;
+        }
+        public NetworkInterface Nic { get; }
+        public UnicastIPAddressInformation Ip { get; }
     }
-
-    public NetworkInterface Nic { get; }
-    public UnicastIPAddressInformation Ip { get; }
 }

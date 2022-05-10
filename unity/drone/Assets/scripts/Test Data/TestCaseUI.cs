@@ -17,22 +17,7 @@ public class TestCaseUI : MonoBehaviour
     private string _currentFile;
     void Start()
     {
-        TestCaseManager.RefreshTestCases();
-        foreach (string testcase in TestCaseManager.TestCases)
-        {
-            var panel = Object.Instantiate(PrefabPanel, Vector3.zero, Quaternion.identity) as GameObject;
-            panel.transform.SetParent(ScrollContent.transform, false);
-            panel.GetComponentInChildren<Text>().text = testcase;
-            var buttons = panel.GetComponentsInChildren<Button>();
-            buttons[0].onClick.AddListener(delegate
-            {
-                SetFileInput(testcase);
-            });
-            buttons[1].onClick.AddListener(delegate
-            {
-                ToggleLoad(testcase);
-            });
-        }
+        updateTestCases();
     }
 
     void OnDisable()
@@ -49,10 +34,12 @@ public class TestCaseUI : MonoBehaviour
             panel.transform.SetParent(ScrollContent.transform, false);
             panel.GetComponentInChildren<Text>().text = testcase;
             var buttons = panel.GetComponentsInChildren<Button>();
+            // set first button to change the file input
             buttons[0].onClick.AddListener(delegate
             {
                 SetFileInput(testcase);
             });
+            // set second button to run the test case
             buttons[1].onClick.AddListener(delegate
             {
                 ToggleLoad(testcase);
@@ -72,15 +59,20 @@ public class TestCaseUI : MonoBehaviour
             _saveStarted = !_saveStarted;
             if (_saveStarted)
             {
+                // start save case
                 SaveButton.GetComponentInChildren<Text>().text = "stop save";
+                // check if OutputText exists due to switching scene
                 if (OutputText) OutputText.text = "save in progress";
                 TestCaseManager.SaveCase(FileInput.text);
             }
             else
             {
+                // stop save case
                 SaveButton.GetComponentInChildren<Text>().text = "start save";
+                // check if OutputText exists due to switching scene
                 if (OutputText) OutputText.text = "save completed";
                 TestCaseManager.StopSaveCase();
+                updateTestCases();
             }
         }
     }
@@ -91,6 +83,7 @@ public class TestCaseUI : MonoBehaviour
         {
             if (_currentFile != _filename)
             {
+                // if already loading a case and another case is loaded
                 TestCaseManager.StopLoadCase();
                 _loadStarted = false;
             }
@@ -100,6 +93,7 @@ public class TestCaseUI : MonoBehaviour
                 _currentFile = _filename;
                 OutputText.text = "running " + _filename;
                 string result = await TestCaseManager.LoadCase(_filename) ? " passed" : " failed";
+                // check if OutputText exists due to switching scene
                 if (OutputText) OutputText.text = _filename + result;
                 _loadStarted = false;
             }
@@ -118,6 +112,7 @@ public class TestCaseUI : MonoBehaviour
             if (_loadStarted)
             {
                 LoadAllButton.GetComponentInChildren<Text>().text = "stop load";
+                // change the colour of the Load All button to show that it is in progress
                 ColorBlock _cb = LoadAllButton.colors;
                 _cb.normalColor = Color.gray;
                 _cb.selectedColor = Color.gray;
@@ -128,16 +123,20 @@ public class TestCaseUI : MonoBehaviour
                 {
                     if (_loadStarted)
                     {
+                        // run each file if load is not cancelled
                         string result = (await TestCaseManager.LoadCase(file) ? " passed" : " failed") + "\n";
+                        // check if OutputText exists due to switching scene
                         if (OutputText) OutputText.text += file + result;
                     }
                 }
+                // check if OutputText exists due to switching scene
                 if (OutputText) OutputText.text += "running completed";
                 _loadStarted = false;
             }
             else
             {
                 LoadAllButton.GetComponentInChildren<Text>().text = "start load";
+                // reset Load All button colours
                 LoadAllButton.colors = ColorBlock.defaultColorBlock;
                 TestCaseManager.StopLoadCase();
             }

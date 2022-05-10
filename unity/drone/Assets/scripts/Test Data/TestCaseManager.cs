@@ -37,13 +37,17 @@ public class TestCaseManager : MonoBehaviour
         {
             if (s_sw == null)
             {
+                // if save hasn't started yet
                 if (!Directory.Exists(TestCasesPath))
                 {
                     Directory.CreateDirectory(TestCasesPath);
                 }
+                // delete and overwrite save file if it already exists
                 File.Delete(TestCasesPath + SaveFile + ".txt");
+                // initialise stream writer
                 s_sw = File.AppendText(TestCasesPath + SaveFile + ".txt");
             }
+            // save the drone's desired property to the file
             // s_sw.WriteLine(Target.Drone.transform.localPosition.ToString("f3"));
             Vector3 v = Target.Drone.GetComponent<Rigidbody>().velocity /Target.MaxSpeed;
             s_sw.WriteLine(v);
@@ -54,6 +58,8 @@ public class TestCaseManager : MonoBehaviour
             string s;
             if (s_sr == null)
             {
+                // if load hasn't started yet
+                // initialise stream reader
                 s_sr = File.OpenText(TestCasesPath + LoadFile + ".txt");
                 s = "";
             }
@@ -64,8 +70,10 @@ public class TestCaseManager : MonoBehaviour
             }
             else
             {
+                // once stream reader reaches an empty line
                 StopLoadCase();
             }
+            // check if the drone is in frame, if not then stop running and treat as fail
             if (!DroneCheck.CheckInFrame(Target.Drone, Camera))
             {
                 // Debug.Log("fail: " + LoadFile);
@@ -77,6 +85,7 @@ public class TestCaseManager : MonoBehaviour
 
     public static void RefreshTestCases()
     {
+        // retrieves all txt files in the Test Case directory
         TestCases = new List<string>(Directory.GetFiles(TestCasesPath, "*.txt").Select(file => Path.GetFileNameWithoutExtension(file)));
     }
 
@@ -86,6 +95,8 @@ public class TestCaseManager : MonoBehaviour
         {
             if (file == "")
             {
+                // automatically assign a name for the file if no file name is provided
+                // file name will be formatted as case1.txt for example
                 int i = 1;
                 file = String.Format("case{0}", i);
                 while (File.Exists(TestCasesPath + file + ".txt")) file = String.Format("case{0}", ++i); ;
@@ -104,12 +115,14 @@ public class TestCaseManager : MonoBehaviour
 
     public static async Task<bool> LoadCase(string file)
     {
+        // returns true if case passed, else false if case failed
         ResetObjects.Restart();
         LoadFile = file;
         s_loadStarted = true;
         s_passCase = true;
         while (s_loadStarted)
         {
+            // waits for load to complete/stop
             await Task.Delay(100);
         }
         return s_passCase;

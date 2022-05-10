@@ -9,22 +9,12 @@ public class VelocityConverter : MonoBehaviour
     public float MaxSpeed = 15f;
     public float MaxTiltDeg = 25f;
     public float tiltSpeed = 1;
-    // [Range(-1, 1)]
-    // public float vx = 0.5f;
-    // [Range(-1, 1)]
-    // public float vy = 0.5f;
-
     Rigidbody rb;
     float mass;
     float drag;
-
-    // void Update()
-    // {
-    //     Convert(vx, vy);
-    // }
-
     public void Convert(float vx, float vy)
     {
+        // takes vx vy input from -1 to 1 and add force to the drone to reach target velocity
         rb = GetComponent<Rigidbody>();
         mass = rb.mass;
         rb.drag = 0;

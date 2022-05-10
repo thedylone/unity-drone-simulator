@@ -28,6 +28,7 @@ public class DronesUI : MonoBehaviour
         DroneASpeedField.onEndEdit.AddListener(droneAChange);
         DroneBSpeedField.onEndEdit.AddListener(droneBChange);
         DroneBDropdown.onValueChanged.AddListener(dropdownChange);
+        // Limit Drone B dropdown value to the max number of items (if number of drone models decreases)
         DroneBDropdown.value = Mathf.Min(PlayerPrefs.GetInt(DroneBDropdown.name), DroneBDropdown.options.Count);
         dropdownChange(DroneBDropdown.value);
     }
@@ -35,12 +36,12 @@ public class DronesUI : MonoBehaviour
     {
         loadResources();
         updateDropdownOptions();
+        // reset Preview to show first item as dropdown resets to first item
         updatePreview(droneModels[0]);
     }
     void loadResources()
     {
-        // hdrpLit = Shader.Find("HDRP/Lit");
-
+        // loads drone models from internal "Drone Models" folder in Resources
         droneModels = new List<GameObject>(Resources.LoadAll<GameObject>("Drone Models"));
 
         // import from streamingassets
@@ -50,27 +51,38 @@ public class DronesUI : MonoBehaviour
             {
                 if (Path.GetFileName(file).ToUpper().EndsWith(".OBJ"))
                 {
+                    // import OBJ file
                     string name = Path.GetFileNameWithoutExtension(file);
+                    // destroy existing if already imported before
+                    // to prevent multiple objects from stacking up
                     if (GameObject.Find(name)) Destroy(GameObject.Find(name));
                     GameObject obj = new OBJLoader().Load(file);
                     obj.name = name;
 
+                    // changes the object's material to Drone Material to:
+                    // 1. be able to display with HDRP
+                    // 2. change the colour of the model
                     foreach (MeshRenderer childRenderer in obj.GetComponentsInChildren<MeshRenderer>()) childRenderer.material = DroneMaterial;
-                    if (obj.TryGetComponent(out MeshRenderer renderer)) renderer.material = DroneMaterial;
                     droneModels.Add(obj);
+                    // Don't Destroy to allow Instantiating during Scene Switching
                     DontDestroyOnLoad(obj);
 
                 }
                 else if (Path.GetFileName(file).ToUpper().EndsWith(".GLB") || Path.GetFileName(file).ToUpper().EndsWith(".GLTF"))
                 {
                     string name = Path.GetFileNameWithoutExtension(file);
+                    // destroy existing if already imported before
+                    // to prevent multiple objects from stacking up
                     if (GameObject.Find(name)) Destroy(GameObject.Find(name));
                     GameObject gltfObject = Importer.LoadFromFile(file);
                     gltfObject.name = name;
 
+                    // changes the object's material to Drone Material to:
+                    // 1. be able to display with HDRP
+                    // 2. change the colour of the model
                     foreach (MeshRenderer childRenderer in gltfObject.GetComponentsInChildren<MeshRenderer>()) childRenderer.material = DroneMaterial;
-                    if (gltfObject.TryGetComponent(out MeshRenderer renderer)) renderer.material = DroneMaterial;
                     droneModels.Add(gltfObject);
+                    // Don't Destroy to allow Instantiating during Scene Switching
                     DontDestroyOnLoad(gltfObject);
 
                 }
@@ -106,12 +118,18 @@ public class DronesUI : MonoBehaviour
     }
     void updatePreview(GameObject model)
     {
+        // destroy existing model
         if (previewModel) Destroy(previewModel);
+        // instantiate the model at the target location in view of the preview camera
         previewModel = Instantiate(model, new Vector3(100, 100, 100), new Quaternion(0, 0, 0, 0));
+        // prevent collision of the model
         if (previewModel.TryGetComponent<Rigidbody>(out Rigidbody rb)) Destroy(rb);
+        // get the largest sizes of the model
         float sizeX = previewModel.GetComponentsInChildren<Renderer>().Select(c => c.bounds.size.x).Max();
         float sizeY = previewModel.GetComponentsInChildren<Renderer>().Select(c => c.bounds.size.y).Max();
         // float sizeZ = previewModel.GetComponentsInChildren<Renderer>().Select(c => c.bounds.size.z).Max();
+        
+        // move the camera to allow it to see the entire model
         float distance = Mathf.Max(sizeX, sizeY) / (2.0f * Mathf.Tan(0.5f * PreviewCamera.fieldOfView * Mathf.Deg2Rad));
         PreviewCamera.transform.position = new Vector3(PreviewCamera.transform.position.x, 100 + distance * 2.0f * Mathf.Tan(PreviewCamera.transform.eulerAngles.x * Mathf.PI / 180), 100 - distance * 2.0f);
         // PreviewCamera.transform.LookAt(previewModel.transform.position);
