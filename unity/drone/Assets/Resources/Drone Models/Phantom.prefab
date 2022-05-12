@@ -16993,10 +16993,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee9dee916513754f9ba979a28d3d11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prop1: {fileID: 4046128873972071906}
-  prop2: {fileID: 3389019997034302233}
-  prop3: {fileID: 2182920104999474868}
-  prop4: {fileID: 5320041018116455918}
+  Prop1: {fileID: 8699379514426537396}
+  Prop2: {fileID: 6385237159570228327}
+  Prop3: {fileID: 3939543587079365172}
+  Prop4: {fileID: 2228213790841656844}
   xSpeed: 0
   ySpeed: 2000
   zSpeed: 0

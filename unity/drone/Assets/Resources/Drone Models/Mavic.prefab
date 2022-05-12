@@ -115,10 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee9dee916513754f9ba979a28d3d11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prop1: {fileID: 5945097329776786560}
-  prop2: {fileID: 8833837034905515428}
-  prop3: {fileID: 9038637233792488539}
-  prop4: {fileID: 1936847912827141199}
+  Prop1: {fileID: 5945097329776786560}
+  Prop2: {fileID: 8833837034905515428}
+  Prop3: {fileID: 9038637233792488539}
+  Prop4: {fileID: 1936847912827141199}
   xSpeed: 0
   ySpeed: 2000
   zSpeed: 0
