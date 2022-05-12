@@ -15,7 +15,7 @@ Several properties were changed to instead retrieve the value from the Global Se
 
 An option to <b>Enable RTSP</b> was added. Turning on <b>Enable RTSP</b> will allow FFmpeg to stream out the camera feed via RTSP. Disabling RTSP instead will keep FFmpegOut's intended functionality to save a recording of the camera feed instead.
 
-The <b>Path</b> property was also added. It retrieves the value from the Global Settings static fields. It determined by the <b>Port Number</b> and the <b>URL</b>, determined by `rtsp://localhost:<Port Number>/<URL>`. If the <b>Port Number</b> and <b>URL</b> are both left blank in the Settings, RTSP will be turned <b>off</b> and will save a recording instead.
+The <b>Path</b> property was also added. It retrieves the value from the Global Settings static fields. It is determined by the <b>Port Number</b> and the <b>URL</b>, given by `rtsp://localhost:<Port Number>/<URL>`. If the <b>Port Number</b> and <b>URL</b> are both left blank in the Settings, RTSP will be turned <b>off</b> and will save a recording instead.
 
 It is recommended to use the <b>H.264 NVIDIA</b> preset, but will require a NVIDIA GPU. As it is highly optimised, there is minimal latency and can perform well at high frame rates and/or high resolutions.
 
