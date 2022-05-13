@@ -110,6 +110,10 @@ public class TestCaseUI : MonoBehaviour
             _loadStarted = !_loadStarted;
             if (_loadStarted)
             {
+                if (_waypointStarted)
+                {
+                    TestCaseManager.StopLoadWaypoint();
+                }
                 _currentFile = filename;
                 OutputText.text = "running " + filename;
                 string result = await TestCaseManager.LoadCase(filename) ? " passed" : " failed";
