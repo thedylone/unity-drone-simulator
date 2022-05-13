@@ -69,12 +69,12 @@ namespace FFmpegOut
 
         #region Public properties and members
 
-        public void PushFrame(Texture source)
+        public void PushFrame(Texture source, int storedNumber)
         {
             if (_pipe != null)
             {
                 ProcessQueue();
-                if (source != null) QueueFrame(source);
+                if (source != null) QueueFrame(source, storedNumber);
             }
         }
 
@@ -152,7 +152,8 @@ namespace FFmpegOut
         List<AsyncGPUReadbackRequest> _readbackQueue =
             new List<AsyncGPUReadbackRequest>(4);
 
-        void QueueFrame(Texture source)
+        Queue<RenderTexture> _storedFrames = new Queue<RenderTexture>();
+        void QueueFrame(Texture source, int storedNumber)
         {
             if (_readbackQueue.Count > 6)
             {
@@ -171,8 +172,14 @@ namespace FFmpegOut
             var rt = RenderTexture.GetTemporary
                 (source.width, source.height, 0, RenderTextureFormat.ARGB32);
             Graphics.Blit(source, rt, _blitMaterial, 0);
-            _readbackQueue.Add(AsyncGPUReadback.Request(rt));
-            RenderTexture.ReleaseTemporary(rt);
+            _storedFrames.Enqueue(rt);
+            if (_storedFrames.Count > storedNumber)
+            {
+                rt = _storedFrames.Dequeue();
+                _readbackQueue.Add(AsyncGPUReadback.Request(rt));
+                RenderTexture.ReleaseTemporary(rt);
+            }
+            
         }
 
         void ProcessQueue()

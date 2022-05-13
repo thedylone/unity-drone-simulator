@@ -12,6 +12,7 @@ public class RtspUI : MonoBehaviour
     public InputField PortField;
     public InputField UrlField;
     public Text[] OutputTextList;
+    public InputField DelayField;
     public Toggle TimestampToggle;
     public InputField WidthField;
     public InputField HeightField;
@@ -21,6 +22,7 @@ public class RtspUI : MonoBehaviour
     {
         Settings.RtspPort = PortField.text;
         Settings.RtspUrl = UrlField.text;
+        Settings.RtspDelay = float.Parse(DelayField.text);
         Settings.TimestampToggle = TimestampToggle.isOn;
         Settings.RtspWidth = int.Parse(WidthField.text);
         Settings.RtspHeight = int.Parse(HeightField.text);
@@ -28,6 +30,7 @@ public class RtspUI : MonoBehaviour
         updateOutputText();
         PortField.onValueChanged.AddListener(portChange);
         UrlField.onValueChanged.AddListener(urlChange);
+        DelayField.onValueChanged.AddListener(delayChange);
         TimestampToggle.onValueChanged.AddListener(timestampChange);
         WidthField.onValueChanged.AddListener(widthChange);
         HeightField.onValueChanged.AddListener(heightChange);
@@ -43,6 +46,11 @@ public class RtspUI : MonoBehaviour
     {
         Settings.RtspUrl = url;
         updateOutputText();
+    }
+
+    void delayChange(string delay)
+    {
+        Settings.RtspDelay = float.Parse(delay);
     }
 
     void timestampChange(bool isOn)

@@ -7,6 +7,7 @@ public static class Settings
     // rtsp settings
     public static string RtspPort;
     public static string RtspUrl;
+    public static float RtspDelay; 
     public static bool TimestampToggle;
     public static int RtspWidth;
     public static int RtspHeight;

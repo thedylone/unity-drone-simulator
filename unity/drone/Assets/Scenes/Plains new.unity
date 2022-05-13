@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3729.8398, g: 2372.0664, b: 1864.8008, a: 1}
+  m_IndirectSpecularColor: {r: 3728.704, g: 2372.0469, b: 1864.7812, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2693,7 +2693,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 978979179}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2842,7 +2842,7 @@ Rigidbody:
   m_GameObject: {fileID: 696089494}
   serializedVersion: 2
   m_Mass: 1.375
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.01
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -3818,7 +3818,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 369652833}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4639,7 +4639,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2016643734}
   m_HandleRect: {fileID: 2016643733}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6529,7 +6529,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 756166444}
   m_HandleRect: {fileID: 756166443}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7444,7 +7444,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 875798004}
   m_HandleRect: {fileID: 875798003}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8063,22 +8063,22 @@ PrefabInstance:
     - target: {fileID: 101451369202482265, guid: 8e844cbef5e5b2c4ba57d6558cd88680,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 101451369202482265, guid: 8e844cbef5e5b2c4ba57d6558cd88680,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 101451369202482265, guid: 8e844cbef5e5b2c4ba57d6558cd88680,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 101451369202482265, guid: 8e844cbef5e5b2c4ba57d6558cd88680,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 101451369202482265, guid: 8e844cbef5e5b2c4ba57d6558cd88680,
         type: 3}
@@ -8166,6 +8166,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949992111443253467, guid: ec3bc8061a9d5364499fe95bb576e47a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949992111443253467, guid: ec3bc8061a9d5364499fe95bb576e47a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949992111443253467, guid: ec3bc8061a9d5364499fe95bb576e47a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5949992111443253467, guid: ec3bc8061a9d5364499fe95bb576e47a,
         type: 3}

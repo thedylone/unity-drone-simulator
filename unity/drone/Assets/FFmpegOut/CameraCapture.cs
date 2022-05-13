@@ -36,6 +36,10 @@ namespace FFmpegOut
         {
             get { return Settings.RtspPort != null || Settings.RtspUrl != null ? "rtsp://localhost:" + Settings.RtspPort + "/" + Settings.RtspUrl : ""; }
         }
+        int _storedNumber
+        {
+            get { return Mathf.RoundToInt(Settings.RtspDelay * _frameRate / 1000); }
+        }
 
         #endregion
 
@@ -174,6 +178,9 @@ namespace FFmpegOut
                 _startTime = Time.time;
                 _frameCount = 0;
                 _frameDropCount = 0;
+                Debug.Log(_frameRate);
+                Debug.Log(Settings.RtspDelay);
+                Debug.Log(_storedNumber);
             }
 
             var gap = Time.time - FrameTime;
@@ -182,13 +189,13 @@ namespace FFmpegOut
             if (gap < 0)
             {
                 // Update without frame data.
-                _session.PushFrame(null);
+                _session.PushFrame(null, _storedNumber);
             }
             else if (gap < delta)
             {
                 // Single-frame behind from the current time:
                 // Push the current frame to FFmpeg.
-                _session.PushFrame(camera.targetTexture);
+                _session.PushFrame(camera.targetTexture, _storedNumber);
                 _frameCount++;
             }
             else if (gap < delta * 2)
@@ -197,8 +204,8 @@ namespace FFmpegOut
                 // Push the current frame twice to FFmpeg. Actually this is not
                 // an efficient way to catch up. We should think about
                 // implementing frame duplication in a more proper way. #fixme
-                _session.PushFrame(camera.targetTexture);
-                _session.PushFrame(camera.targetTexture);
+                _session.PushFrame(camera.targetTexture, _storedNumber);
+                _session.PushFrame(camera.targetTexture, _storedNumber);
                 _frameCount += 2;
             }
             else
@@ -207,7 +214,7 @@ namespace FFmpegOut
                 WarnFrameDrop();
 
                 // Push the current frame to FFmpeg.
-                _session.PushFrame(camera.targetTexture);
+                _session.PushFrame(camera.targetTexture, _storedNumber);
 
                 // Compensate the time delay.
                 _frameCount += Mathf.FloorToInt(gap * _frameRate);
