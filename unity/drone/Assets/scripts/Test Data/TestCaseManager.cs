@@ -9,26 +9,35 @@ using UnityEngine;
 public class TestCaseManager : MonoBehaviour
 {
     public static List<string> TestCases;
+    public static List<string> Waypoints;
     public static string TestCasesPath = Application.streamingAssetsPath + "/testdata/";
+    public static string WaypointsPath = Application.streamingAssetsPath + "/waypoint/";
     public DroneController Target;
     public Camera Camera;
+    // save test data
     public static string SaveFile;
     private static bool s_saveStarted = false;
     private static StreamWriter s_sw;
-
+    // load test data
     public static string LoadFile;
     private static bool s_loadStarted = false;
     private static StreamReader s_sr;
     private static bool s_passCase = true;
+    // load waypoint
+    public static string WaypointFile;
+    private static bool s_waypointStarted = false;
+    private static StreamReader s_waypointSr;
 
     public void Start()
     {
         RefreshTestCases();
+        RefreshWaypoints();
     }
 
     void OnDisable()
     {
         StopLoadCase();
+        StopLoadWaypoint();
     }
 
     public void FixedUpdate()
@@ -49,7 +58,7 @@ public class TestCaseManager : MonoBehaviour
             }
             // save the drone's desired property to the file
             // s_sw.WriteLine(Target.Drone.transform.localPosition.ToString("f3"));
-            Vector3 v = Target.Drone.GetComponent<Rigidbody>().velocity /Target.MaxSpeed;
+            Vector3 v = Target.Drone.GetComponent<Rigidbody>().velocity / Target.MaxSpeed;
             s_sw.WriteLine(v);
         }
 
@@ -81,14 +90,86 @@ public class TestCaseManager : MonoBehaviour
                 StopLoadCase();
             }
         }
+        if (s_waypointStarted && s_waypointSr == null) StartCoroutine(LoadWaypoint());
+    }
+
+    IEnumerator LoadWaypoint()
+    {
+        string s;
+        Rigidbody rb = Target.Drone.GetComponent<Rigidbody>();
+        float[] prev = new float[] { 0, 0 };
+        if (s_waypointSr == null)
+        {
+            // if load hasn't started yet
+            // initialise stream reader
+            s_waypointSr = File.OpenText(WaypointsPath + WaypointFile + ".txt");
+            s = "";
+            Target.GetComponent<KeyboardController>().enabled = false;
+        }
+        while ((s = s_waypointSr.ReadLine()) != null)
+        {
+            Debug.Log(s);
+            // check if the drone is in frame, if not then stop running and treat as fail
+            if (!DroneCheck.CheckInFrame(Target.Drone, Camera))
+            {
+                // Debug.Log("fail: " + LoadFile);
+                s_passCase = false;
+                break;
+            }
+            // format : {x, y, v}
+            string[] inputs = s.Split(',');
+            float dx = float.Parse(inputs[0]) - prev[0];
+            float dy = float.Parse(inputs[1]) - prev[1];
+            float dv = float.Parse(inputs[2]);
+
+            prev = new float[] { float.Parse(inputs[0]), float.Parse(inputs[1]) };
+
+            float totalDistance = Mathf.Sqrt(dx * dx + dy * dy);
+
+            float vx = dv * dx / totalDistance;
+            float vy = dv * dy / totalDistance;
+            float waitTime = totalDistance / dv;
+
+            rb.drag = 0;
+            rb.velocity = new Vector3(vx, 0, vy);
+
+            Debug.Log("waiting for " + waitTime);
+            yield return new WaitForSecondsRealtime(waitTime);
+            Debug.Log("waiting finished");
+        }
+
+        // once stream reader reaches an empty line
+        Debug.Log("stop load case");
+        rb.velocity = new Vector3(0, 0, 0);
+        Target.GetComponent<KeyboardController>().enabled = true;
+        StopLoadWaypoint();
     }
 
     public static void RefreshTestCases()
     {
-        // retrieves all txt files in the Test Case directory
-        TestCases = new List<string>(Directory.GetFiles(TestCasesPath, "*.txt").Select(file => Path.GetFileNameWithoutExtension(file)));
+        if (Directory.Exists(TestCasesPath))
+        {
+            // retrieves all txt files in the Test Case directory
+            TestCases = new List<string>(Directory.GetFiles(TestCasesPath, "*.txt").Select(file => Path.GetFileNameWithoutExtension(file)));
+        }
+        else
+        {
+            Directory.CreateDirectory(TestCasesPath);
+        }
     }
 
+    public static void RefreshWaypoints()
+    {
+        if (Directory.Exists(TestCasesPath))
+        {
+            // retrieves all txt files in the Waypoint directory
+            Waypoints = new List<string>(Directory.GetFiles(WaypointsPath, "*.txt").Select(file => Path.GetFileNameWithoutExtension(file)));
+        }
+        else
+        {
+            Directory.CreateDirectory(TestCasesPath);
+        }
+    }
     public static void SaveCase(string file)
     {
         if (!s_loadStarted)
@@ -136,6 +217,27 @@ public class TestCaseManager : MonoBehaviour
         s_sr = null;
     }
 
+    public static async Task<bool> LoadWaypoint(string file)
+    {
+        // returns true if case passed, else false if case failed
+        ResetObjects.Restart();
+        WaypointFile = file;
+        s_waypointStarted = true;
+        s_passCase = true;
+        while (s_waypointStarted)
+        {
+            // waits for load to complete/stop
+            await Task.Delay(100);
+        }
+        return s_passCase;
+        // await Task.CompletedTask;
+    }
+    public static void StopLoadWaypoint()
+    {
+        s_waypointStarted = false;
+        if (s_waypointSr != null) s_waypointSr.Dispose();
+        s_waypointSr = null;
+    }
     public static Vector3 StringToVector3(string sVector)
     {
         // remove the parentheses

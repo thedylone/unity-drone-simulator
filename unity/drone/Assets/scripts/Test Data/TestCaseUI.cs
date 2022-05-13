@@ -10,14 +10,18 @@ public class TestCaseUI : MonoBehaviour
     public Button SaveButton;
     public Button LoadButton;
     public Button LoadAllButton;
-    public GameObject ScrollContent;
+    public GameObject TestCaseScrollContent;
+    public GameObject WaypointScrollContent;
     public GameObject PrefabPanel;
     private bool _saveStarted = false;
     private bool _loadStarted = false;
+    private bool _waypointStarted = false;
     private string _currentFile;
+    private string _currentWaypoint;
     void Start()
     {
         updateTestCases();
+        updateWaypoints();
     }
 
     void OnDisable()
@@ -31,7 +35,7 @@ public class TestCaseUI : MonoBehaviour
         foreach (string testcase in TestCaseManager.TestCases)
         {
             var panel = Object.Instantiate(PrefabPanel, Vector3.zero, Quaternion.identity) as GameObject;
-            panel.transform.SetParent(ScrollContent.transform, false);
+            panel.transform.SetParent(TestCaseScrollContent.transform, false);
             panel.GetComponentInChildren<Text>().text = testcase;
             var buttons = panel.GetComponentsInChildren<Button>();
             // set first button to change the file input
@@ -47,9 +51,25 @@ public class TestCaseUI : MonoBehaviour
         }
     }
 
-    public void SetFileInput(string _filename)
+    void updateWaypoints()
     {
-        FileInput.text = _filename;
+        TestCaseManager.RefreshWaypoints();
+        foreach (string waypoint in TestCaseManager.Waypoints)
+        {
+            var panel = Object.Instantiate(PrefabPanel, Vector3.zero, Quaternion.identity) as GameObject;
+            panel.transform.SetParent(WaypointScrollContent.transform, false);
+            panel.GetComponentInChildren<Text>().text = waypoint;
+            var buttons = panel.GetComponentsInChildren<Button>();
+            buttons[1].onClick.AddListener(delegate
+            {
+                ToggleWaypoint(waypoint);
+            });
+        }
+    }
+
+    public void SetFileInput(string filename)
+    {
+        FileInput.text = filename;
     }
 
     public void ToggleSave()
@@ -77,11 +97,11 @@ public class TestCaseUI : MonoBehaviour
         }
     }
 
-    public async void ToggleLoad(string _filename)
+    public async void ToggleLoad(string filename)
     {
         if (!_saveStarted)
         {
-            if (_currentFile != _filename)
+            if (_currentFile != filename)
             {
                 // if already loading a case and another case is loaded
                 TestCaseManager.StopLoadCase();
@@ -90,11 +110,11 @@ public class TestCaseUI : MonoBehaviour
             _loadStarted = !_loadStarted;
             if (_loadStarted)
             {
-                _currentFile = _filename;
-                OutputText.text = "running " + _filename;
-                string result = await TestCaseManager.LoadCase(_filename) ? " passed" : " failed";
+                _currentFile = filename;
+                OutputText.text = "running " + filename;
+                string result = await TestCaseManager.LoadCase(filename) ? " passed" : " failed";
                 // check if OutputText exists due to switching scene
-                if (OutputText) OutputText.text = _filename + result;
+                if (OutputText) OutputText.text = filename + result;
                 _loadStarted = false;
             }
             else
@@ -139,6 +159,32 @@ public class TestCaseUI : MonoBehaviour
                 // reset Load All button colours
                 LoadAllButton.colors = ColorBlock.defaultColorBlock;
                 TestCaseManager.StopLoadCase();
+            }
+        }
+    }
+    public async void ToggleWaypoint(string waypointFilename)
+    {
+        if (!_loadStarted)
+        {
+            if (_currentWaypoint != waypointFilename)
+            {
+                // if already loading a waypoint and another waypoint is loaded
+                TestCaseManager.StopLoadWaypoint();
+                _waypointStarted = false;
+            }
+            _waypointStarted = !_waypointStarted;
+            if (_waypointStarted)
+            {
+                _currentWaypoint = waypointFilename;
+                OutputText.text = "run waypoint " + waypointFilename;
+                string result = await TestCaseManager.LoadWaypoint(waypointFilename) ? " passed" : " failed";
+                // check if OutputText exists due to switching scene
+                if (OutputText) OutputText.text = waypointFilename + result;
+                _waypointStarted = false;
+            }
+            else
+            {
+                TestCaseManager.StopLoadWaypoint();
             }
         }
     }
