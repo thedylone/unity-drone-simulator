@@ -98,7 +98,7 @@ public class ClientObject : MonoBehaviour
     IEnumerator WaitConvert(float vx, float vy)
     {
         // introduce delay (delay is set in settings)
-        yield return new WaitForSeconds(Settings.ZmqDelay);
+        yield return new WaitForSeconds(Settings.ZmqDelay / 1000);
         Debug.Log(vx + "," + vy);
         Converter.Convert(vx, vy);
     }
