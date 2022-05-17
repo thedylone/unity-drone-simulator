@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,12 +42,17 @@ public class WaypointUI : MonoBehaviour
         }
     }
 
-    public void LoadWaypoint(string waypointFilename)
+    public async void LoadWaypoint(string waypointFilename)
     {
         WaypointManager.StopSaveWaypoint();
         WaypointManager.StopLoadWaypoint();
+        while (WaypointManager.WaypointLoadStarted)
+        {
+            await Task.Delay(100);
+        }
         OutputText.text = "Attempting to load " + waypointFilename;
-        WaypointManager.LoadWaypoint(waypointFilename, Target);
+        await WaypointManager.LoadWaypoint(waypointFilename, Target);
+        OutputText.text = "Finished loading " + waypointFilename;
     }
     public void SaveWaypoint(bool isOn)
     {

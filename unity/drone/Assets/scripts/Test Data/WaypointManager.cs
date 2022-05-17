@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,7 @@ public static class WaypointManager
     private static bool s_waypointSaveStarted = false;
     private static StreamWriter s_waypointSw;
     // load waypoint
-    private static bool s_waypointLoadStarted = false;
+    public static bool WaypointLoadStarted = false;
     private static StreamReader s_waypointSr;
 
     public static void RefreshWaypoints()
@@ -35,7 +36,7 @@ public static class WaypointManager
 
     public static async void SaveWaypoint(string file, DroneController target)
     {
-        if (!s_waypointSaveStarted && !s_waypointLoadStarted)
+        if (!s_waypointSaveStarted && !WaypointLoadStarted)
         {
             if (file == "")
             {
@@ -78,7 +79,7 @@ public static class WaypointManager
             // if (target.Drone.GetComponent<Rigidbody>().velocity != previousVelocity)
             // if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyUp(KeyCode.D))
             List<KeyCode> keys = new List<KeyCode>(keyboard.Keys);
-            foreach(KeyCode key in keys)
+            foreach (KeyCode key in keys)
             {
                 if (Input.GetKey(key) != keyboard[key])
                 {
@@ -104,10 +105,11 @@ public static class WaypointManager
         if (s_waypointSw != null) s_waypointSw.Dispose();
         s_waypointSw = null;
     }
-    public static async void LoadWaypoint(string file, DroneController target)
+    public static async Task LoadWaypoint(string file, DroneController target)
     {
-        if (!s_waypointSaveStarted && !s_waypointLoadStarted)
+        if (!s_waypointSaveStarted && !WaypointLoadStarted)
         {
+            WaypointLoadStarted = true;
             ResetObjects.Restart();
             Debug.Log("LoadWaypoint");
             await loadWaypoint(file, target);
@@ -145,9 +147,15 @@ public static class WaypointManager
             rb.drag = 0;
             rb.velocity = new Vector3(vx, 0, vy);
 
+            int timeElapsed = 0;
             Debug.Log("waiting for " + waitTime);
             // yield return new WaitForSecondsRealtime(waitTime);
-            await Task.Delay(Mathf.RoundToInt(waitTime * 1000));
+            while (s_waypointSr != null && timeElapsed < waitTime * 1000)
+            {
+                timeElapsed += 10;
+                await Task.Delay(10);
+            }
+            // await Task.Delay(Mathf.RoundToInt(waitTime * 1000));
             Debug.Log("waiting finished");
         }
 
@@ -156,10 +164,11 @@ public static class WaypointManager
         rb.velocity = new Vector3(0, 0, 0);
         target.GetComponent<KeyboardController>().enabled = true;
         StopLoadWaypoint();
+        WaypointLoadStarted = false;
     }
     public static void StopLoadWaypoint()
     {
-        s_waypointLoadStarted = false;
+        // WaypointLoadStarted = false;
         if (s_waypointSr != null) s_waypointSr.Dispose();
         s_waypointSr = null;
     }
