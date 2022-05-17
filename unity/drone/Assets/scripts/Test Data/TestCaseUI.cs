@@ -11,19 +11,14 @@ public class TestCaseUI : MonoBehaviour
     public Button LoadButton;
     public Button LoadAllButton;
     public GameObject TestCaseScrollContent;
-    public GameObject WaypointScrollContent;
     public GameObject PrefabPanel;
     private bool _saveStarted = false;
     private bool _loadStarted = false;
-    private bool _waypointStarted = false;
     private string _currentFile;
-    private string _currentWaypoint;
     void Start()
     {
         updateTestCases();
-        updateWaypoints();
     }
-
     void OnDisable()
     {
         _saveStarted = false;
@@ -50,28 +45,10 @@ public class TestCaseUI : MonoBehaviour
             });
         }
     }
-
-    void updateWaypoints()
-    {
-        TestCaseManager.RefreshWaypoints();
-        foreach (string waypoint in TestCaseManager.Waypoints)
-        {
-            var panel = Object.Instantiate(PrefabPanel, Vector3.zero, Quaternion.identity) as GameObject;
-            panel.transform.SetParent(WaypointScrollContent.transform, false);
-            panel.GetComponentInChildren<Text>().text = waypoint;
-            var buttons = panel.GetComponentsInChildren<Button>();
-            buttons[1].onClick.AddListener(delegate
-            {
-                ToggleWaypoint(waypoint);
-            });
-        }
-    }
-
     public void SetFileInput(string filename)
     {
         FileInput.text = filename;
     }
-
     public void ToggleSave()
     {
         if (!_loadStarted)
@@ -96,7 +73,6 @@ public class TestCaseUI : MonoBehaviour
             }
         }
     }
-
     public async void ToggleLoad(string filename)
     {
         if (!_saveStarted)
@@ -110,10 +86,6 @@ public class TestCaseUI : MonoBehaviour
             _loadStarted = !_loadStarted;
             if (_loadStarted)
             {
-                if (_waypointStarted)
-                {
-                    TestCaseManager.StopLoadWaypoint();
-                }
                 _currentFile = filename;
                 OutputText.text = "running " + filename;
                 string result = await TestCaseManager.LoadCase(filename) ? " passed" : " failed";
@@ -127,7 +99,6 @@ public class TestCaseUI : MonoBehaviour
             }
         }
     }
-
     public async void ToggleLoadAll()
     {
         if (!_saveStarted)
@@ -163,32 +134,6 @@ public class TestCaseUI : MonoBehaviour
                 // reset Load All button colours
                 LoadAllButton.colors = ColorBlock.defaultColorBlock;
                 TestCaseManager.StopLoadCase();
-            }
-        }
-    }
-    public async void ToggleWaypoint(string waypointFilename)
-    {
-        if (!_loadStarted)
-        {
-            if (_currentWaypoint != waypointFilename)
-            {
-                // if already loading a waypoint and another waypoint is loaded
-                TestCaseManager.StopLoadWaypoint();
-                _waypointStarted = false;
-            }
-            _waypointStarted = !_waypointStarted;
-            if (_waypointStarted)
-            {
-                _currentWaypoint = waypointFilename;
-                OutputText.text = "run waypoint " + waypointFilename;
-                string result = await TestCaseManager.LoadWaypoint(waypointFilename) ? " passed" : " failed";
-                // check if OutputText exists due to switching scene
-                if (OutputText) OutputText.text = waypointFilename + result;
-                _waypointStarted = false;
-            }
-            else
-            {
-                TestCaseManager.StopLoadWaypoint();
             }
         }
     }
