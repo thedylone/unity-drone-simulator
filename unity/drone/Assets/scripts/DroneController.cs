@@ -7,6 +7,7 @@ public class DroneController : MonoBehaviour
     public GameObject Drone;
     public GameObject DroneGroup;
     public float MaxSpeed;
+    public WaypointManager waypointManager;
     void Awake()
     {
         if (gameObject.name == "Drone A controller")
