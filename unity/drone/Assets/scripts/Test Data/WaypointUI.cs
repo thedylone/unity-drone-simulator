@@ -13,6 +13,7 @@ public class WaypointUI : MonoBehaviour
     public Toggle SaveButton;
     public Toggle StopSaveButton;
     public GameObject PrefabPanel;
+    WaypointManager waypointManager = new WaypointManager();
     // private bool _saveStarted = false;
     // private bool _loadStarted = false;
 
@@ -24,12 +25,12 @@ public class WaypointUI : MonoBehaviour
     }
     void updateWaypoints()
     {
-        WaypointManager.RefreshWaypoints();
+        waypointManager.RefreshWaypoints();
         foreach (Transform child in WaypointScrollContent.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
-        foreach (string waypoint in WaypointManager.Waypoints)
+        foreach (string waypoint in waypointManager.Waypoints)
         {
             var panel = Object.Instantiate(PrefabPanel, Vector3.zero, Quaternion.identity) as GameObject;
             panel.transform.SetParent(WaypointScrollContent.transform, false);
@@ -44,14 +45,14 @@ public class WaypointUI : MonoBehaviour
 
     public async void LoadWaypoint(string waypointFilename)
     {
-        WaypointManager.StopSaveWaypoint();
-        WaypointManager.StopLoadWaypoint();
-        while (WaypointManager.WaypointLoadStarted)
+        waypointManager.StopSaveWaypoint();
+        waypointManager.StopLoadWaypoint();
+        while (waypointManager.WaypointLoadStarted)
         {
             await Task.Delay(100);
         }
         OutputText.text = "Attempting to load " + waypointFilename;
-        await WaypointManager.LoadWaypoint(waypointFilename, Target);
+        await waypointManager.LoadWaypoint(waypointFilename, Target);
         OutputText.text = "Finished loading " + waypointFilename;
     }
     public void SaveWaypoint(bool isOn)
@@ -61,10 +62,10 @@ public class WaypointUI : MonoBehaviour
             string file = FileInput.text;
             if (file == "")
             {
-                file = WaypointManager.GenerateFilename(WaypointManager.WaypointsPath, "waypoint");
+                file = WaypointManager.GenerateFilename(waypointManager.WaypointsPath, "waypoint");
             }
-            WaypointManager.StopLoadWaypoint();
-            WaypointManager.SaveWaypoint(file, Target);
+            waypointManager.StopLoadWaypoint();
+            waypointManager.SaveWaypoint(file, Target);
             OutputText.text = "Attempting to save to " + file;
         }
 
@@ -73,7 +74,7 @@ public class WaypointUI : MonoBehaviour
     {
         if (isOn)
         {
-            WaypointManager.StopSaveWaypoint();
+            waypointManager.StopSaveWaypoint();
             OutputText.text = "Attempting to stop saving";
             updateWaypoints();
         }

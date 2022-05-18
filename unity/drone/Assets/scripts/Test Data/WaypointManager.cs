@@ -7,21 +7,21 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public static class WaypointManager
+public class WaypointManager
 {
-    public static List<string> Waypoints;
-    public static string WaypointsPath
+    public List<string> Waypoints;
+    public string WaypointsPath
     {
         get { return Application.streamingAssetsPath + "/waypoint/"; }
     }
     // save waypoint
-    private static bool s_waypointSaveStarted = false;
-    private static StreamWriter s_waypointSw;
+    private bool s_waypointSaveStarted = false;
+    private StreamWriter s_waypointSw;
     // load waypoint
-    public static bool WaypointLoadStarted = false;
-    private static StreamReader s_waypointSr;
+    public bool WaypointLoadStarted = false;
+    private StreamReader s_waypointSr;
 
-    public static void RefreshWaypoints()
+    public void RefreshWaypoints()
     {
         if (Directory.Exists(WaypointsPath))
         {
@@ -34,7 +34,7 @@ public static class WaypointManager
         }
     }
 
-    public static async void SaveWaypoint(string file, DroneController target)
+    public async void SaveWaypoint(string file, DroneController target)
     {
         if (!s_waypointSaveStarted && !WaypointLoadStarted)
         {
@@ -52,7 +52,7 @@ public static class WaypointManager
         while (File.Exists(path + file + ".txt")) file = $"{prefix}{++i}";
         return file;
     }
-    public static async Task saveWaypoint(string file, DroneController target)
+    public async Task saveWaypoint(string file, DroneController target)
     {
         Vector3 initialPosition;
         Vector3 previousVelocity;
@@ -99,13 +99,13 @@ public static class WaypointManager
         StopSaveWaypoint();
     }
 
-    public static void StopSaveWaypoint()
+    public void StopSaveWaypoint()
     {
         s_waypointSaveStarted = false;
         if (s_waypointSw != null) s_waypointSw.Dispose();
         s_waypointSw = null;
     }
-    public static async Task LoadWaypoint(string file, DroneController target)
+    public async Task LoadWaypoint(string file, DroneController target)
     {
         if (!s_waypointSaveStarted && !WaypointLoadStarted)
         {
@@ -115,7 +115,7 @@ public static class WaypointManager
             await loadWaypoint(file, target);
         }
     }
-    static async Task loadWaypoint(string file, DroneController target)
+    async Task loadWaypoint(string file, DroneController target)
     {
         Debug.Log("load waypoint");
         string s;
@@ -166,7 +166,7 @@ public static class WaypointManager
         StopLoadWaypoint();
         WaypointLoadStarted = false;
     }
-    public static void StopLoadWaypoint()
+    public void StopLoadWaypoint()
     {
         // WaypointLoadStarted = false;
         if (s_waypointSr != null) s_waypointSr.Dispose();
