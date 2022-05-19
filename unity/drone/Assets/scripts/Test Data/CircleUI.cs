@@ -40,7 +40,7 @@ public class CircleUI : MonoBehaviour
             // target.GetComponent<KeyboardController>().converter.Convert();
             float x = Mathf.Cos(timer) * radius * (clockwise ? -1 : 1);
             float y = Mathf.Sin(timer) * radius;
-            target.Drone.transform.localPosition = new Vector3(x, target.transform.localPosition.y, y);
+            target.Drone.transform.localPosition = new Vector3(x, target.Drone.transform.localPosition.y, y);
             timer += Time.deltaTime * speed / radius;
         }
         else
