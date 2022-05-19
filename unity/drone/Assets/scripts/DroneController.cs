@@ -23,6 +23,9 @@ public class DroneController : MonoBehaviour
             Drone.AddComponent<Rigidbody>();
             Drone.GetComponent<Rigidbody>().useGravity = false;
             Drone.AddComponent<MeshRenderer>();
+            Drone.AddComponent<WindDirection>();
+            Drone.AddComponent<Force>();
+
         }
     }
 }
