@@ -15,7 +15,7 @@ public class UdpSocket : MonoBehaviour
     [SerializeField] int txPort = 8001; // port to send data to Python on
     public Transform target;
     public Camera cam;
-    public DirectVelocity converter;
+    // public DirectVelocity converter;
     [HideInInspector] public float vx;
     [HideInInspector] public float vy;
 
@@ -111,10 +111,10 @@ public class UdpSocket : MonoBehaviour
         Vector3 screenPos = cam.WorldToScreenPoint(target.position);
         SendData((screenPos.x - 10) + "," + (screenPos.y - 10) + "," + (screenPos.x + 10) + "," + (screenPos.y + 10));
         // move based on received inputs
-        if (converter)
-        {
-            converter.Convert(vx, vy);
-        }
+        // if (converter)
+        // {
+        //     converter.Convert(vx, vy);
+        // }
     }
 
     //Prevent crashes - close clients and threads properly!

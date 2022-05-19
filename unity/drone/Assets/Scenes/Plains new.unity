@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3728.6885, g: 2372.0332, b: 1864.7539, a: 1}
+  m_IndirectSpecularColor: {r: 3728.6885, g: 2372.0332, b: 1864.75, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1851,7 +1851,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &352139440
 MonoBehaviour:
@@ -4269,14 +4269,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696089494}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1942838302}
+  m_Children: []
   m_Father: {fileID: 922789949}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &696089500
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4472,7 +4471,7 @@ RectTransform:
   - {fileID: 1084810860}
   - {fileID: 670933146}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5027,6 +5026,7 @@ GameObject:
   - component: {fileID: 766712654}
   - component: {fileID: 766712657}
   - component: {fileID: 766712655}
+  - component: {fileID: 766712656}
   m_Layer: 0
   m_Name: Drone A controller
   m_TagString: GameController
@@ -5063,6 +5063,20 @@ MonoBehaviour:
   MaxTiltDeg: 25
   EnableTilt: 0
   TiltSpeed: 1
+--- !u!114 &766712656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766712653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd15d8e6094ab3d459c545491024a48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxTiltDeg: 25
+  tiltSpeed: 1
 --- !u!114 &766712657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5078,7 +5092,6 @@ MonoBehaviour:
   Drone: {fileID: 696089494}
   DroneGroup: {fileID: 922789948}
   MaxSpeed: 1
-  circleManager: {fileID: 0}
 --- !u!1 &825778250
 GameObject:
   m_ObjectHideFlags: 0
@@ -7210,6 +7223,7 @@ GameObject:
   - component: {fileID: 1126855378}
   - component: {fileID: 1126855376}
   - component: {fileID: 1126855375}
+  - component: {fileID: 1126855377}
   m_Layer: 0
   m_Name: Drone B controller
   m_TagString: GameController
@@ -7261,7 +7275,21 @@ MonoBehaviour:
   EnableHover: 0
   HoverDistance: 10
   Layer: 3
-  converter: {fileID: 1126855375}
+  converter: {fileID: 1126855377}
+--- !u!114 &1126855377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126855373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd15d8e6094ab3d459c545491024a48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxTiltDeg: 25
+  tiltSpeed: 1
 --- !u!114 &1126855378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7277,7 +7305,6 @@ MonoBehaviour:
   Drone: {fileID: 0}
   DroneGroup: {fileID: 922789948}
   MaxSpeed: 1
-  circleManager: {fileID: 0}
 --- !u!1 &1135806808
 GameObject:
   m_ObjectHideFlags: 0
@@ -9869,7 +9896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967ee1d8b83836e4591910e579f1cae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Converter: {fileID: 766712655}
+  Converter: {fileID: 766712656}
 --- !u!4 &1581582806
 Transform:
   m_ObjectHideFlags: 0
@@ -10544,7 +10571,7 @@ Transform:
   - {fileID: 766712654}
   - {fileID: 1126855374}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1705669873
 GameObject:
@@ -12078,7 +12105,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1927383314
 GameObject:
@@ -12259,6 +12286,7 @@ GameObject:
   - component: {fileID: 1942838304}
   - component: {fileID: 1942838303}
   - component: {fileID: 1942838307}
+  - component: {fileID: 1942838305}
   m_Layer: 0
   m_Name: stream
   m_TagString: Untagged
@@ -12273,13 +12301,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942838301}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -250, y: 70, z: -250}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1072458427}
-  m_Father: {fileID: 696089499}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1942838303
 MonoBehaviour:
@@ -12420,7 +12448,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 84
+  field of view: 77
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -12438,6 +12466,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1942838305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942838301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13dd357ca9a1cda419d8c64c104b7bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 696089494}
 --- !u!114 &1942838307
 MonoBehaviour:
   m_ObjectHideFlags: 0

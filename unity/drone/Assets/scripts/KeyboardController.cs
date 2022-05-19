@@ -7,7 +7,8 @@ public class KeyboardController : MonoBehaviour
     public bool EnableHover = false;
     public float HoverDistance = 10f;
     public int Layer = 3;
-    public DirectVelocity converter;
+    // public VelocityConverter converter;
+    public bool UseConverter;
 
     GameObject drone;
     float speed;
@@ -36,9 +37,10 @@ public class KeyboardController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if (converter)
+        if (UseConverter)
         {
-            converter.Convert(horizontalInput, verticalInput);
+            // converter.Convert(horizontalInput, verticalInput);
+            VelocityConverter.Convert(rb, horizontalInput, verticalInput, GetComponent<DroneController>().MaxSpeed, 25, 1);
         }
         else
         {

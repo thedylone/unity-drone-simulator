@@ -74,7 +74,7 @@ public class NetMqListener
 
 public class ClientObject : MonoBehaviour
 {
-    public DirectVelocity Converter;
+    public DroneController DroneController;
     private NetMqListener _netMqListener;
 
     // where the received messages will be processed
@@ -100,7 +100,7 @@ public class ClientObject : MonoBehaviour
         // introduce delay (delay is set in settings)
         yield return new WaitForSeconds(Settings.ZmqDelay / 1000);
         Debug.Log(vx + "," + vy);
-        Converter.Convert(vx, vy);
+        VelocityConverter.Convert(DroneController.Drone.GetComponent<Rigidbody>(), vx, vy, DroneController.MaxSpeed, 25f, 1f);
     }
 
     // private void Start()
