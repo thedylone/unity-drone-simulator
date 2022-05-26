@@ -1,72 +1,64 @@
 # drone versus drone
 
-drone
+Unity Drone Simulator is an appllcation which allows you to simulate the 'Eagle Concept', streaming out the Camera feed of the 'Hunter' Drone and receiving inputs to move the 'Hunter Drone'. This project is meant to test the capabilities of a Computer Vision Model and PID Controller Script.
 
-## Contents
+![Menu](images/Menu.png)
 
-- [blender](#blender)
-    - [installation](#installation)
-    - [setup](#setup)
-- [unity](#unity)
-    - [installation](#installation-1)
-    - [setup](#setup-1)
-    - [system requirements](#system-requirements)
+## Eagle Concept
 
-## blender
+A 'Hunter' Drone is flying above the 'Target' Drone, with its camera facing down. The height between the 2 drones is the Separation Distance of the drones. The Hunter Drone's height is fixed at 55m, while adjusting the Separation Distance will move the Target Drone's vertical position. For example, with a Separation Distance of 20m, the Target Drone will be placed at 35m.
 
-easy modelling of the scenes for unity. with procedural generation.
+![EagleDiagram]()
 
-### installation
+In this application, the user is looking from the Hunter Drone's Camera's Point of View, and is able to move the Target Drone with Keyboard Controls (WASD).
 
-- install Blender v3 and later
-    - earlier versions not guaranteed
+## Settings and Configurations
+---
+### RTSP Settings
 
-### setup
+The application is able to stream out the Hunter Drone's camera feed via RTSP using FFmpegOut. For more information on FFmpegOut, do refer to the [FFmpegOut README](unity/drone/Assets/FFmpegOut/README.md) or [the GitHub repository](https://github.com/keijiro/FFmpegOut).
 
-TBC
+> **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream. This repository does **not** come with a RTSP server, consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to run the server.
 
-## unity
+Adjust the **Port Number** and **URL** for the RTSP output path. By default, Port Number is `8554` and URL is `/drone`. The application will display a list of IP Address your device is connected to. This RTSP stream can then be accessed from another device by connecting to a listed IP Address.
 
-engine simulation with RTSP streaming capabilities
+> Ensure that the two devices are able to connect to each other, e.g. change firewall settings.
 
-based on [FFmpegOut](https://github.com/keijiro/FFmpegOut), with changes to FFmpeg to output RTSP stream
+An additional **Delay** can be introduced into the RTSP stream by adjusting the slider in the Settings page. Select how much to delay the stream in milliseconds.
+> Note that this will not account for the existing latency, meaning that with a base latency of `500ms`, adding `1000ms` delay will result in a combined delay of `1500ms`.
 
-### installation
+Click to toggle the **Timestamp**, which will show the time elapsed since the application was opened.
+> Note that this Timestamp, located in the bottom left of the screen, will be visible in the RTSP stream. This is useful for measuring latency between the application and the receiving client.
 
-- install Unity 2020.3.30f1 or later
-- this repository already includes FFmpegOut and the Binary package
+If necessary, adjust the other parameters for the stream:
+- **Width** (default 1920),
+- **Height** (default 1080), 
+- and **Frame Rate** (default 30).
 
-### setup
+### ZeroMQ Settings
 
-- open Scenes folder and select Template
-    - Template comes with a Main Camera pre-configured
-- import scene from blender or create entirely within unity
-    - for physics e.g. collision, select all elements in scene from Blender and add:
-        - Rigidbody
-        - Mesh Collider
-        - Is Kinematic if necessary
-- (optional) attach controller scripts onto models
-- if not using Template or other pre-configured scenes:
-    - create a camera (or use existing camera)
-    - follow steps in [FFmpegOut](https://github.com/keijiro/FFmpegOut/blob/master/README.md)
-        - add Camera Capture component
-        - (optional) add Frame Rate Controller component
-    - use preset “H.264 NVIDIA” or “HEVC NVIDIA” for good quality
-    - tick Enable RTSP for RTSP output
-    - specify output path e.g. `rtsp://127.0.0.1:8554/stream`
-    - if RTSP disabled and path is blank, will save a recording to the root Unity folder instead
-- does not come with RTSP server. consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to create the server.
-- simply connect to the RTSP server with a RTSP client e.g. VLC
+The application is able to receive inputs via ZeroMQ, to move the Hunter Drone. The Controller Script should send in inputs as `Vx,Vy`. 
+> `Vx` and `Vy` should be within the range from -1 to 1.
 
-### system requirements
+Enter the **Path** for the application to connect and listen to.
 
-for FFmpegOut:
+A **Delay** can also be introduced, meaning that inputs will only be executed a set fixed time after receiving from the Controller Script.
+> Similar to the RTSP delay, this will not account for the existing latency.
 
-- Unity 2018.3 or later
-- Windows: Direct3D 11
-- macOS: Metal
-- Linux: Vulkan
+### Drone Settings
 
-FFmpegOut only supports desktop platforms.
+Modify the Settings for both the Hunter Drone and the Target Drone.
 
-FFmpegOut works not only on the legacy rendering paths (forward/deferred) but also on the standard scriptable render pipelines (LWRP/HDRP).
+As mentioned in [Eagle Concept](#eagle-concept), **Separation Distance** will adjust the height of the Target Drone from the Hunter Drone, from a range of 1m to 50m.
+
+The **Max Speed** of the Hunter Drone and the Target Drone can be adjusted. This will determine how fast the drones will travel. For example, with `Vx = 0.5` and **Max Speed** of `10m/s`, the drone will move at `5m/s`.
+
+The 3D Model for the Target Drone can also be changed. This repository comes with the models of DJI Mavic and DJI Phantom. New models can also be imported by placing them into the `Assets/Resources/Drone Models` folder, as well as the `StreamingAssets/Drone Models` folder. 
+
+During runtime, models can be imported through the `StreamingAssets/Drone Models` folder. Supported formats are:
+- obj
+- glTF
+
+The Refresh Button next to the Model Dropdown will reload all the files and import the models. For more info on the Runtime Importers, refer to the [Assets README on Runtime Importers](unity/drone/Assets/README.md#runtime-importers).
+
+The Target Drone's **Material Colour** can also be edited using the Flexible Color Picker. For more info on the Flexible Color Picker, refer to the [Assets README on the Flexible Color Picker](unity/drone/Assets/README.md#flexible-color-picker-v250) or the [FlexibleColorPickerDoc.pdf](unity/drone/Assets/FlexibleColorPicker/FlexibleColorPickerDoc.pdf).

@@ -25,3 +25,5 @@ A modification was made in the [Importer.cs](GLTFUtility/Scripts/Importer.cs) fi
 ### Runtime OBJ Importer v2.02
 
 [Runtime OBJ Importer](https://assetstore.unity.com/packages/tools/modeling/runtime-obj-importer-49547) is used to import .obj files from the StreamingAssets folder into the application. Read more on the [README in the folder](OBJImport/README.HTML).
+
+A custom material is also applied to the object after import, which similarly can be changed with the [Flexible Color Picker](#flexible-color-picker-v250).
