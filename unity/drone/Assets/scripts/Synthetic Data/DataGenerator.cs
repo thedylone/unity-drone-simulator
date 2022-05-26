@@ -159,14 +159,14 @@ public class DataGenerator : MonoBehaviour
         byte[] bytes = image.EncodeToPNG(); // change to .EncodeToPNG() for png files
         Destroy(image);
 
-        // File.WriteAllBytes(SavePath + "/" + (fileCounter + FileStartingNumber) + ".png", bytes); // change to .png for png files
+        File.WriteAllBytes(SavePath + "/" + (fileCounter + FileStartingNumber) + ".png", bytes); // change to .png for png files
 
         // outputs position data in specific format
         File.WriteAllText(SavePath + "/" + (fileCounter + FileStartingNumber) + ".txt", "drone 0.0 0 0.0 " + Mathf.RoundToInt(minX).ToString("f2") + " " + Mathf.RoundToInt(screenHeight - maxY).ToString("f2") + " " + Mathf.RoundToInt(maxX).ToString("f2") + " " + Mathf.RoundToInt(screenHeight - minY).ToString("f2") + " 0.0 0.0 0.0 0.0 0.0 0.0 0.0");
 
-        ImageSynthesis synth = Camera.GetComponent<ImageSynthesis>();
-        synth.OnSceneChange();
-        synth.Save((fileCounter + FileStartingNumber) + "", path: SavePath);
+        // ImageSynthesis synth = Camera.GetComponent<ImageSynthesis>();
+        // synth.OnSceneChange();
+        // synth.Save((fileCounter + FileStartingNumber).ToString(), 1920, 1080, path: SavePath);
 
         fileCounter++;
     }

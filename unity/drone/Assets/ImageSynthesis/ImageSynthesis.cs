@@ -21,11 +21,11 @@ public class ImageSynthesis : MonoBehaviour {
 	// pass configuration
 	private CapturePass[] capturePasses = new CapturePass[] {
 		new CapturePass() { name = "_img" },
-		new CapturePass() { name = "_id", supportsAntialiasing = false },
+		//new CapturePass() { name = "_id", supportsAntialiasing = false },
 		new CapturePass() { name = "_layer", supportsAntialiasing = false },
-		new CapturePass() { name = "_depth" },
-		new CapturePass() { name = "_normals" },
-		new CapturePass() { name = "_flow", supportsAntialiasing = false, needsRescale = true } // (see issue with Motion Vectors in @KNOWN ISSUES)
+		//new CapturePass() { name = "_depth" },
+		//new CapturePass() { name = "_normals" },
+		//new CapturePass() { name = "_flow", supportsAntialiasing = false, needsRescale = true } // (see issue with Motion Vectors in @KNOWN ISSUES)
 	};
 
 	struct CapturePass {
@@ -79,7 +79,7 @@ public class ImageSynthesis : MonoBehaviour {
 	private Camera CreateHiddenCamera(string name)
 	{
 		var go = new GameObject (name, typeof (Camera));
-		go.hideFlags = HideFlags.HideAndDontSave;
+		// go.hideFlags = HideFlags.HideAndDontSave;
 		go.transform.parent = transform;
 
 		var newCamera = go.GetComponent<Camera>();
@@ -144,11 +144,11 @@ public class ImageSynthesis : MonoBehaviour {
 		opticalFlowMaterial.SetFloat("_Sensitivity", opticalFlowSensitivity);
 
 		// setup command buffers and replacement shaders
-		SetupCameraWithReplacementShader(capturePasses[1].camera, uberReplacementShader, ReplacelementModes.ObjectId);
-		SetupCameraWithReplacementShader(capturePasses[2].camera, uberReplacementShader, ReplacelementModes.CatergoryId);
-		SetupCameraWithReplacementShader(capturePasses[3].camera, uberReplacementShader, ReplacelementModes.DepthCompressed, Color.white);
-		SetupCameraWithReplacementShader(capturePasses[4].camera, uberReplacementShader, ReplacelementModes.Normals);
-		SetupCameraWithPostShader(capturePasses[5].camera, opticalFlowMaterial, DepthTextureMode.Depth | DepthTextureMode.MotionVectors);
+		//SetupCameraWithReplacementShader(capturePasses[1].camera, uberReplacementShader, ReplacelementModes.ObjectId);
+		SetupCameraWithReplacementShader(capturePasses[1].camera, uberReplacementShader, ReplacelementModes.CatergoryId);
+		//SetupCameraWithReplacementShader(capturePasses[3].camera, uberReplacementShader, ReplacelementModes.DepthCompressed, Color.white);
+		//SetupCameraWithReplacementShader(capturePasses[4].camera, uberReplacementShader, ReplacelementModes.Normals);
+		//SetupCameraWithPostShader(capturePasses[5].camera, opticalFlowMaterial, DepthTextureMode.Depth | DepthTextureMode.MotionVectors);
 	}
 
 
@@ -162,9 +162,14 @@ public class ImageSynthesis : MonoBehaviour {
 			var layer = r.gameObject.layer;
 			var tag = r.gameObject.tag;
 
-			mpb.SetColor("_ObjectColor", ColorEncoding.EncodeIDAsColor(id));
-			mpb.SetColor("_CategoryColor", ColorEncoding.EncodeLayerAsColor(layer));
-			r.SetPropertyBlock(mpb);
+			
+			// var colorgen = ColorEncoding.EncodeLayerAsColor(layer);
+			if (layer != 9)
+            {
+				mpb.SetColor("_ObjectColor", ColorEncoding.EncodeIDAsColor(id));
+				mpb.SetColor("_CategoryColor", ColorEncoding.EncodeLayerAsColor(layer));
+				r.SetPropertyBlock(mpb);
+			}
 		}
 	}
 
