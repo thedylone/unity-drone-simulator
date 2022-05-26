@@ -100,7 +100,8 @@ public class ClientObject : MonoBehaviour
         // introduce delay (delay is set in settings)
         yield return new WaitForSeconds(Settings.ZmqDelay / 1000);
         Debug.Log(vx + "," + vy);
-        VelocityConverter.Convert(DroneController.Drone.GetComponent<Rigidbody>(), vx, vy, DroneController.MaxSpeed, 25f, 1f);
+        // VelocityConverter.Convert(DroneController.Drone.GetComponent<Rigidbody>(), vx, vy, DroneController.MaxSpeed, 25f, 1f);
+        DroneController.GetComponent<VelocityConverter>().SetVelocities(vx, vy);
     }
 
     // private void Start()

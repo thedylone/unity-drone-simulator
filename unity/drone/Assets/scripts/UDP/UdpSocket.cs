@@ -14,6 +14,8 @@ public class UdpSocket : MonoBehaviour
     [SerializeField] int rxPort = 8000; // port to receive data from Python on
     [SerializeField] int txPort = 8001; // port to send data to Python on
     public Transform target;
+    public DroneController TargetDroneController;
+    public DroneController HunterDroneController;
     public Camera cam;
     // public DirectVelocity converter;
     [HideInInspector] public float vx;
@@ -108,13 +110,14 @@ public class UdpSocket : MonoBehaviour
     void Update()
     {
         // send camera data
-        Vector3 screenPos = cam.WorldToScreenPoint(target.position);
+        Vector3 screenPos = cam.WorldToScreenPoint(TargetDroneController.Drone.transform.position);
         SendData((screenPos.x - 10) + "," + (screenPos.y - 10) + "," + (screenPos.x + 10) + "," + (screenPos.y + 10));
         // move based on received inputs
         // if (converter)
         // {
         //     converter.Convert(vx, vy);
         // }
+        HunterDroneController.GetComponent<VelocityConverter>().SetVelocities(vx, vy);
     }
 
     //Prevent crashes - close clients and threads properly!

@@ -52,7 +52,7 @@ public class WaypointManager
         while (File.Exists(path + file + ".txt")) file = $"{prefix}{++i}";
         return file;
     }
-    public async Task saveWaypoint(string file, DroneController target)
+    async Task saveWaypoint(string file, DroneController target)
     {
         Vector3 initialPosition;
         Vector3 previousVelocity;
@@ -144,16 +144,21 @@ public class WaypointManager
             float vy = dv * dy / totalDistance;
             float waitTime = totalDistance / dv;
 
-            rb.drag = 0;
-            rb.velocity = new Vector3(vx, 0, vy);
+            // rb.drag = 0;
+            // rb.velocity = new Vector3(vx, 0, vy);
+            vx /= target.MaxSpeed;
+            vy /= target.MaxSpeed;
+            
 
-            int timeElapsed = 0;
+            float timeElapsed = 0;
             Debug.Log("waiting for " + waitTime);
             // yield return new WaitForSecondsRealtime(waitTime);
-            while (s_waypointSr != null && timeElapsed < waitTime * 1000)
+            while (s_waypointSr != null && timeElapsed < waitTime)
             {
-                timeElapsed += 10;
-                await Task.Delay(10);
+                // VelocityConverter.Convert(rb, vx, vy, target.MaxSpeed, 25, 1);
+                target.GetComponent<VelocityConverter>().SetVelocities(vx, vy);
+                timeElapsed += Time.fixedDeltaTime;
+                await Task.Delay(Mathf.RoundToInt(Time.fixedDeltaTime * 1000));
             }
             // await Task.Delay(Mathf.RoundToInt(waitTime * 1000));
             Debug.Log("waiting finished");
@@ -161,7 +166,8 @@ public class WaypointManager
 
         // once stream reader reaches an empty line
         Debug.Log("stop load case");
-        rb.velocity = new Vector3(0, 0, 0);
+        VelocityConverter.Convert(rb, 0, 0, target.MaxSpeed, 25, 1);
+        // rb.velocity = new Vector3(0, 0, 0);
         target.GetComponent<KeyboardController>().enabled = true;
         StopLoadWaypoint();
         WaypointLoadStarted = false;

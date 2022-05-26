@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3728.6885, g: 2372.0332, b: 1864.75, a: 1}
+  m_IndirectSpecularColor: {r: 3728.6885, g: 2372.0332, b: 1864.7539, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1903,7 +1903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &380290631
 Transform:
   m_ObjectHideFlags: 0
@@ -5060,9 +5060,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a139693b6d761b45a20c5529a8a9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxTiltDeg: 25
-  EnableTilt: 0
-  TiltSpeed: 1
+  maxTiltDeg: 25
+  enableTilt: 0
+  tiltSpeed: 1
 --- !u!114 &766712656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5075,8 +5075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd15d8e6094ab3d459c545491024a48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxTiltDeg: 25
-  tiltSpeed: 1
+  Vx: 0
+  Vy: 0
 --- !u!114 &766712657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7257,9 +7257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a139693b6d761b45a20c5529a8a9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxTiltDeg: 25
-  EnableTilt: 0
-  TiltSpeed: 1
+  maxTiltDeg: 25
+  enableTilt: 0
+  tiltSpeed: 1
 --- !u!114 &1126855376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7275,7 +7275,7 @@ MonoBehaviour:
   EnableHover: 0
   HoverDistance: 10
   Layer: 3
-  converter: {fileID: 1126855377}
+  UseConverter: 1
 --- !u!114 &1126855377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7288,8 +7288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd15d8e6094ab3d459c545491024a48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxTiltDeg: 25
-  tiltSpeed: 1
+  Vx: 0
+  Vy: 0
 --- !u!114 &1126855378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9883,7 +9883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1581582805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9896,7 +9896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967ee1d8b83836e4591910e579f1cae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Converter: {fileID: 766712656}
+  DroneController: {fileID: 0}
 --- !u!4 &1581582806
 Transform:
   m_ObjectHideFlags: 0
@@ -11371,7 +11371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1798652822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11389,8 +11389,9 @@ MonoBehaviour:
   rxPort: 8000
   txPort: 8001
   target: {fileID: 543450651607432422}
+  TargetDroneController: {fileID: 1126855378}
+  HunterDroneController: {fileID: 766712657}
   cam: {fileID: 1942838304}
-  converter: {fileID: 0}
   vx: 0
   vy: 0
 --- !u!4 &1798652823

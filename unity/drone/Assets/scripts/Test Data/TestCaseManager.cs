@@ -67,7 +67,10 @@ public class TestCaseManager : MonoBehaviour
             if ((s = s_sr.ReadLine()) != null)
             {
                 // Target.Drone.transform.localPosition = StringToVector3(s);
-                Target.Drone.GetComponent<Rigidbody>().velocity = StringToVector3(s) * Target.MaxSpeed;
+                // Target.Drone.GetComponent<Rigidbody>().velocity = StringToVector3(s) * Target.MaxSpeed;
+                Vector3 velocity = StringToVector3(s);
+                // VelocityConverter.Convert(Target.Drone.GetComponent<Rigidbody>(), velocity.x, velocity.z, Target.MaxSpeed, 25, 1);
+                Target.GetComponent<VelocityConverter>().SetVelocities(velocity.x, velocity.z);
             }
             else
             {

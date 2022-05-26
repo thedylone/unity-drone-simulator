@@ -40,7 +40,9 @@ public class KeyboardController : MonoBehaviour
         if (UseConverter)
         {
             // converter.Convert(horizontalInput, verticalInput);
-            VelocityConverter.Convert(rb, horizontalInput, verticalInput, GetComponent<DroneController>().MaxSpeed, 25, 1);
+            // VelocityConverter.Convert(rb, horizontalInput, verticalInput, GetComponent<DroneController>().MaxSpeed, 25, 1);
+            VelocityConverter convert = GetComponent<VelocityConverter>();
+            convert.SetVelocities(horizontalInput, verticalInput);
         }
         else
         {

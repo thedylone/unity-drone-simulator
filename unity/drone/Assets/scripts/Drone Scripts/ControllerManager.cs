@@ -56,7 +56,7 @@ public class ControllerManager : MonoBehaviour {
 
 		rb.inertiaTensor = new Vector3(12e-4f, 15e-4f, 10e-4f);
 
-		LoadPlayerPrefs ();
+		// LoadPlayerPrefs ();
 		resetYawRef ();
 		Dbg.Trace ("phi, theta, psi, phi_ref, theta_ref, psi_ref, p, q, r, p_ref, q_ref, r_ref, torque_x, torque_y, torque_z, vz, vz_ref, thrust_Z");
 		// heightControl = ControlMode.Stabilized;
@@ -244,12 +244,12 @@ public class ControllerManager : MonoBehaviour {
 		return rateLoop (angularRatesRef);
 	}
 	// for stabilised angle control
-	Vector3 controlAngles(float userElevatorInput) {
+	Vector3 controlAngles(float a) {
 		float userRudderInput = Input.GetAxis ("Drone Rudder") * (invertAxisR ? -1 : 1);
 		float userAileronInput = Input.GetAxis ("Drone Aileron") * (invertAxisA ? -1 : 1);
 		// userRudderInput = 0;
 		// userAileronInput = 0;
-		//float userElevatorInput = Input.GetAxis ("Elevator") * (invertAxisE ? -1 : 1);
+		float userElevatorInput = Input.GetAxis ("Drone Elevator") * (invertAxisE ? -1 : 1);
 
 		float boost = Input.GetAxis ("Drone Boost");
 		commandsMultiplier = 1 + boost;
