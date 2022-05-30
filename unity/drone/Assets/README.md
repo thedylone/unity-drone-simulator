@@ -2,6 +2,19 @@
 
 ## Asset Store
 
+### Unity Terrain - HDRP Demo Scene v1.0.0
+[Unity Terrain - HDRP Demo Scene](https://assetstore.unity.com/packages/3d/environments/unity-terrain-hdrp-demo-scene-213198) was featured in the [Unity Blog showcasing the latest updates for HDRP](https://blog.unity.com/games/experience-the-new-unity-terrain-demo-scenes-for-hdrp-and-urp). Many assets were taken from this Demo Scene, including:
+
+- Terrain Textures, Brushes
+- Foliage, Trees, Grass
+- HDRP Volume Prefabs
+- ShaderGraphs
+
+However, as the Demo is created for Unity v2021.2 and HDRP 12.1+, some functionality will not be available in this project's version of Unity v2020 and HDRP 10.8.1, such as:
+
+- Volumetric Clouds
+- Lens Flare
+
 ### EasyRoads3D v3.2.1f1
 [EasyRoads3D](https://assetstore.unity.com/packages/3d/characters/easyroads3d-free-v3-987) was used to quickly and easily create road textures with compatibility with the Unity Terrain along with HDRP support, building a more realistic environment.
 

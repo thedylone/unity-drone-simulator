@@ -8,7 +8,7 @@ Unity Drone Simulator is an appllcation which allows you to simulate the 'Eagle 
 
 A 'Hunter' Drone is flying above the 'Target' Drone, with its camera facing down. The height between the 2 drones is the Separation Distance of the drones. The Hunter Drone's height is fixed at 55m, while adjusting the Separation Distance will move the Target Drone's vertical position. For example, with a Separation Distance of 20m, the Target Drone will be placed at 35m.
 
-![EagleDiagram]()
+![EagleDiagram](images/Eagle.png)
 
 In this application, the user is looking from the Hunter Drone's Camera's Point of View, and is able to move the Target Drone with Keyboard Controls (WASD).
 
@@ -62,3 +62,16 @@ During runtime, models can be imported through the `StreamingAssets/Drone Models
 The Refresh Button next to the Model Dropdown will reload all the files and import the models. For more info on the Runtime Importers, refer to the [Assets README on Runtime Importers](unity/drone/Assets/README.md#runtime-importers).
 
 The Target Drone's **Material Colour** can also be edited using the Flexible Color Picker. For more info on the Flexible Color Picker, refer to the [Assets README on the Flexible Color Picker](unity/drone/Assets/README.md#flexible-color-picker-v250) or the [FlexibleColorPickerDoc.pdf](unity/drone/Assets/FlexibleColorPicker/FlexibleColorPickerDoc.pdf).
+
+## External Assets
+---
+Additional Asset Packages were used to assist in the creation of this project. More details can be found on the [Assets README](unity/drone/Assets/README.md).
+
+- [Unity Terrain - HDRP Demo Scene](https://assetstore.unity.com/packages/3d/environments/unity-terrain-hdrp-demo-scene-213198)
+- [EasyRoads3D](https://assetstore.unity.com/packages/3d/characters/easyroads3d-free-v3-987)
+- [Flexible Color Picker](https://assetstore.unity.com/packages/tools/gui/flexible-color-picker-150497)
+- [GLTFUtility](https://github.com/Siccity/GLTFUtility)
+- [JsonDotNet](https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347)
+- [Runtime OBJ Importer](https://assetstore.unity.com/packages/tools/model)
+- [Street Lights Pack](https://assetstore.unity.com/packages/3d/props/exterior/street-lights-pack-31644#publisher)
+- [Yughues Free Sand Materials](https://assetstore.unity.com/packages/2d/textures-materials/floors/yughues-free-sand-materials-12964)

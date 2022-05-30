@@ -13,11 +13,19 @@ Several properties were changed to instead retrieve the value from the Global Se
 - **Height** (default 1080)
 - **Frame Rate** (default 30)
 
+### Enable RTSP
+
 An option to **Enable RTSP** was added. Turning on **Enable RTSP** will allow FFmpeg to stream out the camera feed via RTSP. Disabling RTSP instead will keep FFmpegOut's intended functionality to save a recording of the camera feed instead.
+
+### Output Path
 
 The **Path** property was also added. It retrieves the value from the Global Settings static fields. It is determined by the **Port Number** and the **URL**, given by `rtsp://localhost:<Port Number>/<URL>`. If the **Port Number** and **URL** are both left blank in the Settings, RTSP will be turned **off** and will save a recording instead.
 
+### Preset
+
 It is recommended to use the **H.264 NVIDIA** preset, but will require a NVIDIA GPU. As it is highly optimised, there is minimal latency and can perform well at high frame rates and/or high resolutions.
+
+### Additional Delay
 
 A **Delay** can be introduced into the RTSP stream. The user can choose to add a certain amount of Delay, which is saved into the Global Settings static field. This is achieved by Enqueuing frames, and once the number of frames in the Queue exceeds `Frame Rate * Delay (ms) / 1000`, a frame is Dequeued, thus introducing a Delay.
 
@@ -39,4 +47,4 @@ RTSP streaming is enabled using the following flags:
 
  Requirements are similar to those stated in the [FFmpegOut README](https://github.com/keijiro/FFmpegOut/blob/master/README.md#system-requirements).
 
- However, it is recommended to use Unity 2020.3.30f1 for the rest of the project, and have a NVIDIA GPU for the H.264 NVIDIA preset.
+ However, it is recommended to use Unity 2020.3.30f1 for the rest of the project, and use a device with a NVIDIA GPU for the H.264 NVIDIA preset.
