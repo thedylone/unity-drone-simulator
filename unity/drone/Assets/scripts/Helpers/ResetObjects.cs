@@ -33,6 +33,8 @@ public class ResetObjects : MonoBehaviour
             // then reset drone to its saved initial position and rotation
             DroneControllers[i].GetComponent<DroneController>().Drone.transform.position = s_initialPositions[i];
             DroneControllers[i].GetComponent<DroneController>().Drone.transform.rotation = s_initialRotations[i];
+
+            DroneControllers[i].GetComponent<VelocityConverter>().SetVelocities(0,0);
         }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4073.7822, g: 2762.7773, b: 2599.496, a: 1}
+  m_IndirectSpecularColor: {r: 3728.6885, g: 2372.0332, b: 1864.75, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1903,7 +1903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &380290631
 Transform:
   m_ObjectHideFlags: 0
@@ -9958,7 +9958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1581582805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9971,7 +9971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967ee1d8b83836e4591910e579f1cae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DroneController: {fileID: 0}
+  DroneController: {fileID: 766712657}
 --- !u!4 &1581582806
 Transform:
   m_ObjectHideFlags: 0
