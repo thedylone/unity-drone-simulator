@@ -31,20 +31,22 @@ public class CircleUI : MonoBehaviour
     void enableChange(bool isOn)
     {
         IsOn = isOn;
-        Target.GetComponent<KeyboardController>().enabled = !isOn;
+        // Target.GetComponent<KeyboardController>().enabled = !isOn;
     }
     float timer = 0;
     void orbit(DroneController target, int radius, float speed, bool clockwise)
     {
-        if (!target.waypointManager.WaypointLoadStarted)
+        TestCaseManager testCaseManager;
+        target.TryGetComponent<TestCaseManager>(out testCaseManager);
+        if (!target.waypointManager.WaypointLoadStarted && (!testCaseManager || !testCaseManager.LoadStarted))
         {
             // target.GetComponent<KeyboardController>().converter.Convert();
-            // float x = Mathf.Cos(timer) * radius * (clockwise ? -1 : 1);
-            // float y = Mathf.Sin(timer) * radius;
-            // target.Drone.transform.localPosition = new Vector3(x, target.Drone.transform.localPosition.y, y);
-            float vx = speed * Mathf.Sin(timer * speed / radius) * (clockwise ? 1 : -1) / target.MaxSpeed;
-            float vy = speed * Mathf.Cos(timer * speed / radius) / target.MaxSpeed;
-            target.GetComponent<VelocityConverter>().SetVelocities(vx, vy);
+            float x = Mathf.Cos(timer * speed / radius) * radius * (clockwise ? -1 : 1);
+            float y = Mathf.Sin(timer * speed / radius) * radius;
+            target.Drone.transform.localPosition = new Vector3(x, target.Drone.transform.localPosition.y, y);
+            // float vx = speed * Mathf.Sin(timer * speed / radius) * (clockwise ? 1 : -1) / target.MaxSpeed;
+            // float vy = speed * Mathf.Cos(timer * speed / radius) / target.MaxSpeed;
+            // target.GetComponent<VelocityConverter>().SetVelocities(vx, vy);
             timer += Time.deltaTime;
         }
         else
