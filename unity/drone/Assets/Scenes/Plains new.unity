@@ -5284,7 +5284,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Run Waypoints to move Drone B to desired coordinates at desired speeds.
+  m_Text: Run Waypoints to move Target Drone to desired coordinates at desired speeds.
 --- !u!222 &831557215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8172,9 +8172,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Run test cases to automatically move Drone B. Set the name of the file
-    in the input field to overwrite an existing case, or save a new one. Leave blank
-    to automatically create a new case
+  m_Text: Run test cases to automatically move Target Drone. Set the name of the
+    file in the input field to overwrite an existing case, or save a new one. Leave
+    blank to automatically create a new case
 --- !u!222 &1285612787
 CanvasRenderer:
   m_ObjectHideFlags: 0
