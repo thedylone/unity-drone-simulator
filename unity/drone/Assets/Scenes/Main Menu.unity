@@ -219,12 +219,13 @@ PrefabInstance:
     - target: {fileID: 5113134604456243828, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_Text
-      value: 'Configure the settings for Drone A and Drone B.
+      value: 'Configure the settings for Hunter Drone and Target Drone.
 
-        Drone A refers
-        to the drone flying above.
+        Hunter
+        Drone refers to the drone flying above.
 
-        Drone B refers to the drone flying below.'
+        Target Drone refers to the
+        drone flying below.'
       objectReference: {fileID: 0}
     - target: {fileID: 5113134604456243831, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -314,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1000
+      value: 1050
       objectReference: {fileID: 0}
     - target: {fileID: 7225659253399606669, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -1087,7 +1088,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Drone A
+  m_Text: Hunter Drone
 --- !u!222 &168492647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1997,7 +1998,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Drone B
+  m_Text: Target Drone
 --- !u!222 &474431707
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4233,7 +4234,7 @@ PrefabInstance:
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1000
+      value: 1050
       objectReference: {fileID: 0}
     - target: {fileID: 7225659253399606669, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -5059,7 +5060,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Separation distance will affect Drone B's height.
+  m_Text: Separation distance will affect Target Drone's height.
 --- !u!222 &1357501321
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5577,7 +5578,7 @@ PrefabInstance:
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1000
+      value: 1050
       objectReference: {fileID: 0}
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -6333,7 +6334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1000, y: -1600}
+  m_AnchoredPosition: {x: 1050, y: -1680}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1565658264
@@ -8415,12 +8416,12 @@ PrefabInstance:
     - target: {fileID: 3144503801483044526, guid: 7e171d795554b5940867e880d726bc75,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 11500
+      value: 12600
       objectReference: {fileID: 0}
     - target: {fileID: 3144503801483044526, guid: 7e171d795554b5940867e880d726bc75,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -623461
+      value: -766690.06
       objectReference: {fileID: 0}
     - target: {fileID: 3144503801876551068, guid: 7e171d795554b5940867e880d726bc75,
         type: 3}
