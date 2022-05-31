@@ -13,14 +13,14 @@ public class TestCaseManager : MonoBehaviour
     public DroneController Target;
     public Camera Camera;
     // save test data
-    public static string SaveFile;
-    private static bool s_saveStarted = false;
-    private static StreamWriter s_sw;
+    public string SaveFile;
+    public bool SaveStarted = false;
+    private StreamWriter sw;
     // load test data
-    public static string LoadFile;
-    private static bool s_loadStarted = false;
-    private static StreamReader s_sr;
-    private static bool s_passCase = true;
+    public string LoadFile;
+    public bool LoadStarted = false;
+    private StreamReader sr;
+    private bool passCase = true;
 
     public void Start()
     {
@@ -34,9 +34,9 @@ public class TestCaseManager : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (s_saveStarted)
+        if (SaveStarted)
         {
-            if (s_sw == null)
+            if (sw == null)
             {
                 // if save hasn't started yet
                 if (!Directory.Exists(TestCasesPath))
@@ -46,29 +46,30 @@ public class TestCaseManager : MonoBehaviour
                 // delete and overwrite save file if it already exists
                 File.Delete(TestCasesPath + SaveFile + ".txt");
                 // initialise stream writer
-                s_sw = File.AppendText(TestCasesPath + SaveFile + ".txt");
+                sw = File.AppendText(TestCasesPath + SaveFile + ".txt");
             }
             // save the drone's desired property to the file
-            // s_sw.WriteLine(Target.Drone.transform.localPosition.ToString("f3"));
+            // sw.WriteLine(Target.Drone.transform.localPosition.ToString("f3"));
             Vector3 v = Target.Drone.GetComponent<Rigidbody>().velocity / Target.MaxSpeed;
-            s_sw.WriteLine(v);
+            sw.WriteLine(v);
         }
 
-        if (s_loadStarted)
+        if (LoadStarted)
         {
             string s;
-            if (s_sr == null)
+            if (sr == null)
             {
                 // if load hasn't started yet
                 // initialise stream reader
-                s_sr = File.OpenText(TestCasesPath + LoadFile + ".txt");
+                sr = File.OpenText(TestCasesPath + LoadFile + ".txt");
                 s = "";
             }
-            if ((s = s_sr.ReadLine()) != null)
+            if ((s = sr.ReadLine()) != null)
             {
                 // Target.Drone.transform.localPosition = StringToVector3(s);
                 // Target.Drone.GetComponent<Rigidbody>().velocity = StringToVector3(s) * Target.MaxSpeed;
                 Vector3 velocity = StringToVector3(s);
+                Debug.Log(velocity);
                 // VelocityConverter.Convert(Target.Drone.GetComponent<Rigidbody>(), velocity.x, velocity.z, Target.MaxSpeed, 25, 1);
                 Target.GetComponent<VelocityConverter>().SetVelocities(velocity.x, velocity.z);
             }
@@ -81,7 +82,7 @@ public class TestCaseManager : MonoBehaviour
             if (!DroneCheck.CheckInFrame(Target.Drone, Camera))
             {
                 // Debug.Log("fail: " + LoadFile);
-                s_passCase = false;
+                passCase = false;
                 StopLoadCase();
             }
         }
@@ -99,9 +100,9 @@ public class TestCaseManager : MonoBehaviour
             Directory.CreateDirectory(TestCasesPath);
         }
     }
-    public static void SaveCase(string file)
+    public void SaveCase(string file)
     {
-        if (!s_loadStarted)
+        if (!LoadStarted && !Target.waypointManager.WaypointLoadStarted)
         {
             if (file == "")
             {
@@ -112,38 +113,43 @@ public class TestCaseManager : MonoBehaviour
                 while (File.Exists(TestCasesPath + file + ".txt")) file = String.Format("case{0}", ++i); ;
             }
             SaveFile = file;
-            s_saveStarted = true;
+            SaveStarted = true;
         }
     }
 
-    public static void StopSaveCase()
+    public void StopSaveCase()
     {
-        s_saveStarted = false;
-        if (s_sw != null) s_sw.Dispose();
-        s_sw = null;
+        SaveStarted = false;
+        if (sw != null) sw.Dispose();
+        sw = null;
     }
 
-    public static async Task<bool> LoadCase(string file)
+    public async Task<bool> LoadCase(string file)
     {
         // returns true if case passed, else false if case failed
+        if (Target.waypointManager.WaypointLoadStarted) return false;
+        Debug.Log("disabling keyboard");
+        Target.GetComponent<KeyboardController>().enabled = false;
         ResetObjects.Restart();
         LoadFile = file;
-        s_loadStarted = true;
-        s_passCase = true;
-        while (s_loadStarted)
+        LoadStarted = true;
+        passCase = true;
+        while (LoadStarted)
         {
             // waits for load to complete/stop
             await Task.Delay(100);
         }
-        return s_passCase;
+        return passCase;
         // await Task.CompletedTask;
     }
 
-    public static void StopLoadCase()
+    public void StopLoadCase()
     {
-        s_loadStarted = false;
-        if (s_sr != null) s_sr.Dispose();
-        s_sr = null;
+        LoadStarted = false;
+        if (sr != null) sr.Dispose();
+        sr = null;
+        Debug.Log("enabling keyboard");
+        Target.GetComponent<KeyboardController>().enabled = true;
     }
     public static Vector3 StringToVector3(string sVector)
     {

@@ -15,11 +15,11 @@ public class WaypointManager
         get { return Application.streamingAssetsPath + "/waypoint/"; }
     }
     // save waypoint
-    private bool s_waypointSaveStarted = false;
-    private StreamWriter s_waypointSw;
+    public bool WaypointSaveStarted = false;
+    private StreamWriter waypointSw;
     // load waypoint
     public bool WaypointLoadStarted = false;
-    private StreamReader s_waypointSr;
+    private StreamReader waypointSr;
 
     public void RefreshWaypoints()
     {
@@ -36,7 +36,10 @@ public class WaypointManager
 
     public async void SaveWaypoint(string file, DroneController target)
     {
-        if (!s_waypointSaveStarted && !WaypointLoadStarted)
+        TestCaseManager testCaseManager;
+        target.TryGetComponent<TestCaseManager>(out testCaseManager);
+        if (!testCaseManager || !testCaseManager.SaveStarted)
+        if (!WaypointSaveStarted && !WaypointLoadStarted)
         {
             if (file == "")
             {
@@ -63,7 +66,7 @@ public class WaypointManager
         // delete and overwrite save file if it already exists
         File.Delete(WaypointsPath + file + ".txt");
         // initialise stream writer
-        s_waypointSw = File.AppendText(WaypointsPath + file + ".txt");
+        waypointSw = File.AppendText(WaypointsPath + file + ".txt");
         initialPosition = target.Drone.transform.localPosition;
         previousVelocity = target.Drone.GetComponent<Rigidbody>().velocity;
         Dictionary<KeyCode, bool> keyboard = new Dictionary<KeyCode, bool>
@@ -73,7 +76,7 @@ public class WaypointManager
             { KeyCode.S, false},
             { KeyCode.D, false},
         };
-        while (s_waypointSw != null)
+        while (waypointSw != null)
         {
             bool changedKey = false;
             // if (target.Drone.GetComponent<Rigidbody>().velocity != previousVelocity)
@@ -90,7 +93,7 @@ public class WaypointManager
             if (changedKey && previousVelocity.magnitude > 0)
             {
                 // Debug.Log("change detected");
-                s_waypointSw.WriteLine($"{target.Drone.transform.localPosition.x - initialPosition.x},{target.Drone.transform.localPosition.z - initialPosition.z},{previousVelocity.magnitude},{initialPosition.y}");
+                waypointSw.WriteLine($"{target.Drone.transform.localPosition.x - initialPosition.x},{target.Drone.transform.localPosition.z - initialPosition.z},{previousVelocity.magnitude},{initialPosition.y}");
                 // previousVelocity = target.Drone.GetComponent<Rigidbody>().velocity;
             }
             previousVelocity = target.Drone.GetComponent<Rigidbody>().velocity;
@@ -101,13 +104,16 @@ public class WaypointManager
 
     public void StopSaveWaypoint()
     {
-        s_waypointSaveStarted = false;
-        if (s_waypointSw != null) s_waypointSw.Dispose();
-        s_waypointSw = null;
+        WaypointSaveStarted = false;
+        if (waypointSw != null) waypointSw.Dispose();
+        waypointSw = null;
     }
     public async Task LoadWaypoint(string file, DroneController target)
     {
-        if (!s_waypointSaveStarted && !WaypointLoadStarted)
+        TestCaseManager testCaseManager;
+        target.TryGetComponent<TestCaseManager>(out testCaseManager);
+        if (!testCaseManager || !testCaseManager.LoadStarted)
+        if (!WaypointSaveStarted && !WaypointLoadStarted)
         {
             WaypointLoadStarted = true;
             ResetObjects.Restart();
@@ -122,11 +128,11 @@ public class WaypointManager
         Rigidbody rb = target.Drone.GetComponent<Rigidbody>();
         float[] prev = new float[] { 0, 0 };
         // initialise stream reader
-        s_waypointSr = File.OpenText(WaypointsPath + file + ".txt");
+        waypointSr = File.OpenText(WaypointsPath + file + ".txt");
         s = "";
         target.GetComponent<KeyboardController>().enabled = false;
 
-        while (s_waypointSr != null && (s = s_waypointSr.ReadLine()) != null)
+        while (waypointSr != null && (s = waypointSr.ReadLine()) != null)
         {
             Debug.Log(s);
 
@@ -153,7 +159,7 @@ public class WaypointManager
             float timeElapsed = 0;
             Debug.Log("waiting for " + waitTime);
             // yield return new WaitForSecondsRealtime(waitTime);
-            while (s_waypointSr != null && timeElapsed < waitTime)
+            while (waypointSr != null && timeElapsed < waitTime)
             {
                 // VelocityConverter.Convert(rb, vx, vy, target.MaxSpeed, 25, 1);
                 target.GetComponent<VelocityConverter>().SetVelocities(vx, vy);
@@ -175,7 +181,7 @@ public class WaypointManager
     public void StopLoadWaypoint()
     {
         // WaypointLoadStarted = false;
-        if (s_waypointSr != null) s_waypointSr.Dispose();
-        s_waypointSr = null;
+        if (waypointSr != null) waypointSr.Dispose();
+        waypointSr = null;
     }
 }

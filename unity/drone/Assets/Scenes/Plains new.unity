@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3728.6885, g: 2372.0332, b: 1864.75, a: 1}
+  m_IndirectSpecularColor: {r: 3728.704, g: 2372.0469, b: 1864.7812, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1865,6 +1865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f24c55b57cbe5346891086c1c28303c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 1126855378}
+  Camera: {fileID: 1942838304}
   OutputText: {fileID: 302928991}
   FileInput: {fileID: 2073577161}
   SaveButton: {fileID: 664912559}
@@ -1887,6 +1889,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1126855378}
   Camera: {fileID: 1942838304}
+  SaveFile: 
+  SaveStarted: 0
+  LoadFile: 
+  LoadStarted: 0
 --- !u!1 &380290630
 GameObject:
   m_ObjectHideFlags: 0
@@ -5092,6 +5098,7 @@ MonoBehaviour:
   Drone: {fileID: 696089494}
   DroneGroup: {fileID: 922789948}
   MaxSpeed: 1
+  testCaseManager: {fileID: 0}
 --- !u!1 &825778250
 GameObject:
   m_ObjectHideFlags: 0
@@ -7380,6 +7387,7 @@ MonoBehaviour:
   Drone: {fileID: 0}
   DroneGroup: {fileID: 922789948}
   MaxSpeed: 1
+  testCaseManager: {fileID: 0}
 --- !u!1 &1135806808
 GameObject:
   m_ObjectHideFlags: 0

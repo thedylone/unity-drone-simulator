@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class TestCaseUI : MonoBehaviour
 {
+    public DroneController Target;
+    public Camera Camera;
     public Text OutputText;
     public InputField FileInput;
     public Button SaveButton;
@@ -15,8 +17,12 @@ public class TestCaseUI : MonoBehaviour
     private bool _saveStarted = false;
     private bool _loadStarted = false;
     private string _currentFile;
+    private TestCaseManager testCaseManager;
     void Start()
     {
+        testCaseManager = Target.gameObject.AddComponent<TestCaseManager>();
+        testCaseManager.Target = Target;
+        testCaseManager.Camera = Camera;
         updateTestCases();
     }
     void OnDisable()
@@ -60,7 +66,7 @@ public class TestCaseUI : MonoBehaviour
                 SaveButton.GetComponentInChildren<Text>().text = "stop save";
                 // check if OutputText exists due to switching scene
                 if (OutputText) OutputText.text = "save in progress";
-                TestCaseManager.SaveCase(FileInput.text);
+                testCaseManager.SaveCase(FileInput.text);
             }
             else
             {
@@ -68,7 +74,7 @@ public class TestCaseUI : MonoBehaviour
                 SaveButton.GetComponentInChildren<Text>().text = "start save";
                 // check if OutputText exists due to switching scene
                 if (OutputText) OutputText.text = "save completed";
-                TestCaseManager.StopSaveCase();
+                testCaseManager.StopSaveCase();
                 updateTestCases();
             }
         }
@@ -77,10 +83,10 @@ public class TestCaseUI : MonoBehaviour
     {
         if (!_saveStarted)
         {
-            if (_currentFile != filename)
+            if (_loadStarted && _currentFile != filename)
             {
                 // if already loading a case and another case is loaded
-                TestCaseManager.StopLoadCase();
+                testCaseManager.StopLoadCase();
                 _loadStarted = false;
             }
             _loadStarted = !_loadStarted;
@@ -88,14 +94,14 @@ public class TestCaseUI : MonoBehaviour
             {
                 _currentFile = filename;
                 OutputText.text = "running " + filename;
-                string result = await TestCaseManager.LoadCase(filename) ? " passed" : " failed";
+                string result = await testCaseManager.LoadCase(filename) ? " passed" : " failed";
                 // check if OutputText exists due to switching scene
                 if (OutputText) OutputText.text = filename + result;
                 _loadStarted = false;
             }
             else
             {
-                TestCaseManager.StopLoadCase();
+                testCaseManager.StopLoadCase();
             }
         }
     }
@@ -119,7 +125,7 @@ public class TestCaseUI : MonoBehaviour
                     if (_loadStarted)
                     {
                         // run each file if load is not cancelled
-                        string result = (await TestCaseManager.LoadCase(file) ? " passed" : " failed") + "\n";
+                        string result = (await testCaseManager.LoadCase(file) ? " passed" : " failed") + "\n";
                         // check if OutputText exists due to switching scene
                         if (OutputText) OutputText.text += file + result;
                     }
@@ -133,7 +139,7 @@ public class TestCaseUI : MonoBehaviour
                 LoadAllButton.GetComponentInChildren<Text>().text = "start load";
                 // reset Load All button colours
                 LoadAllButton.colors = ColorBlock.defaultColorBlock;
-                TestCaseManager.StopLoadCase();
+                testCaseManager.StopLoadCase();
             }
         }
     }
