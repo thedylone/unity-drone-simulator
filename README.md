@@ -177,5 +177,5 @@ Additional Asset Packages were used to assist in the creation of this project. M
 - [GLTFUtility](https://github.com/Siccity/GLTFUtility)
 - [JsonDotNet](https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347)
 - [Runtime OBJ Importer](https://assetstore.unity.com/packages/tools/model)
-- [Street Lights Pack](https://assetstore.unity.com/packages/3d/props/exterior/street-lights-pack-31644#publisher)
+- [Street Lights Pack](https://assetstore.unity.com/packages/3d/props/exterior/street-lights-pack-31644)
 - [Yughues Free Sand Materials](https://assetstore.unity.com/packages/2d/textures-materials/floors/yughues-free-sand-materials-12964)
