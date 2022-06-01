@@ -8,7 +8,7 @@ Unity Drone Simulator is an appllcation which allows you to simulate the 'Eagle 
 
 A 'Hunter' Drone is flying above the 'Target' Drone, with its camera facing vertically down. The height between the 2 drones is the Separation Distance of the drones. The Hunter Drone's height is fixed at 55m, while adjusting the Separation Distance will move the Target Drone's vertical position. For example, with a Separation Distance of 20m, the Target Drone will be placed at 35m.
 
-![EagleDiagram](images/Eagle.png)
+![EagleDiagram](images/eagle.gif)
 
 In this application, the user is looking from the Hunter Drone's Camera's Point of View, and is able to move the Target Drone with Keyboard Controls (WASD).
 
