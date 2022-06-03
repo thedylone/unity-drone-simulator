@@ -457,8 +457,8 @@ InputManager:
     m_Name: Drone Throttle
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: '[2]'
-    positiveButton: '[8]'
+    negativeButton: left shift
+    positiveButton: right shift
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -521,8 +521,8 @@ InputManager:
     m_Name: Drone Elevator
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left shift
-    positiveButton: right shift
+    negativeButton: '[2]'
+    positiveButton: '[8]'
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
