@@ -1,6 +1,8 @@
 # drone versus drone
 
-Unity Drone Simulator is an appllcation which allows you to simulate the '**Eagle Concept**', streaming out the Camera feed of the 'Hunter' Drone and receiving inputs to move the 'Hunter' Drone. This project is meant to test the capabilities of a Computer Vision Model and PID Controller Script.
+Unity Drone Simulator is an appllcation which allows you to simulate the '**Eagle Concept**', streaming out the Camera feed of the 'Hunter' Drone and receiving inputs to move the 'Hunter' Drone. This project is meant to test the capabilities of a **Computer Vision Model** and **PID Controller Script**.
+
+Unity's High Definition Render Pipeline (HDRP) is used in this project to enhance the graphical fidelity, enabling the Simulator to be as similar to reality, thus testing the Computer Vision in near-realistic environments.
 
 ![Menu](images/Menu.png)
 
@@ -29,6 +31,33 @@ A 'Hunter' Drone is flying above the 'Target' Drone, with its camera facing vert
 ![EagleDiagram](images/eagle.gif)
 
 In this application, the user is looking from the Hunter Drone's Camera's Point of View, and is able to move the Target Drone with Keyboard Controls (WASD).
+
+---
+
+## Quickstart
+
+Follow the below steps to use the Application together with a **Computer Vision** model and **Controller Script**.
+
+1. Download the [latest release](/release/latest).
+> Alternatively, clone this repository and open the Unity Project (Unity 2020.3.30f1). You can run it in Unity Editor or build the Application yourself.
+2. Launch the Application, as well as a RTSP Server, e.g. [rtsp-simple-server](/rtsp%20simple%20server/).
+> **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream, else the Application will crash.
+3. Configure Settings. Important Settings to note are:
+    - RTSP output path
+    - ZeroMQ listener path
+    > Set the ZeroMQ listener path to be the output path of the **Controller Script**  
+4. Click on **Start** to load into the Scene. RTSP and ZeroMQ will automatically start up.
+> To confirm, the **rtsp-simple-server** will indicate that a session is publishing to the path provided in the settings.
+
+Start up the **Computer Vision** and Controller Script.
+
+1. If running on another device, ensure the devices are able to connect to each other, e.g. change firewall settings.
+2. For the **Computer Vision**, consume the RTSP stream via the RTSP output path as set and shown in the Application's Settings.
+> To confirm, the **rtsp-simple-server** will indicate that a session is reading from the path provided in the settings.
+
+Move the Target Drone with WASD, and observe that the **Computer Vision** is able to detect the drone. The **Controller Script** should then receive the detections, and subsequently send commands to move the Hunter Drone. The Hunter Drone, also the Application's POV, should be moving and following the Target Drone.
+
+Press `Escape` or click on the gear icon in the top left corner to open up the Menu while running. The **Test Case Menu**, **Waypoint Menu** and **Circle Menu** will allow you to automatically move the Target Drone. For more details, refer to the [Runtime Section](#runtime).
 
 ---
 
@@ -77,14 +106,14 @@ If necessary, adjust the other parameters for the stream:
 
 ### ZeroMQ Settings
 
-The application is able to receive inputs via ZeroMQ, to move the Hunter Drone. The Controller Script should send in inputs as `Vx,Vy`. 
+The application is able to receive inputs via ZeroMQ, to move the Hunter Drone. The **Controller Script** should send in inputs as `Vx,Vy`. 
 > ℹ️ `Vx` and `Vy` should be within the range from -1 to 1, which will then be modified by the Drone's set Max Speed.
 
 <details><summary>Settings Guide</summary>
 
 Enter the **Path** for the application to connect and listen to.
 
-A **Delay** can also be introduced, meaning that inputs will only be executed a set fixed time after receiving from the Controller Script.
+A **Delay** can also be introduced, meaning that inputs will only be executed a set fixed time after receiving from the **Controller Script**.
 > Similar to the RTSP delay, this will not account for the existing latency.
 
 </details>
