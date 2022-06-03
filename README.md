@@ -1,12 +1,30 @@
 # drone versus drone
 
-Unity Drone Simulator is an appllcation which allows you to simulate the 'Eagle Concept', streaming out the Camera feed of the 'Hunter' Drone and receiving inputs to move the 'Hunter Drone'. This project is meant to test the capabilities of a Computer Vision Model and PID Controller Script.
+Unity Drone Simulator is an appllcation which allows you to simulate the '**Eagle Concept**', streaming out the Camera feed of the 'Hunter' Drone and receiving inputs to move the 'Hunter' Drone. This project is meant to test the capabilities of a Computer Vision Model and PID Controller Script.
 
 ![Menu](images/Menu.png)
 
+---
+
+## Contents
+
+1. [Eagle Concept](#eagle-concept)
+2. [Settings and Configurations](#settings-and-configurations)
+    - [RTSP Settings](#rtsp-settings)
+    - [ZeroMQ Settings](#zeromq-settings)
+    - [Drone Settings](#drone-settings)
+3. [Runtime](#runtime)
+    - [Test Case Menu](#test-case-menu)
+    - [Waypoint Menu](#waypoint-menu)
+    - [Circle Menu](#circle-menu)
+    - [Comparison](#comparison)
+4. [External Assets](#external-assets)
+
+---
+
 ## Eagle Concept
 
-A 'Hunter' Drone is flying above the 'Target' Drone, with its camera facing vertically down. The height between the 2 drones is the Separation Distance of the drones. The Hunter Drone's height is fixed at 55m, while adjusting the Separation Distance will move the Target Drone's vertical position. For example, with a Separation Distance of 20m, the Target Drone will be placed at 35m.
+A 'Hunter' Drone is flying above the 'Target' Drone, with its camera facing vertically down. The height between the 2 drones is the Separation Distance of the drones. The Hunter Drone's height is fixed at `55m`, while adjusting the Separation Distance will move the Target Drone's vertical position. For example, with a Separation Distance of `20m`, the Target Drone will be placed at `35m`.
 
 ![EagleDiagram](images/eagle.gif)
 
