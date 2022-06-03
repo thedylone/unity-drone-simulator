@@ -65,9 +65,15 @@ public class VelocityConverter : MonoBehaviour
         rb.AddForce(fx, 0, fy);
     }
 
+    public static void DirectConvert(Rigidbody rb, float vx, float vy, float maxSpeed)
+    {
+        rb.velocity = new Vector3(vx * maxSpeed, 0, vy * maxSpeed);
+    }
+
     public void FixedUpdate()
     {
         Convert(rb, Vx, Vy, maxSpeed, maxTiltDeg, tiltSpeed);
+        // DirectConvert(rb, Vx, Vy, maxSpeed);
     }
 
     public void SetVelocities(float vx, float vy)
