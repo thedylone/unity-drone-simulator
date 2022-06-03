@@ -11,16 +11,17 @@ Unity's High Definition Render Pipeline (HDRP) is used in this project to enhanc
 ## Contents
 
 1. [Eagle Concept](#eagle-concept)
-2. [Settings and Configurations](#settings-and-configurations)
+2. [Quickstart](#quickstart)
+3. [Settings and Configurations](#settings-and-configurations)
     - [RTSP Settings](#rtsp-settings)
     - [ZeroMQ Settings](#zeromq-settings)
     - [Drone Settings](#drone-settings)
-3. [Runtime](#runtime)
+4. [Runtime](#runtime)
     - [Test Case Menu](#test-case-menu)
     - [Waypoint Menu](#waypoint-menu)
     - [Circle Menu](#circle-menu)
     - [Comparison](#comparison)
-4. [External Assets](#external-assets)
+5. [External Assets](#external-assets)
 
 ---
 
@@ -38,7 +39,7 @@ In this application, the user is looking from the Hunter Drone's Camera's Point 
 
 Follow the below steps to use the Application together with a **Computer Vision** model and **Controller Script**.
 
-1. Download the [latest release](/release/latest).
+1. Download the [latest release]().
 > Alternatively, clone this repository and open the Unity Project (Unity 2020.3.30f1). You can run it in Unity Editor or build the Application yourself.
 2. Launch the Application, as well as a RTSP Server, e.g. [rtsp-simple-server](/rtsp%20simple%20server/).
 > **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream, else the Application will crash.
