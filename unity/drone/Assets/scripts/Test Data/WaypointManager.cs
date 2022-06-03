@@ -182,7 +182,8 @@ public class WaypointManager
 
         // once stream reader reaches an empty line
         Debug.Log("stop load case");
-        VelocityConverter.Convert(rb, 0, 0, target.MaxSpeed, 25, 1);
+        // VelocityConverter.Convert(rb, 0, 0, target.MaxSpeed, 25, 1);
+        vc.SetVelocities(0,0);
         // rb.velocity = new Vector3(0, 0, 0);
         target.GetComponent<KeyboardController>().enabled = true;
         StopLoadWaypoint();
