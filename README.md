@@ -49,9 +49,9 @@ The Settings Page will enable you to modify the below:
 
 ### RTSP Settings
 
-The application is able to stream out the Hunter Drone's camera feed via RTSP using FFmpegOut. For more information on FFmpegOut, do refer to the [FFmpegOut README](unity/drone/Assets/FFmpegOut/README.md) or [the GitHub repository](https://github.com/keijiro/FFmpegOut).
+The application is able to stream out the Hunter Drone's camera feed via RTSP using FFmpegOut. For more information on FFmpegOut, do refer to the [FFmpegOut README](/docs/FFmpegOut.md) or [the GitHub repository](https://github.com/keijiro/FFmpegOut).
 
-> **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream. Consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to run the server, located in the root of this repository at [/rtsp simple server](/rtsp%20simple%20server/).
+> **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream. Consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to run the server, located at [/rtsp simple server](/rtsp%20simple%20server/). Refer to the [rtsp-simple-server README](/docs/rtsp-simple-server.md) for information on setting up.
 
 <details><summary>Settings Guide</summary>
 
@@ -108,9 +108,9 @@ During runtime, models can be imported through the `StreamingAssets/Drone Models
 - [obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file)
 - [glTF (includes .gltf and .glb)](https://en.wikipedia.org/wiki/GlTF)
 
-The Refresh Button next to the Model Dropdown will reload all the files and import the models. For more info on the Runtime Importers, refer to the [Assets README on Runtime Importers](unity/drone/Assets/README.md#runtime-importers).
+The Refresh Button next to the Model Dropdown will reload all the files and import the models. For more info on the Runtime Importers, refer to the [Assets README on Runtime Importers](/docs/Assets.md#runtime-importers).
 
-The Target Drone's **Material Colour** can also be edited using the Flexible Color Picker. For more info on the Flexible Color Picker, refer to the [Assets README on the Flexible Color Picker](unity/drone/Assets/README.md#flexible-color-picker-v250) or the [FlexibleColorPickerDoc.pdf](unity/drone/Assets/FlexibleColorPicker/FlexibleColorPickerDoc.pdf).
+The Target Drone's **Material Colour** can also be edited using the Flexible Color Picker. For more info on the Flexible Color Picker, refer to the [Assets README on the Flexible Color Picker](/docs/Assets.md#flexible-color-picker-v250) or the [FlexibleColorPickerDoc.pdf](unity/drone/Assets/FlexibleColorPicker/FlexibleColorPickerDoc.pdf).
 
 </details>
 
@@ -187,7 +187,7 @@ Below is a comparison among the 3 methods of automated movement:
 
 ## External Assets
 
-Additional Asset Packages were used to assist in the creation of this project. More details can be found on the [Assets README](unity/drone/Assets/README.md).
+Additional Asset Packages were used to assist in the creation of this project. More details can be found on the [Assets README](/docs/Assets.md).
 
 - [Unity Terrain - HDRP Demo Scene](https://assetstore.unity.com/packages/3d/environments/unity-terrain-hdrp-demo-scene-213198)
 - [EasyRoads3D](https://assetstore.unity.com/packages/3d/characters/easyroads3d-free-v3-987)
