@@ -126,7 +126,9 @@ public class WaypointManager
         Debug.Log("load waypoint");
         string s;
         Rigidbody rb = target.Drone.GetComponent<Rigidbody>();
+        VelocityConverter vc = target.GetComponent<VelocityConverter>();
         float[] prev = new float[] { 0, 0 };
+        Vector3 prevPosition = Vector3.zero;
         // initialise stream reader
         waypointSr = File.OpenText(WaypointsPath + file + ".txt");
         s = "";
@@ -143,6 +145,7 @@ public class WaypointManager
             float dv = float.Parse(inputs[2]);
 
             prev = new float[] { float.Parse(inputs[0]), float.Parse(inputs[1]) };
+            prevPosition = rb.transform.position;
 
             float totalDistance = Mathf.Sqrt(dx * dx + dy * dy);
 
@@ -156,18 +159,25 @@ public class WaypointManager
             vy /= target.MaxSpeed;
             
 
-            float timeElapsed = 0;
-            Debug.Log("waiting for " + waitTime);
-            // yield return new WaitForSecondsRealtime(waitTime);
-            while (waypointSr != null && timeElapsed < waitTime)
+            // float timeElapsed = 0;
+            // Debug.Log("waiting for " + waitTime);
+            // // yield return new WaitForSecondsRealtime(waitTime);
+            // while (waypointSr != null && timeElapsed < waitTime)
+            // {
+            //     // VelocityConverter.Convert(rb, vx, vy, target.MaxSpeed, 25, 1);
+            //     vc.SetVelocities(vx, vy);
+            //     timeElapsed += Time.fixedDeltaTime;
+            //     await Task.Delay(Mathf.RoundToInt(Time.fixedDeltaTime * 1000));
+            // }
+            // // await Task.Delay(Mathf.RoundToInt(waitTime * 1000));
+            // Debug.Log("waiting finished");
+            float currentDistance = 0;
+            while (waypointSr != null && currentDistance < totalDistance)
             {
-                // VelocityConverter.Convert(rb, vx, vy, target.MaxSpeed, 25, 1);
-                target.GetComponent<VelocityConverter>().SetVelocities(vx, vy);
-                timeElapsed += Time.fixedDeltaTime;
-                await Task.Delay(Mathf.RoundToInt(Time.fixedDeltaTime * 1000));
+                currentDistance = (rb.transform.position - prevPosition).magnitude;
+                vc.SetVelocities(vx,vy);
+                await Task.Delay(50);
             }
-            // await Task.Delay(Mathf.RoundToInt(waitTime * 1000));
-            Debug.Log("waiting finished");
         }
 
         // once stream reader reaches an empty line
