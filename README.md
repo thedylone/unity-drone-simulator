@@ -51,7 +51,7 @@ The Settings Page will enable you to modify the below:
 
 The application is able to stream out the Hunter Drone's camera feed via RTSP using FFmpegOut. For more information on FFmpegOut, do refer to the [FFmpegOut README](unity/drone/Assets/FFmpegOut/README.md) or [the GitHub repository](https://github.com/keijiro/FFmpegOut).
 
-> **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream. This repository does **not** come with a RTSP server, consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to run the server.
+> **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream. Consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to run the server, located in the root of this repository at [/rtsp simple server](/rtsp%20simple%20server/).
 
 <details><summary>Settings Guide</summary>
 
