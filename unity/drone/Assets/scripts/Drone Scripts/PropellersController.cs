@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PropellersController : MonoBehaviour {
 
-	public float maxRPM = 12000;
+	public float maxRPM = 32000;
 	
 	private Vector4 RPM;
 	private Vector3[] propellersPositions;

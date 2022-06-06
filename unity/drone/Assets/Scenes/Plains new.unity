@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3728.6885, g: 2372.0332, b: 1864.75, a: 1}
+  m_IndirectSpecularColor: {r: 3728.704, g: 2372.0469, b: 1864.7812, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4290,8 +4290,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696089494}
   serializedVersion: 2
-  m_Mass: 1.375
-  m_Drag: 0
+  m_Mass: 0.4
+  m_Drag: 0.35
   m_AngularDrag: 0.01
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -5033,6 +5033,8 @@ GameObject:
   - component: {fileID: 766712657}
   - component: {fileID: 766712655}
   - component: {fileID: 766712656}
+  - component: {fileID: 766712659}
+  - component: {fileID: 766712658}
   m_Layer: 0
   m_Name: Drone A controller
   m_TagString: GameController
@@ -5081,6 +5083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd15d8e6094ab3d459c545491024a48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseMode: 1
   Vx: 0
   Vy: 0
 --- !u!114 &766712657
@@ -5099,6 +5102,52 @@ MonoBehaviour:
   DroneGroup: {fileID: 922789948}
   MaxSpeed: 1
   testCaseManager: {fileID: 0}
+--- !u!114 &766712658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766712653}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feefb5ffcabe7e543a19e01bc785f5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRPM: 32000
+--- !u!114 &766712659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766712653}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eab67c1218941d40a830c214be7288e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anglesControl: 0
+  tiltAngle: 20
+  rollSensitivity: 100
+  pitchSensitivity: 100
+  yawSensitivity: 100
+  tiltAngleKp: 4
+  yawAngleKp: 2
+  tiltRateKp: 10
+  yawRateKp: 10
+  heightControl: 0
+  verticalSpeedSensitivity: 3
+  heightSensitivity: 3000
+  verticalSpeedKp: 2
+  squareMapping: 1
+  invertAxisT: 0
+  invertAxisR: 0
+  invertAxisE: 0
+  invertAxisA: 0
+  ElevatorInput: 0
+  AileronInput: 0
+  rb: {fileID: 696089500}
 --- !u!1 &825778250
 GameObject:
   m_ObjectHideFlags: 0
@@ -7306,6 +7355,8 @@ GameObject:
   - component: {fileID: 1126855376}
   - component: {fileID: 1126855375}
   - component: {fileID: 1126855377}
+  - component: {fileID: 1126855380}
+  - component: {fileID: 1126855379}
   m_Layer: 0
   m_Name: Drone B controller
   m_TagString: GameController
@@ -7370,6 +7421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd15d8e6094ab3d459c545491024a48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseMode: 1
   Vx: 0
   Vy: 0
 --- !u!114 &1126855378
@@ -7388,6 +7440,52 @@ MonoBehaviour:
   DroneGroup: {fileID: 922789948}
   MaxSpeed: 1
   testCaseManager: {fileID: 0}
+--- !u!114 &1126855379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126855373}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feefb5ffcabe7e543a19e01bc785f5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRPM: 32000
+--- !u!114 &1126855380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126855373}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eab67c1218941d40a830c214be7288e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anglesControl: 0
+  tiltAngle: 20
+  rollSensitivity: 100
+  pitchSensitivity: 100
+  yawSensitivity: 100
+  tiltAngleKp: 4
+  yawAngleKp: 2
+  tiltRateKp: 10
+  yawRateKp: 10
+  heightControl: 0
+  verticalSpeedSensitivity: 3
+  heightSensitivity: 3000
+  verticalSpeedKp: 2
+  squareMapping: 1
+  invertAxisT: 0
+  invertAxisR: 0
+  invertAxisE: 0
+  invertAxisA: 0
+  ElevatorInput: 0
+  AileronInput: 0
+  rb: {fileID: 0}
 --- !u!1 &1135806808
 GameObject:
   m_ObjectHideFlags: 0
