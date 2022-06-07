@@ -219,9 +219,9 @@ PrefabInstance:
     - target: {fileID: 5113134604456243828, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_Text
-      value: 'Configure the settings for Hunter Drone and Target Drone.
+      value: 'Configure the settings for Eagle Drone and Target Drone.
 
-        Hunter
+        Eagle
         Drone refers to the drone flying above.
 
         Target Drone refers to the
@@ -315,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1050
+      value: 1150
       objectReference: {fileID: 0}
     - target: {fileID: 7225659253399606669, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -1088,7 +1088,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hunter Drone
+  m_Text: Eagle Drone
 --- !u!222 &168492647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4140,11 +4140,11 @@ PrefabInstance:
     - target: {fileID: 5113134604456243828, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_Text
-      value: 'Enable ZeroMQ connection to controller script to move Drone A. ZeroMQ
-        will listen for controller inputs to remotely move Drone A''s position.
+      value: 'Enable ZeroMQ connection to controller script to move Eagle Drone.
+        ZeroMQ will listen for controller inputs to remotely move Eagle Drone''s
+        position.
 
-        Enter
-        the path for ZeroMQ to connect and listen to.'
+        Enter the path for ZeroMQ to connect and listen to.'
       objectReference: {fileID: 0}
     - target: {fileID: 5113134604456243831, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -4234,7 +4234,7 @@ PrefabInstance:
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1050
+      value: 1150
       objectReference: {fileID: 0}
     - target: {fileID: 7225659253399606669, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -5490,7 +5490,7 @@ PrefabInstance:
     - target: {fileID: 5113134604456243828, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_Text
-      value: 'Enable RTSP streaming of Drone A''s view.
+      value: 'Enable RTSP streaming of Eagle Drone''s view.
 
         Customise output
         path Port Number and URL. Ensure you have a RTSP server running before starting!'
@@ -5578,7 +5578,7 @@ PrefabInstance:
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1050
+      value: 1150
       objectReference: {fileID: 0}
     - target: {fileID: 7225659252676339274, guid: 53b45ec91d0b55642ab17c51d464bf2f,
         type: 3}
@@ -6334,7 +6334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1050, y: -1680}
+  m_AnchoredPosition: {x: 1150, y: -1840}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1565658264
@@ -8416,12 +8416,12 @@ PrefabInstance:
     - target: {fileID: 3144503801483044526, guid: 7e171d795554b5940867e880d726bc75,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 12600
+      value: 14950
       objectReference: {fileID: 0}
     - target: {fileID: 3144503801483044526, guid: 7e171d795554b5940867e880d726bc75,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -766690.06
+      value: -870503.9
       objectReference: {fileID: 0}
     - target: {fileID: 3144503801876551068, guid: 7e171d795554b5940867e880d726bc75,
         type: 3}
