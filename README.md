@@ -1,6 +1,6 @@
 # drone versus drone
 
-Unity Drone Simulator is an appllcation which allows you to simulate the '**Eagle Concept**', streaming out the Camera feed of the 'Hunter' Drone and receiving inputs to move the 'Hunter' Drone. This project is meant to test the capabilities of a **Computer Vision Model** and **PID Controller Script**.
+Unity Drone Simulator is an appllcation which allows you to simulate the '**Eagle Concept**', streaming out the Camera feed of the 'Eagle' Drone and receiving inputs to move the 'Eagle' Drone. This project is meant to test the capabilities of a **Computer Vision Model** and **PID Controller Script**.
 
 Unity's High Definition Render Pipeline (HDRP) is used in this project to enhance the graphical fidelity, enabling the Simulator to be as similar to reality, thus testing the Computer Vision in near-realistic environments.
 
@@ -27,11 +27,11 @@ Unity's High Definition Render Pipeline (HDRP) is used in this project to enhanc
 
 ## Eagle Concept
 
-A 'Hunter' Drone is flying above the 'Target' Drone, with its camera facing vertically down. The height between the 2 drones is the Separation Distance of the drones. The Hunter Drone's height is fixed at `55m`, while adjusting the Separation Distance will move the Target Drone's vertical position. For example, with a Separation Distance of `20m`, the Target Drone will be placed at `35m`.
+An 'Eagle' Drone is flying above the 'Target' Drone, with its camera facing vertically down. The height between the 2 drones is the Separation Distance of the drones. The Eagle Drone's height is fixed at `55m`, while adjusting the Separation Distance will move the Target Drone's vertical position. For example, with a Separation Distance of `20m`, the Target Drone will be placed at `35m`.
 
 ![EagleDiagram](images/eagle.gif)
 
-In this application, the user is looking from the Hunter Drone's Camera's Point of View, and is able to move the Target Drone with Keyboard Controls (WASD).
+In this application, the user is looking from the Eagle Drone's Camera's Point of View, and is able to move the Target Drone with Keyboard Controls (WASD).
 
 ---
 
@@ -56,7 +56,7 @@ Start up the **Computer Vision** and Controller Script.
 2. For the **Computer Vision**, consume the RTSP stream via the RTSP output path as set and shown in the Application's Settings.
 > To confirm, the **rtsp-simple-server** will indicate that a session is reading from the path provided in the settings.
 
-Move the Target Drone with WASD, and observe that the **Computer Vision** is able to detect the drone. The **Controller Script** should then receive the detections, and subsequently send commands to move the Hunter Drone. The Hunter Drone, also the Application's POV, should be moving and following the Target Drone.
+Move the Target Drone with WASD, and observe that the **Computer Vision** is able to detect the drone. The **Controller Script** should then receive the detections, and subsequently send commands to move the Eagle Drone. The Eagle Drone, also the Application's POV, should be moving and following the Target Drone.
 
 Press `Escape` or click on the gear icon in the top left corner to open up the Menu while running. The **Test Case Menu**, **Waypoint Menu** and **Circle Menu** will allow you to automatically move the Target Drone. For more details, refer to the [Runtime Section](#runtime).
 
@@ -79,7 +79,7 @@ The Settings Page will enable you to modify the below:
 
 ### RTSP Settings
 
-The application is able to stream out the Hunter Drone's camera feed via RTSP using FFmpegOut. For more information on FFmpegOut, do refer to the [FFmpegOut README](/docs/FFmpegOut.md) or [the GitHub repository](https://github.com/keijiro/FFmpegOut).
+The application is able to stream out the Eagle Drone's camera feed via RTSP using FFmpegOut. For more information on FFmpegOut, do refer to the [FFmpegOut README](/docs/FFmpegOut.md) or [the GitHub repository](https://github.com/keijiro/FFmpegOut).
 
 > **⚠️Warning!⚠️** Ensure that a server is running before starting the RTSP stream. Consider using [rtsp-simple-server](https://github.com/aler9/rtsp-simple-server) to run the server, located at [/rtsp simple server](/rtsp%20simple%20server/). Refer to the [rtsp-simple-server README](/docs/rtsp-simple-server.md) for information on setting up.
 
@@ -107,7 +107,7 @@ If necessary, adjust the other parameters for the stream:
 
 ### ZeroMQ Settings
 
-The application is able to receive inputs via ZeroMQ, to move the Hunter Drone. The **Controller Script** should send in inputs as `Vx,Vy`. 
+The application is able to receive inputs via ZeroMQ, to move the Eagle Drone. The **Controller Script** should send in inputs as `Vx,Vy`. 
 > ℹ️ `Vx` and `Vy` should be within the range from -1 to 1, which will then be modified by the Drone's set Max Speed.
 
 <details><summary>Settings Guide</summary>
@@ -123,13 +123,13 @@ A **Delay** can also be introduced, meaning that inputs will only be executed a 
 
 ### Drone Settings
 
-Modify the Settings for both the Hunter Drone and the Target Drone.
+Modify the Settings for both the Eagle Drone and the Target Drone.
 
 <details><summary>Settings Guide</summary>
 
-As mentioned in [Eagle Concept](#eagle-concept), **Separation Distance** will adjust the height of the Target Drone from the Hunter Drone, from a range of 1m to 50m.
+As mentioned in [Eagle Concept](#eagle-concept), **Separation Distance** will adjust the height of the Target Drone from the Eagle Drone, from a range of 1m to 50m.
 
-The **Max Speed** of the Hunter Drone and the Target Drone can be adjusted. This will determine how fast the drones will travel. For example, with `Vx = 0.5` and **Max Speed** of `10m/s`, the drone will move at `5m/s`.
+The **Max Speed** of the Eagle Drone and the Target Drone can be adjusted. This will determine how fast the drones will travel. For example, with `Vx = 0.5` and **Max Speed** of `10m/s`, the drone will move at `5m/s`.
 
 The 3D Model for the Target Drone can also be changed. This repository comes with the models of DJI Mavic and DJI Phantom. New models can also be imported by placing them into the `Assets/Resources/Drone Models` folder, as well as the `StreamingAssets/Drone Models` folder. 
 
@@ -160,7 +160,7 @@ Press `Escape` on your keyboard or click on the gear icon in the top left corner
 - Return to Main Menu
     > Stops the RTSP Stream and ZeroMQ and will return to the Main Menu starting screen, where Settings can be changed.
 - Reset Drone Positions
-    > Moves the Hunter and Target Drones back to the starting position.
+    > Moves the Eagle and Target Drones back to the starting position.
 - Quit
     > Closes the application (stops running if in Editor).
 
