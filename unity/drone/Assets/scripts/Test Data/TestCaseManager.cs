@@ -9,7 +9,7 @@ using UnityEngine;
 public class TestCaseManager : MonoBehaviour
 {
     public static List<string> TestCases;
-    public static string TestCasesPath = Application.streamingAssetsPath + "/testdata/";
+    public static string TestCasesPath = Application.streamingAssetsPath + "/inputreplay/";
     public DroneController Target;
     public Camera Camera;
     // save test data

@@ -968,7 +968,7 @@ GameObject:
   - component: {fileID: 170961665}
   - component: {fileID: 170961664}
   m_Layer: 5
-  m_Name: Test Case title
+  m_Name: input replay title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1026,7 +1026,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Test Cases
+  m_Text: Input Replay
 --- !u!222 &170961665
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1909,7 +1909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &380290631
 Transform:
   m_ObjectHideFlags: 0
@@ -6153,7 +6153,7 @@ GameObject:
   - component: {fileID: 987348776}
   - component: {fileID: 987348777}
   m_Layer: 5
-  m_Name: Test Case Side
+  m_Name: Input Replay Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8056,7 +8056,7 @@ PrefabInstance:
     - target: {fileID: 6163039401107757109, guid: 38d5b8b6e340ef44cbaea3a698ccce6c,
         type: 3}
       propertyPath: m_Text
-      value: Open Test Case Menu
+      value: Open Input Replay Menu
       objectReference: {fileID: 0}
     - target: {fileID: 6163039401361846101, guid: 38d5b8b6e340ef44cbaea3a698ccce6c,
         type: 3}
@@ -8196,7 +8196,7 @@ PrefabInstance:
     - target: {fileID: 6163039402356368975, guid: 38d5b8b6e340ef44cbaea3a698ccce6c,
         type: 3}
       propertyPath: m_Name
-      value: Test Case Toggle
+      value: Input Replay Toggle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d5b8b6e340ef44cbaea3a698ccce6c, type: 3}
@@ -8270,9 +8270,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Run test cases to automatically move Target Drone. Set the name of the
-    file in the input field to overwrite an existing case, or save a new one. Leave
-    blank to automatically create a new case
+  m_Text: Run Input Replay to automatically move Target Drone. Set the name of the
+    file in the input field to overwrite an existing replay, or save a new one. Leave
+    blank to automatically create a new replay.
 --- !u!222 &1285612787
 CanvasRenderer:
   m_ObjectHideFlags: 0
