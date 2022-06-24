@@ -17,7 +17,7 @@ Unity's High Definition Render Pipeline (HDRP) is used in this project to enhanc
     - [ZeroMQ Settings](#zeromq-settings)
     - [Drone Settings](#drone-settings)
 4. [Runtime](#runtime)
-    - [Test Case Menu](#test-case-menu)
+    - [Input Replay Menu](#input-replay-menu)
     - [Waypoint Menu](#waypoint-menu)
     - [Circle Menu](#circle-menu)
     - [Comparison](#comparison)
@@ -58,7 +58,7 @@ Start up the **Computer Vision** and Controller Script.
 
 Move the Target Drone with WASD, and observe that the **Computer Vision** is able to detect the drone. The **Controller Script** should then receive the detections, and subsequently send commands to move the Eagle Drone. The Eagle Drone, also the Application's POV, should be moving and following the Target Drone.
 
-Press `Escape` or click on the gear icon in the top left corner to open up the Menu while running. The **Test Case Menu**, **Waypoint Menu** and **Circle Menu** will allow you to automatically move the Target Drone. For more details, refer to the [Runtime Section](#runtime).
+Press `Escape` or click on the gear icon in the top left corner to open up the Menu while running. The **Input Replay Menu**, **Waypoint Menu** and **Circle Menu** will allow you to automatically move the Target Drone. For more details, refer to the [Runtime Section](#runtime).
 
 ---
 
@@ -154,7 +154,7 @@ Upon pressing **Start**, the RTSP Stream and ZeroMQ Client will both be automati
 
 Press `Escape` on your keyboard or click on the gear icon in the top left corner to open the Menu. The following options are available in the Menu:
 
-- [Test Case Menu](#test-case-menu)
+- [Input Replay Menu](#input-replay-menu)
 - [Waypoint Menu](#waypoint-menu)
 - [Circle Menu](#circle-menu)
 - Return to Main Menu
@@ -164,19 +164,19 @@ Press `Escape` on your keyboard or click on the gear icon in the top left corner
 - Quit
     > Closes the application (stops running if in Editor).
 
-The **Test Case Menu**, **Waypoint Menu**, and **Circle Menu** all allow the Target Drone to be moved automatically, not requiring manual input from the Keyboard.
+The **Input Replay Menu**, **Waypoint Menu**, and **Circle Menu** all allow the Target Drone to be moved automatically, not requiring manual input from the Keyboard.
 
-### Test Case Menu
+### Input Replay Menu
 
-A Test Case is a recording of the Target Drone's Velocity normalised by `Max Speed`, automatically moving the Target Drone without requiring manual input. The Application will check if the Target Drone is within the boundaries of the Camera Screen. If the Target Drone remains in view of the Camera for the entire duration of the Test Case, it is deemed as a **Pass**, else it will be considered a **Fail**.
+An Input Replay is a recording of the Target Drone's Velocity normalised by `Max Speed`, automatically moving the Target Drone without requiring manual input. The Application will check if the Target Drone is within the boundaries of the Camera Screen. If the Target Drone remains in view of the Camera for the entire duration of the Input Replay, it is deemed as a **Pass**, else it will be considered a **Fail**.
 
-Both Recording and Replaying are possible. Test Cases are stored in the `StreamingAssets/testdata` folder. Test Cases can be manually imported into the folder. However, it is recommended to create a Test Case via the Recording function.
+Both Recording and Replaying are possible. Input Replays are stored in the `StreamingAssets/inputreplay` folder. Input Replays can be manually imported into the folder. However, it is recommended to create an Input Replay via the Recording function.
 
-To save a Recording, input a custom file name or leave blank to auto-generate a new file name. Inputting an existing file name will overwrite the existing Test Case. Press the 'Save' button to start recording, and press the 'Save' button again to stop recording.
+To save a Recording, input a custom file name or leave blank to auto-generate a new file name. Inputting an existing file name will overwrite the existing Input Replay. Press the 'Save' button to start recording, and press the 'Save' button again to stop recording.
 
-All Test Cases found are listed in the Test Case Menu. The 'Play' button next to each Test Case will Load the respective Test Case. Loading another Case while one is running will end the existing Case and start the new Case.
+All Input Replays found are listed in the Input Replay Menu. The 'Play' button next to each Input Replay will Load the respective Input Replay. Loading another Replay while one is running will end the existing Replay and start the new Replay.
 
-The 'Load All' button will successively load each Test Case, displaying the output of each Case whether it is a **Pass** or **Fail**.
+The 'Load All' button will successively load each Input Replay, displaying the output of each Replay whether it is a **Pass** or **Fail**.
 
 ---
 
@@ -196,7 +196,7 @@ All Waypoints found are listed in the Waypoint Menu. The 'Play' button next to e
 
 Enabling the Circle function will allow the Target Drone to orbit around the initial position. The desired **Radius** and **Speed**, as well as **Direction** (Clockwise or Counter-Clockwise) can be changed in the Menu.
 
-> ℹ Note that the Circling function is disabled while a Test Case or a Waypoint is being Loaded.
+> ℹ Note that the Circling function is disabled while an Input Replay or a Waypoint is being Loaded.
 
 ---
 
@@ -204,7 +204,7 @@ Enabling the Circle function will allow the Target Drone to orbit around the ini
 
 Below is a comparison among the 3 methods of automated movement:
 
-| Test Case | Waypoint | Circle |
+| Input Replay | Waypoint | Circle |
 | --- | --- | --- |
 | Saves Velocity | Saves Location and Speed | Cannot Save |
 | Precise Recording | Inaccurate Recording | Cannot Save |
