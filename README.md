@@ -1,6 +1,6 @@
 # drone versus drone
 
-Unity Drone Simulator is an appllcation which allows you to simulate the '**Eagle Concept**', streaming out the Camera feed of the 'Eagle' Drone and receiving inputs to move the 'Eagle' Drone. This project is meant to test the capabilities of a **Computer Vision Model** and **PID Controller Script**.
+Unity Drone Simulator is an application which allows you to simulate the '**Eagle Concept**', streaming out the Camera feed of the 'Eagle' Drone and receiving inputs to move the 'Eagle' Drone. This project is meant to test the capabilities of a **Computer Vision Model** and **PID Controller Script**.
 
 Unity's High Definition Render Pipeline (HDRP) is used in this project to enhance the graphical fidelity, enabling the Simulator to be as similar to reality, thus testing the Computer Vision in near-realistic environments.
 
