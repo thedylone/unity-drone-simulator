@@ -439,6 +439,9 @@ figcaption {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
 }
+.sub-head { font-size: 1.45rem; letter-spacing: -0.015em; margin-top: 0.5rem; }
+.sub-head ~ .sub-head { margin-top: 2.5rem; }
+.sub-lede { margin: 0.4rem 0 1.1rem; color: var(--color-text-muted); max-width: 68ch; }
 .chart-card { background: rgba(255, 255, 255, 0.7); }
 .chart-head {
     display: flex;

@@ -124,7 +124,7 @@
                 <!-- Wide layout -->
                 <svg class="diagram-wide" viewBox="0 0 1000 330" role="img" aria-labelledby="dg-title dg-desc">
                     <title id="dg-title">System architecture</title>
-                    <desc id="dg-desc">Unity simulation, then camera capture with FFmpegOut, then FFmpeg H.264 encode, then an RTSP server, which feeds the external computer vision model and PID controller. The controller sends Vx, Vy commands over ZeroMQ back to the Unity simulation, which moves the Eagle drone.</desc>
+                    <desc id="dg-desc">Unity simulation, then camera capture with FFmpegOut, then FFmpeg H.264 encode, then an RTSP server, which feeds the external YOLOv5 computer vision model and PID controller. The controller sends Vx, Vy commands over ZeroMQ back to the Unity simulation, which moves the Eagle drone.</desc>
                     <defs>
                         <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                             <path d="M0 0 L10 5 L0 10 z" class="arrowhead" />
@@ -162,7 +162,7 @@
                         <rect x="820" y="40" width="160" height="252" rx="12" />
                         <text x="900" y="72" class="n-kicker">External</text>
                         <text x="900" y="112" class="n-title">CV model</text>
-                        <text x="900" y="132" class="n-sub">detects Target</text>
+                        <text x="900" y="132" class="n-sub">YOLOv5 detection</text>
                         <line x1="845" y1="166" x2="955" y2="166" class="divider" />
                         <text x="900" y="206" class="n-title">PID controller</text>
                         <text x="900" y="226" class="n-sub">script</text>
@@ -186,7 +186,7 @@
 
                 <!-- Narrow layout -->
                 <svg class="diagram-tall" viewBox="0 0 340 600" role="img" aria-labelledby="dgt-title">
-                    <title id="dgt-title">System architecture: Unity simulation, camera capture, FFmpeg encode, RTSP server, external CV model and PID controller, and ZeroMQ commands back to Unity.</title>
+                    <title id="dgt-title">System architecture: Unity simulation, camera capture, FFmpeg encode, RTSP server, external YOLOv5 computer vision model and PID controller, and ZeroMQ commands back to Unity.</title>
                     <defs>
                         <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                             <path d="M0 0 L10 5 L0 10 z" class="arrowhead" />
@@ -202,7 +202,7 @@
                         <text x="190" y="311" class="n-title">RTSP server</text><text x="190" y="332" class="n-sub">rtsp-simple-server · :8554/drone</text></g>
                     <g class="node node-ext"><rect x="60" y="376" width="260" height="104" rx="12" />
                         <text x="190" y="400" class="n-kicker">External</text>
-                        <text x="190" y="428" class="n-title">CV model → PID</text><text x="190" y="450" class="n-sub">detects Target, computes command</text></g>
+                        <text x="190" y="428" class="n-title">CV model → PID</text><text x="190" y="450" class="n-sub">YOLOv5 detection → command</text></g>
                     <g class="node"><rect x="60" y="510" width="260" height="62" rx="12" />
                         <text x="190" y="537" class="n-title">ZeroMQ client</text><text x="190" y="558" class="n-sub">Vx, Vy ∈ [−1, 1]</text></g>
                     <path d="M190 70 V 96" class="edge" marker-end="url(#arw2)" />
@@ -226,7 +226,7 @@
                 </li>
                 <li class="card step">
                     <span class="step-k">03 · Detect &amp; control</span>
-                    <p>Any RTSP client can read the stream (VLC and FFplay work too). The CV model consumes it, and the controller script turns detections into velocity commands.</p>
+                    <p>Any RTSP client can read the stream (VLC and FFplay work too). The YOLOv5 model consumes it, and the controller script turns detections into velocity commands.</p>
                 </li>
                 <li class="card step">
                     <span class="step-k">04 · Command</span>
@@ -239,30 +239,46 @@
         <section class="container" id="results">
             <div class="section-head">
                 <p class="eyebrow">Results</p>
-                <h2 class="heading">P versus PID, in the loop</h2>
+                <h2 class="heading">What the simulator surfaced</h2>
                 <p class="section-lede">
-                    The writeup compares a proportional-only controller with a full PID controller following the
-                    Target, once with the Target held still and once with it moving. Both runs use the same sim, stream and command path.
+                    From the writeup: the sim was used to stress the YOLOv5 perception model and to compare
+                    controllers, with the Waypoint method flying the Eagle and the unauthorized (Target) drone through repeatable scenarios.
                 </p>
             </div>
+
+            <h3 class="sub-head">Perception testing</h3>
+            <p class="sub-lede">YOLOv5 sometimes failed to detect the drones correctly, because of busy backgrounds and poor contrast between drone and background.</p>
+            <div class="results results-text">
+                <div class="card step">
+                    <span class="step-k">False positives · lampposts</span>
+                    <p>Waypoint flights near lampposts got them mistaken for drones. A filtering algorithm was added and improved over several rounds, tested against a set of control and treatment scenarios to find the best filter.</p>
+                </div>
+                <div class="card step">
+                    <span class="step-k">False negatives · white sand</span>
+                    <p>Flying white drones over white sand gave the lowest contrast and missed detections. A state motion estimator was tuned in the sim to use trajectory information to guess the drone's position when contrast was low.</p>
+                </div>
+            </div>
+
+            <h3 class="sub-head">Real-time control testing</h3>
+            <p class="sub-lede">The sim showed why the choice between a P and a PID controller matters. Plots show the Target's offset from centre, in pixels.</p>
             <div class="results">
                 <figure class="card chart-card">
                     <div class="chart-head">
-                        <span class="step-k">Stationary target</span>
+                        <span class="step-k">Stationary target · 600 px off-centre</span>
                         <span class="legend"><i class="sw sw-p"></i>P <i class="sw sw-pid"></i>PID</span>
                     </div>
                     <img src="assets/pid-static.webp" width="720" height="217" loading="lazy"
-                         alt="Line chart, stationary target. Both controllers start at 600. P (blue) falls fast, overshoots to about −180, swings back and settles near zero. PID (orange) falls a little more slowly, dips to about −75 and creeps back toward zero over a much longer time." />
-                    <figcaption>P gets there fast but overshoots and rings; PID overshoots less but takes longer to settle.</figcaption>
+                         alt="Line chart of offset in pixels for a stationary target starting 600 pixels off-centre. P (blue) falls fast, overshoots below zero, oscillates, then centres. PID (orange) overshoots less with no oscillation, but takes much longer to reach zero." />
+                    <figcaption>P overshoots and oscillates before centring. PID overshoots less and doesn't oscillate, but takes longer to centre.</figcaption>
                 </figure>
                 <figure class="card chart-card">
                     <div class="chart-head">
-                        <span class="step-k">Moving target</span>
+                        <span class="step-k">Moving target · constant velocity</span>
                         <span class="legend"><i class="sw sw-p"></i>P <i class="sw sw-pid"></i>PID</span>
                     </div>
                     <img src="assets/pid-moving.webp" width="720" height="217" loading="lazy"
-                         alt="Line chart, moving target. P (blue) rises to about 135 then holds a steady band around 90 to 100. PID (orange) climbs to about 250, then steadily falls to around 15 by the end of the run." />
-                    <figcaption>P holds a constant offset of about 100; PID starts further off but keeps closing the gap, ending near 15.</figcaption>
+                         alt="Line chart of offset in pixels for a target starting at centre and moving away at constant velocity. P (blue) levels off at a steady error of about 100 pixels. PID (orange) lets the target pull away further, peaking around 250 pixels, then brings the offset down toward zero." />
+                    <figcaption>P never centres and keeps a steady-state error of 100 px. PID does centre, but first lets the Target pull away 250 px (P: 150 px).</figcaption>
                 </figure>
             </div>
         </section>
@@ -316,12 +332,12 @@
                 <figure class="card media-card">
                     <img src="assets/pov-detections.webp" width="640" height="360" loading="lazy"
                          alt="Top-down view from the Eagle camera over grass, trees and a road, with three small drones each marked by a green box labelled Drone." />
-                    <figcaption>Eagle POV: the CV model boxing every drone in frame.</figcaption>
+                    <figcaption>Eagle POV: YOLOv5 detections on the camera feed.</figcaption>
                 </figure>
                 <figure class="card media-card media-tall">
                     <img src="assets/pov-sand.webp" width="583" height="720" loading="lazy"
                          alt="Top-down view over pale, whitened sand. A tiny white drone near the bottom edge is marked with a green box labelled Drone." />
-                    <figcaption>The hard case: a white drone over whitened sand.</figcaption>
+                    <figcaption>Lowest contrast: a white drone over white sand, where false negatives showed up.</figcaption>
                 </figure>
             </div>
         </section>
