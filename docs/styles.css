@@ -413,26 +413,6 @@ figcaption {
 }
 .feature p { color: var(--color-text-muted); font-size: 0.97rem; }
 
-/* ---------- Gallery ---------- */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-}
-
-.gallery-3 {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    grid-template-rows: auto auto;
-}
-.gallery-3 .media-tall { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; }
-.media-card.media-tall img {
-    flex: 1;
-    min-height: 0;
-    aspect-ratio: auto;
-    object-fit: cover;
-    object-position: center 85%;
-}
-
 /* ---------- Results ---------- */
 .results {
     display: grid;
@@ -442,6 +422,24 @@ figcaption {
 .sub-head { font-size: 1.45rem; letter-spacing: -0.015em; margin-top: 0.5rem; }
 .sub-head ~ .sub-head { margin-top: 2.5rem; }
 .sub-lede { margin: 0.4rem 0 1.1rem; color: var(--color-text-muted); max-width: 68ch; }
+.perception {
+    display: grid;
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+    margin-bottom: 0.5rem;
+}
+.clip-card video { width: 100%; height: auto; background: var(--color-navy-strong); }
+.clip-card .clip-body {
+    display: block;
+    padding: var(--inner-padding-block);
+    font-family: var(--font-sans);
+    font-size: 0.94rem;
+    letter-spacing: 0;
+    color: var(--color-text-muted);
+}
+.clip-text { display: block; }
+.step-shot { margin-top: 0.9rem; max-width: 34rem; }
 .chart-card { background: rgba(255, 255, 255, 0.7); }
 .chart-head {
     display: flex;
@@ -585,9 +583,8 @@ figcaption {
 @media (max-width: 720px) {
     .diagram-wide { display: none; }
     .diagram-tall { display: block; }
-    .gallery, .gallery-3, .steps-grid { grid-template-columns: minmax(0, 1fr); }
-    .gallery-3 .media-tall { grid-column: auto; grid-row: auto; }
-    .media-card.media-tall img { aspect-ratio: 583 / 720; flex: none; }
+    .steps-grid, .perception { grid-template-columns: minmax(0, 1fr); }
+    .clip-card video[height="720"] { max-height: 70vh; width: auto; margin-inline: auto; }
     .hide-sm { display: none; }
 }
 

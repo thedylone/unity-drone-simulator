@@ -248,15 +248,31 @@
 
             <h3 class="sub-head">Perception testing</h3>
             <p class="sub-lede">YOLOv5 sometimes failed to detect the drones correctly, because of busy backgrounds and poor contrast between drone and background.</p>
-            <div class="results results-text">
-                <div class="card step">
-                    <span class="step-k">False positives · lampposts</span>
-                    <p>Waypoint flights near lampposts got them mistaken for drones. A filtering algorithm was added and improved over several rounds, tested against a set of control and treatment scenarios to find the best filter.</p>
-                </div>
-                <div class="card step">
-                    <span class="step-k">False negatives · white sand</span>
-                    <p>Flying white drones over white sand gave the lowest contrast and missed detections. A state motion estimator was tuned in the sim to use trajectory information to guess the drone's position when contrast was low.</p>
-                </div>
+            <div class="perception">
+                <figure class="card clip-card">
+                    <video poster="assets/false-positives-poster.webp" width="640" height="360"
+                           autoplay muted loop playsinline preload="metadata"
+                           aria-label="Eagle camera view over grass, trees and a road. The drone in the field is boxed as Drone, and lampposts along the road are also boxed as Drone.">
+                        <source src="assets/false-positives.webm" type="video/webm" />
+                        <source src="assets/false-positives.mp4" type="video/mp4" />
+                    </video>
+                    <figcaption class="clip-body">
+                        <span class="step-k">False positives · lampposts</span>
+                        <span class="clip-text">Waypoint flights near lampposts got them mistaken for drones. A filtering algorithm was added and improved over several rounds, tested against a set of control and treatment scenarios to find the best filter.</span>
+                    </figcaption>
+                </figure>
+                <figure class="card clip-card">
+                    <video poster="assets/false-negatives-poster.webp" width="583" height="720"
+                           autoplay muted loop playsinline preload="metadata"
+                           aria-label="Eagle camera view over pale sand. A white drone is boxed as Drone over darker sand, but the box disappears while it crosses the white patch.">
+                        <source src="assets/false-negatives.webm" type="video/webm" />
+                        <source src="assets/false-negatives.mp4" type="video/mp4" />
+                    </video>
+                    <figcaption class="clip-body">
+                        <span class="step-k">False negatives · white sand</span>
+                        <span class="clip-text">Flying white drones over white sand gave the lowest contrast and missed detections. A state motion estimator was tuned in the sim to use trajectory information to guess the drone's position when contrast was low.</span>
+                    </figcaption>
+                </figure>
             </div>
 
             <h3 class="sub-head">Real-time control testing</h3>
@@ -317,31 +333,6 @@
             </ul>
         </section>
 
-        <!-- Gallery -->
-        <section class="container" id="gallery">
-            <div class="section-head">
-                <p class="eyebrow">Gallery</p>
-                <h2 class="heading">In the app</h2>
-            </div>
-            <div class="gallery gallery-3">
-                <figure class="card media-card">
-                    <img src="assets/menu.webp" width="1600" height="900" loading="lazy"
-                         alt="The simulator's main menu, with Start, Settings, Fullscreen and Quit buttons and a Quick Glance sidebar of key settings." />
-                    <figcaption>Main menu with the Quick Glance settings sidebar.</figcaption>
-                </figure>
-                <figure class="card media-card">
-                    <img src="assets/pov-detections.webp" width="640" height="360" loading="lazy"
-                         alt="Top-down view from the Eagle camera over grass, trees and a road, with three small drones each marked by a green box labelled Drone." />
-                    <figcaption>Eagle POV: YOLOv5 detections on the camera feed.</figcaption>
-                </figure>
-                <figure class="card media-card media-tall">
-                    <img src="assets/pov-sand.webp" width="583" height="720" loading="lazy"
-                         alt="Top-down view over pale, whitened sand. A tiny white drone near the bottom edge is marked with a green box labelled Drone." />
-                    <figcaption>Lowest contrast: a white drone over white sand, where false negatives showed up.</figcaption>
-                </figure>
-            </div>
-        </section>
-
         <!-- Setup -->
         <section class="container" id="setup">
             <div class="section-head">
@@ -364,6 +355,11 @@
                     <li>
                         <h3>Configure settings</h3>
                         <p>In <strong>Settings</strong>, set the RTSP output path (port + URL) and the ZeroMQ listener path. The listener path must be the controller script's output path.</p>
+                        <figure class="card media-card step-shot">
+                            <img src="assets/menu.webp" width="1600" height="900" loading="lazy"
+                                 alt="The simulator's main menu, with Start, Settings, Fullscreen and Quit buttons and a Quick Glance sidebar of key settings." />
+                            <figcaption>Main menu with the Quick Glance settings sidebar.</figcaption>
+                        </figure>
                     </li>
                     <li>
                         <h3>Press Start</h3>
