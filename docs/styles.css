@@ -7,16 +7,9 @@
 body { overflow-x: hidden; }
 
 /* Media inside kit frames */
-/* Keep intrinsic aspect ratios: the kit sets width: 100% on figure images but
-   not height, so the height="" attribute would otherwise stretch them. */
-.pk-figure img { height: auto; }
 .pk-frame { overflow: hidden; }
 .pk-frame video { width: 100%; height: auto; }
 .pk-hero-media img { aspect-ratio: 16 / 9; object-fit: cover; }
-/* Kit v1 workaround: `.pk-figure { margin: 0 }` comes after `.pk-hero-media`
-   in project-kit.css and cancels its 2.5rem top margin. This restores the
-   kit's own value only; remove once the kit fixes the order. */
-.pk-figure.pk-hero-media { margin-top: 2.5rem; }
 
 /* 01 — Why */
 .split {

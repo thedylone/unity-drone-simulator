@@ -1,5 +1,5 @@
 /*
- * project-kit.css — v1.1
+ * project-kit.css — v1.2
  * Shared style for every project page under projects.thedylone.com/<repo>/.
  * Copy this file verbatim into each project; do not edit it per project.
  * Page-specific styles go in a separate file loaded AFTER this one and must
@@ -65,6 +65,7 @@ p + p { margin-top: 1rem; }
 a { color: var(--color-navy); text-decoration-color: var(--color-hairline-strong); text-underline-offset: 0.2em; }
 a:hover { color: var(--color-gold); text-decoration-color: var(--color-gold); }
 img, svg, canvas, video { max-width: 100%; display: block; }
+img, video { height: auto; }
 ul, ol { margin: 0; padding-left: 1.25rem; }
 li + li { margin-top: 0.35rem; }
 ::selection { background: var(--color-gold-soft); color: var(--color-navy-strong); }
@@ -149,7 +150,7 @@ li + li { margin-top: 0.35rem; }
 .pk-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 .pk-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.25rem; padding: 0; list-style: none; }
 .pk-tags li + li { margin: 0; }
-.pk-hero-media { margin-top: 2.5rem; }
+.pk-hero-media, .pk-figure.pk-hero-media { margin-top: 2.5rem; }
 
 /* ---------- Section headings ---------- */
 .pk-h2 { font-size: clamp(1.8rem, 3.2vw, 2.4rem); letter-spacing: -0.02em; }
