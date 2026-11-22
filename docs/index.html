@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unity Drone Simulator</title>
+    <meta name="description" content="A Unity HDRP drone digital twin used as a testbed for computer vision and PID control, streaming its camera over RTSP via FFmpeg and taking control inputs over ZeroMQ." />
+    <meta property="og:title" content="Unity Drone Simulator" />
+    <meta property="og:description" content="A Unity drone digital twin: a testbed for computer vision and PID control, with low-latency RTSP video out and ZeroMQ control in." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://projects.thedylone.com/unity-drone-simulator/" />
+    <meta property="og:image" content="https://projects.thedylone.com/unity-drone-simulator/gallery-cover.webp" />
+    <meta name="theme-color" content="#f9f9f6" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="nav">
+        <div class="nav-inner">
+            <a class="brand" href="https://projects.thedylone.com/">thedylone <span>/ projects</span></a>
+            <nav aria-label="Page sections">
+                <ul class="nav-links">
+                    <li class="hide-sm"><a href="#why">Why</a></li>
+                    <li class="hide-sm"><a href="#architecture">Architecture</a></li>
+                    <li class="hide-sm"><a href="#features">Features</a></li>
+                    <li><a href="#setup">Setup</a></li>
+                    <li><a href="https://github.com/thedylone/unity-drone-simulator">GitHub ↗</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- Hero -->
+        <section class="container hero">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Project · DSTA internship</p>
+                    <h1 class="heading-xl">Unity Drone <em>Simulator</em></h1>
+                    <p class="lede">
+                        A drone digital twin built in Unity and C#, used as a testbed for a
+                        <strong>computer vision model</strong> and a <strong>PID controller script</strong>.
+                        The simulated camera feed is encoded with FFmpeg and streamed out over RTSP;
+                        control inputs come back in over ZeroMQ.
+                    </p>
+                    <ul class="tags" aria-label="Stack">
+                        <li>C#</li><li>Unity HDRP</li><li>FFmpeg</li><li>RTSP</li><li>ZeroMQ</li><li>Computer vision</li><li>PID control</li>
+                    </ul>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="https://github.com/thedylone/unity-drone-simulator">View the repo</a>
+                        <a class="btn" href="https://medium.com/d-classified/unity-as-a-testbed-for-autonomy-development-1e326323c68d">Read the writeup ↗</a>
+                    </div>
+                </div>
+                <figure class="hero-media card">
+                    <img src="assets/eagle-view.webp" width="1600" height="900"
+                         alt="Simulated scene: a white quadcopter hovers above a grassy, tree-lined terrain while a second, smaller drone flies below it." />
+                    <figcaption>The Eagle drone above the Target drone in the HDRP scene.</figcaption>
+                </figure>
+            </div>
+
+            <dl class="stats">
+                <div class="stat"><dt>Eagle altitude</dt><dd>55 m</dd></div>
+                <div class="stat"><dt>Separation</dt><dd>1–50 m</dd></div>
+                <div class="stat"><dt>Default stream</dt><dd>1080p · 30 fps</dd></div>
+                <div class="stat"><dt>RTSP default</dt><dd>:8554/drone</dd></div>
+            </dl>
+        </section>
+
+        <!-- Why -->
+        <section class="container" id="why">
+            <div class="section-head">
+                <p class="eyebrow">Why</p>
+                <h2 class="heading">A testbed for autonomy development</h2>
+            </div>
+            <div class="split">
+                <div class="prose">
+                    <p>
+                        The simulator exists to exercise a vision-and-control loop without flying real hardware.
+                        It models the <strong>Eagle Concept</strong>: an Eagle drone flies above a Target drone with its
+                        camera pointing straight down. A computer vision model watches that feed, detects the Target,
+                        and a controller script sends commands back to move the Eagle so it keeps following.
+                    </p>
+                    <p>
+                        The Eagle's height is fixed at 55&nbsp;m; the <em>separation distance</em> sets the Target's height
+                        below it (a 20&nbsp;m separation puts the Target at 35&nbsp;m). You fly the Target with WASD, or let
+                        a scripted path move it, and watch whether the Eagle keeps up.
+                    </p>
+                    <p>
+                        Unity's High Definition Render Pipeline is used so the scene looks as close to reality as
+                        possible, testing the vision model in near-realistic environments. Some terrain is even
+                        deliberately whitened to make a white drone harder to pick out.
+                    </p>
+                </div>
+                <figure class="card media-card">
+                    <video poster="assets/eagle-concept-poster.webp"
+                           width="852" height="480" autoplay muted loop playsinline preload="metadata"
+                           aria-label="Animation of the Eagle Concept: the Eagle drone at 55 m, the Target drone below it, and the separation distance between them.">
+                        <source src="assets/eagle-concept.webm" type="video/webm" />
+                        <source src="assets/eagle-concept.mp4" type="video/mp4" />
+                    </video>
+                    <figcaption>Eagle at 55&nbsp;m, Target below: the gap is the separation distance.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Architecture -->
+        <section class="container" id="architecture">
+            <div class="section-head">
+                <p class="eyebrow">Architecture</p>
+                <h2 class="heading">Video out, commands in</h2>
+                <p class="section-lede">
+                    The Unity app is one half of a closed loop. Frames leave as an RTSP stream; velocity commands
+                    return over ZeroMQ. The vision model and controller run outside Unity, on the same machine or another one on the network.
+                </p>
+            </div>
+
+            <figure class="card diagram">
+                <!-- Wide layout -->
+                <svg class="diagram-wide" viewBox="0 0 1000 330" role="img" aria-labelledby="dg-title dg-desc">
+                    <title id="dg-title">System architecture</title>
+                    <desc id="dg-desc">Unity simulation, then camera capture with FFmpegOut, then FFmpeg H.264 encode, then an RTSP server, which feeds the external computer vision model and PID controller. The controller sends Vx, Vy commands over ZeroMQ back to the Unity simulation, which moves the Eagle drone.</desc>
+                    <defs>
+                        <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                            <path d="M0 0 L10 5 L0 10 z" class="arrowhead" />
+                        </marker>
+                    </defs>
+
+                    <text x="20" y="22" class="lane">Video path · RTSP</text>
+                    <text x="20" y="318" class="lane">Control path · ZeroMQ</text>
+
+                    <g class="node node-unity">
+                        <rect x="20" y="40" width="170" height="92" rx="12" />
+                        <text x="105" y="76" class="n-title">Unity sim</text>
+                        <text x="105" y="98" class="n-sub">HDRP · C#</text>
+                        <text x="105" y="116" class="n-sub">Eagle camera</text>
+                    </g>
+                    <g class="node">
+                        <rect x="220" y="40" width="170" height="92" rx="12" />
+                        <text x="305" y="76" class="n-title">Camera capture</text>
+                        <text x="305" y="98" class="n-sub">FFmpegOut</text>
+                        <text x="305" y="116" class="n-sub">optional delay queue</text>
+                    </g>
+                    <g class="node">
+                        <rect x="420" y="40" width="170" height="92" rx="12" />
+                        <text x="505" y="76" class="n-title">FFmpeg encode</text>
+                        <text x="505" y="98" class="n-sub">H.264 (NVIDIA)</text>
+                        <text x="505" y="116" class="n-sub">RTSP over UDP</text>
+                    </g>
+                    <g class="node">
+                        <rect x="620" y="40" width="170" height="92" rx="12" />
+                        <text x="705" y="76" class="n-title">RTSP server</text>
+                        <text x="705" y="98" class="n-sub">rtsp-simple-server</text>
+                        <text x="705" y="116" class="n-sub">:8554/drone</text>
+                    </g>
+                    <g class="node node-ext">
+                        <rect x="820" y="40" width="160" height="252" rx="12" />
+                        <text x="900" y="72" class="n-kicker">External</text>
+                        <text x="900" y="112" class="n-title">CV model</text>
+                        <text x="900" y="132" class="n-sub">detects Target</text>
+                        <line x1="845" y1="166" x2="955" y2="166" class="divider" />
+                        <text x="900" y="206" class="n-title">PID controller</text>
+                        <text x="900" y="226" class="n-sub">script</text>
+                        <path d="M900 142 V 186" class="edge" marker-end="url(#arw)" />
+                    </g>
+                    <g class="node">
+                        <rect x="420" y="214" width="170" height="78" rx="12" />
+                        <text x="505" y="248" class="n-title">ZeroMQ client</text>
+                        <text x="505" y="270" class="n-sub">listener path</text>
+                    </g>
+
+                    <path d="M190 86 H 216" class="edge" marker-end="url(#arw)" />
+                    <path d="M390 86 H 416" class="edge" marker-end="url(#arw)" />
+                    <path d="M590 86 H 616" class="edge" marker-end="url(#arw)" />
+                    <path d="M790 86 H 816" class="edge" marker-end="url(#arw)" />
+                    <path d="M820 253 H 594" class="edge edge-ctrl" marker-end="url(#arw)" />
+                    <text x="705" y="243" class="e-label">Vx, Vy ∈ [−1, 1]</text>
+                    <path d="M420 253 H 105 V 136" class="edge edge-ctrl" marker-end="url(#arw)" />
+                    <text x="262" y="243" class="e-label">moves Eagle drone</text>
+                </svg>
+
+                <!-- Narrow layout -->
+                <svg class="diagram-tall" viewBox="0 0 340 600" role="img" aria-labelledby="dgt-title">
+                    <title id="dgt-title">System architecture: Unity simulation, camera capture, FFmpeg encode, RTSP server, external CV model and PID controller, and ZeroMQ commands back to Unity.</title>
+                    <defs>
+                        <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                            <path d="M0 0 L10 5 L0 10 z" class="arrowhead" />
+                        </marker>
+                    </defs>
+                    <g class="node node-unity"><rect x="60" y="8" width="260" height="62" rx="12" />
+                        <text x="190" y="35" class="n-title">Unity sim</text><text x="190" y="56" class="n-sub">HDRP · C# · Eagle camera</text></g>
+                    <g class="node"><rect x="60" y="100" width="260" height="62" rx="12" />
+                        <text x="190" y="127" class="n-title">Camera capture</text><text x="190" y="148" class="n-sub">FFmpegOut · delay queue</text></g>
+                    <g class="node"><rect x="60" y="192" width="260" height="62" rx="12" />
+                        <text x="190" y="219" class="n-title">FFmpeg encode</text><text x="190" y="240" class="n-sub">H.264 (NVIDIA) · RTSP/UDP</text></g>
+                    <g class="node"><rect x="60" y="284" width="260" height="62" rx="12" />
+                        <text x="190" y="311" class="n-title">RTSP server</text><text x="190" y="332" class="n-sub">rtsp-simple-server · :8554/drone</text></g>
+                    <g class="node node-ext"><rect x="60" y="376" width="260" height="104" rx="12" />
+                        <text x="190" y="400" class="n-kicker">External</text>
+                        <text x="190" y="428" class="n-title">CV model → PID</text><text x="190" y="450" class="n-sub">detects Target, computes command</text></g>
+                    <g class="node"><rect x="60" y="510" width="260" height="62" rx="12" />
+                        <text x="190" y="537" class="n-title">ZeroMQ client</text><text x="190" y="558" class="n-sub">Vx, Vy ∈ [−1, 1]</text></g>
+                    <path d="M190 70 V 96" class="edge" marker-end="url(#arw2)" />
+                    <path d="M190 162 V 188" class="edge" marker-end="url(#arw2)" />
+                    <path d="M190 254 V 280" class="edge" marker-end="url(#arw2)" />
+                    <path d="M190 346 V 372" class="edge" marker-end="url(#arw2)" />
+                    <path d="M190 480 V 506" class="edge edge-ctrl" marker-end="url(#arw2)" />
+                    <path d="M60 541 H 24 V 39 H 56" class="edge edge-ctrl" marker-end="url(#arw2)" />
+                    <text x="16" y="300" class="e-label" transform="rotate(-90 16 300)">moves Eagle drone</text>
+                </svg>
+            </figure>
+
+            <ol class="steps-grid">
+                <li class="card step">
+                    <span class="step-k">01 · Capture</span>
+                    <p>A modified <a href="https://github.com/keijiro/FFmpegOut">FFmpegOut</a> grabs the Eagle camera. An optional delay holds frames in a queue until it exceeds <code>frameRate × delay / 1000</code>.</p>
+                </li>
+                <li class="card step">
+                    <span class="step-k">02 · Encode &amp; stream</span>
+                    <p>FFmpeg publishes with <code>-f rtsp -rtsp_transport udp -muxdelay 0.1</code>. The H.264 NVIDIA preset is recommended for minimal latency at high resolution and frame rate.</p>
+                </li>
+                <li class="card step">
+                    <span class="step-k">03 · Detect &amp; control</span>
+                    <p>Any RTSP client can read the stream (VLC and FFplay work too). The CV model consumes it, and the controller script turns detections into velocity commands.</p>
+                </li>
+                <li class="card step">
+                    <span class="step-k">04 · Command</span>
+                    <p>The controller sends <code>Vx,Vy</code> over <a href="https://zeromq.org/">ZeroMQ</a>, which mirrors how it talks to the DJI app. Unity scales the values by the Eagle's max speed.</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Features -->
+        <section class="container" id="features">
+            <div class="section-head">
+                <p class="eyebrow">Features</p>
+                <h2 class="heading">Built for repeatable tests</h2>
+            </div>
+            <ul class="feature-grid">
+                <li class="card feature">
+                    <h3>Near-realistic scenes</h3>
+                    <p>HDRP terrain, foliage and roads from the Unity Terrain demo and EasyRoads3D, plus sandy textures chosen to make detection harder.</p>
+                </li>
+                <li class="card feature">
+                    <h3>Configurable RTSP stream</h3>
+                    <p>Port, URL, width, height and frame rate are all set in the menu. The app lists your device's IP addresses so another machine on the network can connect.</p>
+                </li>
+                <li class="card feature">
+                    <h3>Latency injection</h3>
+                    <p>Add a fixed delay to the video stream or to incoming ZeroMQ commands. An optional on-screen timestamp, burned into the stream, helps measure end-to-end latency.</p>
+                </li>
+                <li class="card feature">
+                    <h3>Input Replay with pass/fail</h3>
+                    <p>Record the Target's normalised velocity and replay it. A run passes only if the Target stays in the camera frame throughout. "Load All" runs every replay in turn.</p>
+                </li>
+                <li class="card feature">
+                    <h3>Waypoints &amp; circling</h3>
+                    <p>Readable waypoint files give x, y and speed. The Circle mode orbits the start point with a set radius, speed and direction.</p>
+                </li>
+                <li class="card feature">
+                    <h3>Swappable target drone</h3>
+                    <p>DJI Mavic and Phantom models are included. Import <code>.obj</code> or glTF models at runtime from <code>StreamingAssets</code> and recolour them with a colour picker.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Gallery -->
+        <section class="container" id="gallery">
+            <div class="section-head">
+                <p class="eyebrow">Gallery</p>
+                <h2 class="heading">In the app</h2>
+            </div>
+            <div class="gallery">
+                <figure class="card media-card">
+                    <img src="assets/menu.webp" width="1600" height="900" loading="lazy"
+                         alt="The simulator's main menu, with Start, Settings, Fullscreen and Quit buttons and a Quick Glance sidebar of key settings." />
+                    <figcaption>Main menu with the Quick Glance settings sidebar.</figcaption>
+                </figure>
+                <!--
+                    TODO(owner): add a screenshot or short GIF of the Eagle's downward-facing camera view,
+                    ideally as received over RTSP (e.g. in VLC/FFplay) with the CV model's detection box drawn.
+                    Save it as docs/assets/eagle-pov.webp (16:9), then replace this <div> with:
+                    <figure class="card media-card">
+                        <img src="assets/eagle-pov.webp" width="1600" height="900" loading="lazy" alt="..." />
+                        <figcaption>...</figcaption>
+                    </figure>
+                -->
+                <div class="card media-card todo-slot" role="img" aria-label="Placeholder for a screenshot of the Eagle drone's downward camera view">
+                    <div class="todo-inner">
+                        <span class="todo-tag">TODO</span>
+                        <p class="todo-title">Eagle POV screenshot</p>
+                        <p class="todo-note">Downward camera feed as received over RTSP, ideally with a detection box. Drop it in at <code>docs/assets/eagle-pov.webp</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setup -->
+        <section class="container" id="setup">
+            <div class="section-head">
+                <p class="eyebrow">Setup</p>
+                <h2 class="heading">Run the loop</h2>
+                <p class="section-lede">Condensed from the <a href="https://github.com/thedylone/unity-drone-simulator#quickstart">README quickstart</a>.</p>
+            </div>
+            <div class="setup">
+                <ol class="setup-steps">
+                    <li>
+                        <h3>Get the app</h3>
+                        <p>Clone the repository and open <code>unity/drone</code> in <strong>Unity 2020.3.30f1</strong>. Run it in the Editor, or build it yourself. An NVIDIA GPU is recommended for the H.264 NVIDIA preset.</p>
+                        <pre><code>git clone https://github.com/thedylone/unity-drone-simulator.git</code></pre>
+                    </li>
+                    <li>
+                        <h3>Start an RTSP server first</h3>
+                        <p>Use the bundled <a href="https://github.com/thedylone/unity-drone-simulator/tree/main/rtsp%20simple%20server">rtsp-simple-server</a>. Its <code>rtspAddress</code> in <code>rtsp-simple-server.yml</code> must match the app's port (default <code>:8554</code>).</p>
+                        <p class="warn"><span>Warning</span> Starting the stream with no server running crashes the app.</p>
+                    </li>
+                    <li>
+                        <h3>Configure settings</h3>
+                        <p>In <strong>Settings</strong>, set the RTSP output path (port + URL) and the ZeroMQ listener path. The listener path must be the controller script's output path.</p>
+                    </li>
+                    <li>
+                        <h3>Press Start</h3>
+                        <p>The scene loads, and RTSP and ZeroMQ start on their own. The server should show a session publishing to your path.</p>
+                    </li>
+                    <li>
+                        <h3>Run the CV model and controller</h3>
+                        <p>Point the vision model at the stream. If it runs on another device, check the firewall allows the connection.</p>
+                        <pre><code>rtsp://&lt;ip-address&gt;:8554/drone</code></pre>
+                        <p>Fly the Target with <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> and the Eagle should follow. Press <kbd>Esc</kbd> to open the Input Replay, Waypoint and Circle menus.</p>
+                    </li>
+                </ol>
+                <aside class="card side-card">
+                    <p class="eyebrow">Further reading</p>
+                    <ul class="link-list">
+                        <li><a href="https://github.com/thedylone/unity-drone-simulator#readme">README: full settings &amp; runtime guide</a></li>
+                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/FFmpegOut.md">FFmpegOut modifications</a></li>
+                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/ZeroMQ.md">ZeroMQ client</a></li>
+                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/rtsp-simple-server.md">rtsp-simple-server config</a></li>
+                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/Assets.md">Third-party assets</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Writeup -->
+        <section class="container">
+            <a class="card writeup" href="https://medium.com/d-classified/unity-as-a-testbed-for-autonomy-development-1e326323c68d">
+                <span class="eyebrow">Writeup · D-Classified on Medium</span>
+                <span class="writeup-title">Unity as a testbed for autonomy development</span>
+                <span class="writeup-cta">Read the article ↗</span>
+            </a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>Unity Drone Simulator · MIT License</span>
+            <span class="footer-links">
+                <a href="https://projects.thedylone.com/">← All projects</a>
+                <a href="https://github.com/thedylone/unity-drone-simulator">GitHub</a>
+            </span>
+        </div>
+    </footer>
+</body>
+</html>
