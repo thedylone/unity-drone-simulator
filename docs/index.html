@@ -1,128 +1,97 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Unity Drone Simulator</title>
-    <meta name="description" content="A Unity HDRP drone digital twin used as a testbed for computer vision and PID control, streaming its camera over RTSP via FFmpeg and taking control inputs over ZeroMQ." />
-    <meta property="og:title" content="Unity Drone Simulator" />
-    <meta property="og:description" content="A Unity drone digital twin: a testbed for computer vision and PID control, with low-latency RTSP video out and ZeroMQ control in." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://projects.thedylone.com/unity-drone-simulator/" />
-    <meta property="og:image" content="https://projects.thedylone.com/unity-drone-simulator/gallery-cover.webp" />
-    <meta name="theme-color" content="#f9f9f6" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unity Drone Simulator | Dylan Chua</title>
+  <meta name="description" content="A Unity drone digital twin used as a testbed for YOLOv5 perception and PID control, streaming its camera over RTSP via FFmpeg and taking commands over ZeroMQ." />
+  <meta name="theme-color" content="#f9f9f6" />
+  <meta property="og:title" content="Unity Drone Simulator" />
+  <meta property="og:description" content="A Unity drone digital twin: a testbed for computer vision and PID control, with low-latency RTSP video out and ZeroMQ control in." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://projects.thedylone.com/unity-drone-simulator/" />
+  <meta property="og:image" content="https://projects.thedylone.com/unity-drone-simulator/gallery-cover.webp" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./project-kit.css" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+  <header class="pk-header">
+    <div class="pk-header-inner">
+      <a class="pk-brand" href="https://projects.thedylone.com/">Dylan Chua</a>
+      <ul class="pk-nav">
+        <li><a href="https://projects.thedylone.com/">Projects</a></li>
+        <li><a href="https://github.com/thedylone/unity-drone-simulator" target="_blank" rel="noreferrer">Source</a></li>
+      </ul>
+    </div>
+  </header>
 
-    <header class="nav">
-        <div class="nav-inner">
-            <a class="brand" href="https://projects.thedylone.com/">thedylone <span>/ projects</span></a>
-            <nav aria-label="Page sections">
-                <ul class="nav-links">
-                    <li class="hide-sm"><a href="#why">Why</a></li>
-                    <li class="hide-sm"><a href="#architecture">Architecture</a></li>
-                    <li class="hide-sm"><a href="#results">Results</a></li>
-                    <li class="hide-sm"><a href="#features">Features</a></li>
-                    <li><a href="#setup">Setup</a></li>
-                    <li><a href="https://github.com/thedylone/unity-drone-simulator">GitHub ↗</a></li>
-                </ul>
-            </nav>
+  <main class="pk-main">
+    <section class="pk-hero pk-container">
+      <p class="pk-eyebrow">Project · Simulation</p>
+      <h1 class="pk-title">Unity Drone Simulator</h1>
+      <p class="pk-lede">A drone digital twin built in Unity and C# during an internship at DSTA, used as a testbed for a YOLOv5 computer vision model and a PID controller. The simulated camera feed is encoded with FFmpeg and streamed out over RTSP; control commands come back in over ZeroMQ.</p>
+      <div class="pk-actions">
+        <a class="pk-btn" href="https://medium.com/d-classified/unity-as-a-testbed-for-autonomy-development-1e326323c68d" target="_blank" rel="noreferrer">Read the writeup <span aria-hidden="true">↗</span></a>
+        <a class="pk-btn pk-btn-secondary" href="https://github.com/thedylone/unity-drone-simulator" target="_blank" rel="noreferrer">View code <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="pk-tags">
+        <li class="pk-tag">C#</li>
+        <li class="pk-tag">Unity</li>
+        <li class="pk-tag">HDRP</li>
+        <li class="pk-tag">FFmpeg</li>
+        <li class="pk-tag">RTSP</li>
+        <li class="pk-tag">ZeroMQ</li>
+        <li class="pk-tag">YOLOv5</li>
+      </ul>
+      <figure class="pk-figure pk-hero-media">
+        <img src="assets/eagle-view.webp" width="1600" height="900"
+             alt="Simulated scene: a white quadcopter hovers above a grassy, tree-lined terrain while a second, smaller drone flies below it." />
+        <figcaption><b>HDRP scene</b>The Eagle drone above the Target drone.</figcaption>
+      </figure>
+    </section>
+
+    <section id="why" class="pk-section">
+      <div class="pk-container">
+        <p class="pk-eyebrow">01 — Why</p>
+        <h2 class="pk-h2">A testbed for autonomy development</h2>
+        <div class="split">
+          <div class="pk-prose">
+            <p>The simulator exists to exercise a vision-and-control loop without flying real hardware. It models the <strong>Eagle Concept</strong>: an Eagle drone flies above a Target drone with its camera pointing straight down. A computer vision model watches that feed, detects the Target, and a controller script sends commands back to move the Eagle so it keeps following.</p>
+            <p>The Eagle's height is fixed at 55&nbsp;m; the <em>separation distance</em> sets the Target's height below it (a 20&nbsp;m separation puts the Target at 35&nbsp;m). You fly the Target with WASD, or let a scripted path move it, and watch whether the Eagle keeps up.</p>
+            <p>Unity's High Definition Render Pipeline is used so the scene looks as close to reality as possible, testing the vision model in near-realistic environments. Some terrain is even deliberately whitened to make a white drone harder to pick out.</p>
+          </div>
+          <figure class="pk-figure">
+            <div class="pk-frame">
+              <video poster="assets/eagle-concept-poster.webp" width="852" height="480" autoplay muted loop playsinline preload="metadata"
+                     aria-label="Animation of the Eagle Concept: the Eagle drone at 55 m, the Target drone below it, and the separation distance between them.">
+                <source src="assets/eagle-concept.webm" type="video/webm" />
+                <source src="assets/eagle-concept.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption><b>Eagle Concept</b>Eagle at 55&nbsp;m, Target below: the gap is the separation distance.</figcaption>
+          </figure>
         </div>
-    </header>
+        <dl class="stats">
+          <div class="pk-stat"><dt class="pk-label">Eagle altitude</dt><dd class="pk-stat-value">55 m</dd></div>
+          <div class="pk-stat"><dt class="pk-label">Separation</dt><dd class="pk-stat-value">1–50 m</dd></div>
+          <div class="pk-stat"><dt class="pk-label">Default stream</dt><dd class="pk-stat-value">1080p · 30 fps</dd></div>
+          <div class="pk-stat"><dt class="pk-label">RTSP default</dt><dd class="pk-stat-value">:8554/drone</dd></div>
+        </dl>
+      </div>
+    </section>
 
-    <main id="main">
-        <!-- Hero -->
-        <section class="container hero">
-            <div class="hero-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">Project · DSTA internship</p>
-                    <h1 class="heading-xl">Unity Drone <em>Simulator</em></h1>
-                    <p class="lede">
-                        A drone digital twin built in Unity and C#, used as a testbed for a
-                        <strong>computer vision model</strong> and a <strong>PID controller script</strong>.
-                        The simulated camera feed is encoded with FFmpeg and streamed out over RTSP;
-                        control inputs come back in over ZeroMQ.
-                    </p>
-                    <ul class="tags" aria-label="Stack">
-                        <li>C#</li><li>Unity HDRP</li><li>FFmpeg</li><li>RTSP</li><li>ZeroMQ</li><li>Computer vision</li><li>PID control</li>
-                    </ul>
-                    <div class="actions">
-                        <a class="btn btn-primary" href="https://github.com/thedylone/unity-drone-simulator">View the repo</a>
-                        <a class="btn" href="https://medium.com/d-classified/unity-as-a-testbed-for-autonomy-development-1e326323c68d">Read the writeup ↗</a>
-                    </div>
-                </div>
-                <figure class="hero-media card">
-                    <img src="assets/eagle-view.webp" width="1600" height="900"
-                         alt="Simulated scene: a white quadcopter hovers above a grassy, tree-lined terrain while a second, smaller drone flies below it." />
-                    <figcaption>The Eagle drone above the Target drone in the HDRP scene.</figcaption>
-                </figure>
-            </div>
-
-            <dl class="stats">
-                <div class="stat"><dt>Eagle altitude</dt><dd>55 m</dd></div>
-                <div class="stat"><dt>Separation</dt><dd>1–50 m</dd></div>
-                <div class="stat"><dt>Default stream</dt><dd>1080p · 30 fps</dd></div>
-                <div class="stat"><dt>RTSP default</dt><dd>:8554/drone</dd></div>
-            </dl>
-        </section>
-
-        <!-- Why -->
-        <section class="container" id="why">
-            <div class="section-head">
-                <p class="eyebrow">Why</p>
-                <h2 class="heading">A testbed for autonomy development</h2>
-            </div>
-            <div class="split">
-                <div class="prose">
-                    <p>
-                        The simulator exists to exercise a vision-and-control loop without flying real hardware.
-                        It models the <strong>Eagle Concept</strong>: an Eagle drone flies above a Target drone with its
-                        camera pointing straight down. A computer vision model watches that feed, detects the Target,
-                        and a controller script sends commands back to move the Eagle so it keeps following.
-                    </p>
-                    <p>
-                        The Eagle's height is fixed at 55&nbsp;m; the <em>separation distance</em> sets the Target's height
-                        below it (a 20&nbsp;m separation puts the Target at 35&nbsp;m). You fly the Target with WASD, or let
-                        a scripted path move it, and watch whether the Eagle keeps up.
-                    </p>
-                    <p>
-                        Unity's High Definition Render Pipeline is used so the scene looks as close to reality as
-                        possible, testing the vision model in near-realistic environments. Some terrain is even
-                        deliberately whitened to make a white drone harder to pick out.
-                    </p>
-                </div>
-                <figure class="card media-card">
-                    <video poster="assets/eagle-concept-poster.webp"
-                           width="852" height="480" autoplay muted loop playsinline preload="metadata"
-                           aria-label="Animation of the Eagle Concept: the Eagle drone at 55 m, the Target drone below it, and the separation distance between them.">
-                        <source src="assets/eagle-concept.webm" type="video/webm" />
-                        <source src="assets/eagle-concept.mp4" type="video/mp4" />
-                    </video>
-                    <figcaption>Eagle at 55&nbsp;m, Target below: the gap is the separation distance.</figcaption>
-                </figure>
-            </div>
-        </section>
-
-        <!-- Architecture -->
-        <section class="container" id="architecture">
-            <div class="section-head">
-                <p class="eyebrow">Architecture</p>
-                <h2 class="heading">Video out, commands in</h2>
-                <p class="section-lede">
-                    The Unity app is one half of a closed loop. Frames leave as an RTSP stream; velocity commands
-                    return over ZeroMQ. The vision model and controller run outside Unity, on the same machine or another one on the network.
-                </p>
-            </div>
-
-            <figure class="card diagram">
-                <!-- Wide layout -->
-                <svg class="diagram-wide" viewBox="0 0 1000 330" role="img" aria-labelledby="dg-title dg-desc">
+    <section id="architecture" class="pk-section">
+      <div class="pk-container">
+        <p class="pk-eyebrow">02 — Architecture</p>
+        <h2 class="pk-h2">Video out, commands in</h2>
+        <p class="pk-prose pk-muted">The Unity app is one half of a closed loop. Frames leave as an RTSP stream; velocity commands return over ZeroMQ. The vision model and controller run outside Unity, on the same machine or another one on the network.</p>
+        <figure class="pk-figure">
+          <div class="pk-frame diagram">
+            <svg class="diagram-wide" viewBox="0 0 1000 330" role="img" aria-labelledby="dg-title dg-desc">
                     <title id="dg-title">System architecture</title>
                     <desc id="dg-desc">Unity simulation, then camera capture with FFmpegOut, then FFmpeg H.264 encode, then an RTSP server, which feeds the external YOLOv5 computer vision model and PID controller. The controller sends Vx, Vy commands over ZeroMQ back to the Unity simulation, which moves the Eagle drone.</desc>
                     <defs>
@@ -213,196 +182,183 @@
                     <path d="M60 541 H 24 V 39 H 56" class="edge edge-ctrl" marker-end="url(#arw2)" />
                     <text x="16" y="300" class="e-label" transform="rotate(-90 16 300)">moves Eagle drone</text>
                 </svg>
-            </figure>
+          </div>
+          <figcaption><b>Loop</b>Solid lines carry video; dashed lines carry commands back to the sim.</figcaption>
+        </figure>
+        <ol class="pk-grid steps">
+          <li class="pk-card">
+            <p class="pk-label">01 · Capture</p>
+            <p>A modified <a href="https://github.com/keijiro/FFmpegOut">FFmpegOut</a> grabs the Eagle camera. An optional delay holds frames in a queue until it exceeds <code>frameRate × delay / 1000</code>.</p>
+          </li>
+          <li class="pk-card">
+            <p class="pk-label">02 · Encode and stream</p>
+            <p>FFmpeg publishes with <code>-f rtsp -rtsp_transport udp -muxdelay 0.1</code>. The H.264 NVIDIA preset is recommended for minimal latency at high resolution and frame rate.</p>
+          </li>
+          <li class="pk-card">
+            <p class="pk-label">03 · Detect and control</p>
+            <p>Any RTSP client can read the stream (VLC and FFplay work too). The YOLOv5 model consumes it, and the controller script turns detections into velocity commands.</p>
+          </li>
+          <li class="pk-card">
+            <p class="pk-label">04 · Command</p>
+            <p>The controller sends <code>Vx,Vy</code> over <a href="https://zeromq.org/">ZeroMQ</a>, which mirrors how it talks to the DJI app. Unity scales the values by the Eagle's max speed.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-            <ol class="steps-grid">
-                <li class="card step">
-                    <span class="step-k">01 · Capture</span>
-                    <p>A modified <a href="https://github.com/keijiro/FFmpegOut">FFmpegOut</a> grabs the Eagle camera. An optional delay holds frames in a queue until it exceeds <code>frameRate × delay / 1000</code>.</p>
-                </li>
-                <li class="card step">
-                    <span class="step-k">02 · Encode &amp; stream</span>
-                    <p>FFmpeg publishes with <code>-f rtsp -rtsp_transport udp -muxdelay 0.1</code>. The H.264 NVIDIA preset is recommended for minimal latency at high resolution and frame rate.</p>
-                </li>
-                <li class="card step">
-                    <span class="step-k">03 · Detect &amp; control</span>
-                    <p>Any RTSP client can read the stream (VLC and FFplay work too). The YOLOv5 model consumes it, and the controller script turns detections into velocity commands.</p>
-                </li>
-                <li class="card step">
-                    <span class="step-k">04 · Command</span>
-                    <p>The controller sends <code>Vx,Vy</code> over <a href="https://zeromq.org/">ZeroMQ</a>, which mirrors how it talks to the DJI app. Unity scales the values by the Eagle's max speed.</p>
-                </li>
-            </ol>
-        </section>
+    <section id="results" class="pk-section">
+      <div class="pk-container">
+        <p class="pk-eyebrow">03 — Results</p>
+        <h2 class="pk-h2">What the simulator surfaced</h2>
+        <p class="pk-prose pk-muted">From the writeup: the sim was used to stress the YOLOv5 perception model and to compare controllers, with the Waypoint method flying the Eagle and the unauthorized (Target) drone through repeatable scenarios.</p>
 
-        <!-- Results -->
-        <section class="container" id="results">
-            <div class="section-head">
-                <p class="eyebrow">Results</p>
-                <h2 class="heading">What the simulator surfaced</h2>
-                <p class="section-lede">
-                    From the writeup: the sim was used to stress the YOLOv5 perception model and to compare
-                    controllers, with the Waypoint method flying the Eagle and the unauthorized (Target) drone through repeatable scenarios.
-                </p>
+        <h3 class="pk-h3 sub-head">Perception testing</h3>
+        <p class="pk-prose pk-muted">YOLOv5 sometimes failed to detect the drones correctly, because of busy backgrounds and poor contrast between drone and background.</p>
+        <div class="perception">
+          <figure class="pk-figure">
+            <div class="pk-frame">
+              <video poster="assets/false-positives-poster.webp" width="640" height="360" autoplay muted loop playsinline preload="metadata"
+                     aria-label="Eagle camera view over grass, trees and a road. The drone in the field is boxed as Drone, and lampposts along the road are also boxed as Drone.">
+                <source src="assets/false-positives.webm" type="video/webm" />
+                <source src="assets/false-positives.mp4" type="video/mp4" />
+              </video>
             </div>
-
-            <h3 class="sub-head">Perception testing</h3>
-            <p class="sub-lede">YOLOv5 sometimes failed to detect the drones correctly, because of busy backgrounds and poor contrast between drone and background.</p>
-            <div class="perception">
-                <figure class="card clip-card">
-                    <video poster="assets/false-positives-poster.webp" width="640" height="360"
-                           autoplay muted loop playsinline preload="metadata"
-                           aria-label="Eagle camera view over grass, trees and a road. The drone in the field is boxed as Drone, and lampposts along the road are also boxed as Drone.">
-                        <source src="assets/false-positives.webm" type="video/webm" />
-                        <source src="assets/false-positives.mp4" type="video/mp4" />
-                    </video>
-                    <figcaption class="clip-body">
-                        <span class="step-k">False positives · lampposts</span>
-                        <span class="clip-text">Waypoint flights near lampposts got them mistaken for drones. A filtering algorithm was added and improved over several rounds, tested against a set of control and treatment scenarios to find the best filter.</span>
-                    </figcaption>
-                </figure>
-                <figure class="card clip-card">
-                    <video poster="assets/false-negatives-poster.webp" width="583" height="720"
-                           autoplay muted loop playsinline preload="metadata"
-                           aria-label="Eagle camera view over pale sand. A white drone is boxed as Drone over darker sand, but the box disappears while it crosses the white patch.">
-                        <source src="assets/false-negatives.webm" type="video/webm" />
-                        <source src="assets/false-negatives.mp4" type="video/mp4" />
-                    </video>
-                    <figcaption class="clip-body">
-                        <span class="step-k">False negatives · white sand</span>
-                        <span class="clip-text">Flying white drones over white sand gave the lowest contrast and missed detections. A state motion estimator was tuned in the sim to use trajectory information to guess the drone's position when contrast was low.</span>
-                    </figcaption>
-                </figure>
+            <figcaption><b>False positives</b>Waypoint flights near lampposts got them mistaken for drones. A filtering algorithm was added and improved over several rounds, tested against a set of control and treatment scenarios to find the best filter.</figcaption>
+          </figure>
+          <figure class="pk-figure">
+            <div class="pk-frame">
+              <video poster="assets/false-negatives-poster.webp" width="583" height="720" autoplay muted loop playsinline preload="metadata"
+                     aria-label="Eagle camera view over pale sand. A white drone is boxed as Drone over darker sand, but the box disappears while it crosses the white patch.">
+                <source src="assets/false-negatives.webm" type="video/webm" />
+                <source src="assets/false-negatives.mp4" type="video/mp4" />
+              </video>
             </div>
-
-            <h3 class="sub-head">Real-time control testing</h3>
-            <p class="sub-lede">The sim showed why the choice between a P and a PID controller matters. Plots show the Target's offset from centre, in pixels.</p>
-            <div class="results">
-                <figure class="card chart-card">
-                    <div class="chart-head">
-                        <span class="step-k">Stationary target · 600 px off-centre</span>
-                        <span class="legend"><i class="sw sw-p"></i>P <i class="sw sw-pid"></i>PID</span>
-                    </div>
-                    <img src="assets/pid-static.webp" width="720" height="217" loading="lazy"
-                         alt="Line chart of offset in pixels for a stationary target starting 600 pixels off-centre. P (blue) falls fast, overshoots below zero, oscillates, then centres. PID (orange) overshoots less with no oscillation, but takes much longer to reach zero." />
-                    <figcaption>P overshoots and oscillates before centring. PID overshoots less and doesn't oscillate, but takes longer to centre.</figcaption>
-                </figure>
-                <figure class="card chart-card">
-                    <div class="chart-head">
-                        <span class="step-k">Moving target · constant velocity</span>
-                        <span class="legend"><i class="sw sw-p"></i>P <i class="sw sw-pid"></i>PID</span>
-                    </div>
-                    <img src="assets/pid-moving.webp" width="720" height="217" loading="lazy"
-                         alt="Line chart of offset in pixels for a target starting at centre and moving away at constant velocity. P (blue) levels off at a steady error of about 100 pixels. PID (orange) lets the target pull away further, peaking around 250 pixels, then brings the offset down toward zero." />
-                    <figcaption>P never centres and keeps a steady-state error of 100 px. PID does centre, but first lets the Target pull away 250 px (P: 150 px).</figcaption>
-                </figure>
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section class="container" id="features">
-            <div class="section-head">
-                <p class="eyebrow">Features</p>
-                <h2 class="heading">Built for repeatable tests</h2>
-            </div>
-            <ul class="feature-grid">
-                <li class="card feature">
-                    <h3>Near-realistic scenes</h3>
-                    <p>HDRP terrain, foliage and roads from the Unity Terrain demo and EasyRoads3D, plus sandy textures chosen to make detection harder.</p>
-                </li>
-                <li class="card feature">
-                    <h3>Configurable RTSP stream</h3>
-                    <p>Port, URL, width, height and frame rate are all set in the menu. The app lists your device's IP addresses so another machine on the network can connect.</p>
-                </li>
-                <li class="card feature">
-                    <h3>Latency injection</h3>
-                    <p>Add a fixed delay to the video stream or to incoming ZeroMQ commands. An optional on-screen timestamp, burned into the stream, helps measure end-to-end latency.</p>
-                </li>
-                <li class="card feature">
-                    <h3>Input Replay with pass/fail</h3>
-                    <p>Record the Target's normalised velocity and replay it. A run passes only if the Target stays in the camera frame throughout. "Load All" runs every replay in turn.</p>
-                </li>
-                <li class="card feature">
-                    <h3>Waypoints &amp; circling</h3>
-                    <p>Readable waypoint files give x, y and speed. The Circle mode orbits the start point with a set radius, speed and direction.</p>
-                </li>
-                <li class="card feature">
-                    <h3>Swappable target drone</h3>
-                    <p>DJI Mavic and Phantom models are included. Import <code>.obj</code> or glTF models at runtime from <code>StreamingAssets</code> and recolour them with a colour picker.</p>
-                </li>
-            </ul>
-        </section>
-
-        <!-- Setup -->
-        <section class="container" id="setup">
-            <div class="section-head">
-                <p class="eyebrow">Setup</p>
-                <h2 class="heading">Run the loop</h2>
-                <p class="section-lede">Condensed from the <a href="https://github.com/thedylone/unity-drone-simulator#quickstart">README quickstart</a>.</p>
-            </div>
-            <div class="setup">
-                <ol class="setup-steps">
-                    <li>
-                        <h3>Get the app</h3>
-                        <p>Clone the repository and open <code>unity/drone</code> in <strong>Unity 2020.3.30f1</strong>. Run it in the Editor, or build it yourself. An NVIDIA GPU is recommended for the H.264 NVIDIA preset.</p>
-                        <pre><code>git clone https://github.com/thedylone/unity-drone-simulator.git</code></pre>
-                    </li>
-                    <li>
-                        <h3>Start an RTSP server first</h3>
-                        <p>Use the bundled <a href="https://github.com/thedylone/unity-drone-simulator/tree/main/rtsp%20simple%20server">rtsp-simple-server</a>. Its <code>rtspAddress</code> in <code>rtsp-simple-server.yml</code> must match the app's port (default <code>:8554</code>).</p>
-                        <p class="warn"><span>Warning</span> Starting the stream with no server running crashes the app.</p>
-                    </li>
-                    <li>
-                        <h3>Configure settings</h3>
-                        <p>In <strong>Settings</strong>, set the RTSP output path (port + URL) and the ZeroMQ listener path. The listener path must be the controller script's output path.</p>
-                        <figure class="card media-card step-shot">
-                            <img src="assets/menu.webp" width="1600" height="900" loading="lazy"
-                                 alt="The simulator's main menu, with Start, Settings, Fullscreen and Quit buttons and a Quick Glance sidebar of key settings." />
-                            <figcaption>Main menu with the Quick Glance settings sidebar.</figcaption>
-                        </figure>
-                    </li>
-                    <li>
-                        <h3>Press Start</h3>
-                        <p>The scene loads, and RTSP and ZeroMQ start on their own. The server should show a session publishing to your path.</p>
-                    </li>
-                    <li>
-                        <h3>Run the CV model and controller</h3>
-                        <p>Point the vision model at the stream. If it runs on another device, check the firewall allows the connection.</p>
-                        <pre><code>rtsp://&lt;ip-address&gt;:8554/drone</code></pre>
-                        <p>Fly the Target with <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> and the Eagle should follow. Press <kbd>Esc</kbd> to open the Input Replay, Waypoint and Circle menus.</p>
-                    </li>
-                </ol>
-                <aside class="card side-card">
-                    <p class="eyebrow">Further reading</p>
-                    <ul class="link-list">
-                        <li><a href="https://github.com/thedylone/unity-drone-simulator#readme">README: full settings &amp; runtime guide</a></li>
-                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/FFmpegOut.md">FFmpegOut modifications</a></li>
-                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/ZeroMQ.md">ZeroMQ client</a></li>
-                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/rtsp-simple-server.md">rtsp-simple-server config</a></li>
-                        <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/Assets.md">Third-party assets</a></li>
-                    </ul>
-                </aside>
-            </div>
-        </section>
-
-        <!-- Writeup -->
-        <section class="container">
-            <a class="card writeup" href="https://medium.com/d-classified/unity-as-a-testbed-for-autonomy-development-1e326323c68d">
-                <span class="eyebrow">Writeup · D-Classified on Medium</span>
-                <span class="writeup-title">Unity as a testbed for autonomy development</span>
-                <span class="writeup-cta">Read the article ↗</span>
-            </a>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-inner">
-            <span>Unity Drone Simulator · MIT License</span>
-            <span class="footer-links">
-                <a href="https://projects.thedylone.com/">← All projects</a>
-                <a href="https://github.com/thedylone/unity-drone-simulator">GitHub</a>
-            </span>
+            <figcaption><b>False negatives</b>Flying white drones over white sand gave the lowest contrast and missed detections. A state motion estimator was tuned in the sim to use trajectory information to guess the drone's position when contrast was low.</figcaption>
+          </figure>
         </div>
-    </footer>
+
+        <h3 class="pk-h3 sub-head">Real-time control testing</h3>
+        <p class="pk-prose pk-muted">The sim showed why the choice between a P and a PID controller matters. Plots show the Target's offset from centre, in pixels: P in blue, PID in orange.</p>
+        <div class="charts">
+          <figure class="pk-figure">
+            <img src="assets/pid-static.webp" width="720" height="217" loading="lazy"
+                 alt="Line chart of offset in pixels for a stationary target starting 600 pixels off-centre. P (blue) falls fast, overshoots below zero, oscillates, then centres. PID (orange) overshoots less with no oscillation, but takes much longer to reach zero." />
+            <figcaption><b>Stationary, 600 px off-centre</b>P overshoots and oscillates before centring. PID overshoots less and doesn't oscillate, but takes longer to centre.</figcaption>
+          </figure>
+          <figure class="pk-figure">
+            <img src="assets/pid-moving.webp" width="720" height="217" loading="lazy"
+                 alt="Line chart of offset in pixels for a target starting at centre and moving away at constant velocity. P (blue) levels off at a steady error of about 100 pixels. PID (orange) lets the target pull away further, peaking around 250 pixels, then brings the offset down toward zero." />
+            <figcaption><b>Moving at constant velocity</b>P never centres and keeps a steady-state error of 100 px. PID does centre, but first lets the Target pull away 250 px (P: 150 px).</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="pk-section">
+      <div class="pk-container">
+        <p class="pk-eyebrow">04 — Features</p>
+        <h2 class="pk-h2">Built for repeatable tests</h2>
+        <ul class="pk-grid features">
+          <li class="pk-card">
+            <h3 class="pk-h3">Near-realistic scenes</h3>
+            <p class="pk-muted">HDRP terrain, foliage and roads from the Unity Terrain demo and EasyRoads3D, plus sandy textures chosen to make detection harder.</p>
+          </li>
+          <li class="pk-card">
+            <h3 class="pk-h3">Configurable RTSP stream</h3>
+            <p class="pk-muted">Port, URL, width, height and frame rate are all set in the menu. The app lists your device's IP addresses so another machine on the network can connect.</p>
+          </li>
+          <li class="pk-card">
+            <h3 class="pk-h3">Latency injection</h3>
+            <p class="pk-muted">Add a fixed delay to the video stream or to incoming ZeroMQ commands. An optional on-screen timestamp, burned into the stream, helps measure end-to-end latency.</p>
+          </li>
+          <li class="pk-card">
+            <h3 class="pk-h3">Input Replay with pass/fail</h3>
+            <p class="pk-muted">Record the Target's normalised velocity and replay it. A run passes only if the Target stays in the camera frame throughout. "Load All" runs every replay in turn.</p>
+          </li>
+          <li class="pk-card">
+            <h3 class="pk-h3">Waypoints and circling</h3>
+            <p class="pk-muted">Readable waypoint files give x, y and speed. The Circle mode orbits the start point with a set radius, speed and direction.</p>
+          </li>
+          <li class="pk-card">
+            <h3 class="pk-h3">Swappable target drone</h3>
+            <p class="pk-muted">DJI Mavic and Phantom models are included. Import <code>.obj</code> or glTF models at runtime from <code>StreamingAssets</code> and recolour them with a colour picker.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="setup" class="pk-section">
+      <div class="pk-container">
+        <p class="pk-eyebrow">05 — Setup</p>
+        <h2 class="pk-h2">Run the loop</h2>
+        <p class="pk-prose pk-muted">Condensed from the <a href="https://github.com/thedylone/unity-drone-simulator#quickstart">README quickstart</a>.</p>
+        <ol class="setup-steps pk-prose">
+          <li>
+            <h3 class="pk-h3">Get the app</h3>
+            <p>Clone the repository and open <code>unity/drone</code> in <strong>Unity 2020.3.30f1</strong>. Run it in the Editor, or build it yourself. An NVIDIA GPU is recommended for the H.264 NVIDIA preset.</p>
+            <pre><code>git clone https://github.com/thedylone/unity-drone-simulator.git</code></pre>
+          </li>
+          <li>
+            <h3 class="pk-h3">Start an RTSP server first</h3>
+            <p>Use the bundled <a href="https://github.com/thedylone/unity-drone-simulator/tree/main/rtsp%20simple%20server">rtsp-simple-server</a>. Its <code>rtspAddress</code> in <code>rtsp-simple-server.yml</code> must match the app's port (default <code>:8554</code>).</p>
+            <p class="pk-callout">Starting the stream with no server running crashes the app.</p>
+          </li>
+          <li>
+            <h3 class="pk-h3">Configure settings</h3>
+            <p>In <strong>Settings</strong>, set the RTSP output path (port + URL) and the ZeroMQ listener path. The listener path must be the controller script's output path.</p>
+            <figure class="pk-figure">
+              <img src="assets/menu.webp" width="1600" height="900" loading="lazy"
+                   alt="The simulator's main menu, with Start, Settings, Fullscreen and Quit buttons and a Quick Glance sidebar of key settings." />
+              <figcaption><b>Main menu</b>With the Quick Glance settings sidebar.</figcaption>
+            </figure>
+          </li>
+          <li>
+            <h3 class="pk-h3">Press Start</h3>
+            <p>The scene loads, and RTSP and ZeroMQ start on their own. The server should show a session publishing to your path.</p>
+          </li>
+          <li>
+            <h3 class="pk-h3">Run the CV model and controller</h3>
+            <p>Point the vision model at the stream. If it runs on another device, check the firewall allows the connection.</p>
+            <pre><code>rtsp://&lt;ip-address&gt;:8554/drone</code></pre>
+            <p>Fly the Target with <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> and the Eagle should follow. Press <kbd>Esc</kbd> to open the Input Replay, Waypoint and Circle menus.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="reading" class="pk-section">
+      <div class="pk-container">
+        <p class="pk-eyebrow">06 — Further reading</p>
+        <h2 class="pk-h2">Writeup and docs</h2>
+        <div class="pk-grid">
+          <a class="pk-card link-card" href="https://medium.com/d-classified/unity-as-a-testbed-for-autonomy-development-1e326323c68d" target="_blank" rel="noreferrer">
+            <span class="pk-label">D-Classified on Medium</span>
+            <span class="pk-h3 link-title">Unity as a testbed for autonomy development <span aria-hidden="true">↗</span></span>
+          </a>
+          <div class="pk-card">
+            <p class="pk-label">In the repo</p>
+            <ul class="doc-links">
+              <li><a href="https://github.com/thedylone/unity-drone-simulator#readme">README: full settings and runtime guide</a></li>
+              <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/FFmpegOut.md">FFmpegOut modifications</a></li>
+              <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/ZeroMQ.md">ZeroMQ client</a></li>
+              <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/rtsp-simple-server.md">rtsp-simple-server config</a></li>
+              <li><a href="https://github.com/thedylone/unity-drone-simulator/blob/main/docs/Assets.md">Third-party assets</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pk-footer">
+    <div class="pk-footer-inner">
+      <span>© 2026 Dylan Chua</span>
+      <div class="pk-footer-links">
+        <a href="https://projects.thedylone.com/">All projects</a>
+        <a href="https://thedylone.pages.dev">Portfolio</a>
+        <a href="https://github.com/thedylone" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
