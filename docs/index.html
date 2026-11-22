@@ -27,6 +27,7 @@
                 <ul class="nav-links">
                     <li class="hide-sm"><a href="#why">Why</a></li>
                     <li class="hide-sm"><a href="#architecture">Architecture</a></li>
+                    <li class="hide-sm"><a href="#results">Results</a></li>
                     <li class="hide-sm"><a href="#features">Features</a></li>
                     <li><a href="#setup">Setup</a></li>
                     <li><a href="https://github.com/thedylone/unity-drone-simulator">GitHub ↗</a></li>
@@ -234,6 +235,38 @@
             </ol>
         </section>
 
+        <!-- Results -->
+        <section class="container" id="results">
+            <div class="section-head">
+                <p class="eyebrow">Results</p>
+                <h2 class="heading">P versus PID, in the loop</h2>
+                <p class="section-lede">
+                    The writeup compares a proportional-only controller with a full PID controller following the
+                    Target, once with the Target held still and once with it moving. Both runs use the same sim, stream and command path.
+                </p>
+            </div>
+            <div class="results">
+                <figure class="card chart-card">
+                    <div class="chart-head">
+                        <span class="step-k">Stationary target</span>
+                        <span class="legend"><i class="sw sw-p"></i>P <i class="sw sw-pid"></i>PID</span>
+                    </div>
+                    <img src="assets/pid-static.webp" width="720" height="217" loading="lazy"
+                         alt="Line chart, stationary target. Both controllers start at 600. P (blue) falls fast, overshoots to about −180, swings back and settles near zero. PID (orange) falls a little more slowly, dips to about −75 and creeps back toward zero over a much longer time." />
+                    <figcaption>P gets there fast but overshoots and rings; PID overshoots less but takes longer to settle.</figcaption>
+                </figure>
+                <figure class="card chart-card">
+                    <div class="chart-head">
+                        <span class="step-k">Moving target</span>
+                        <span class="legend"><i class="sw sw-p"></i>P <i class="sw sw-pid"></i>PID</span>
+                    </div>
+                    <img src="assets/pid-moving.webp" width="720" height="217" loading="lazy"
+                         alt="Line chart, moving target. P (blue) rises to about 135 then holds a steady band around 90 to 100. PID (orange) climbs to about 250, then steadily falls to around 15 by the end of the run." />
+                    <figcaption>P holds a constant offset of about 100; PID starts further off but keeps closing the gap, ending near 15.</figcaption>
+                </figure>
+            </div>
+        </section>
+
         <!-- Features -->
         <section class="container" id="features">
             <div class="section-head">
@@ -274,28 +307,22 @@
                 <p class="eyebrow">Gallery</p>
                 <h2 class="heading">In the app</h2>
             </div>
-            <div class="gallery">
+            <div class="gallery gallery-3">
                 <figure class="card media-card">
                     <img src="assets/menu.webp" width="1600" height="900" loading="lazy"
                          alt="The simulator's main menu, with Start, Settings, Fullscreen and Quit buttons and a Quick Glance sidebar of key settings." />
                     <figcaption>Main menu with the Quick Glance settings sidebar.</figcaption>
                 </figure>
-                <!--
-                    TODO(owner): add a screenshot or short GIF of the Eagle's downward-facing camera view,
-                    ideally as received over RTSP (e.g. in VLC/FFplay) with the CV model's detection box drawn.
-                    Save it as docs/assets/eagle-pov.webp (16:9), then replace this <div> with:
-                    <figure class="card media-card">
-                        <img src="assets/eagle-pov.webp" width="1600" height="900" loading="lazy" alt="..." />
-                        <figcaption>...</figcaption>
-                    </figure>
-                -->
-                <div class="card media-card todo-slot" role="img" aria-label="Placeholder for a screenshot of the Eagle drone's downward camera view">
-                    <div class="todo-inner">
-                        <span class="todo-tag">TODO</span>
-                        <p class="todo-title">Eagle POV screenshot</p>
-                        <p class="todo-note">Downward camera feed as received over RTSP, ideally with a detection box. Drop it in at <code>docs/assets/eagle-pov.webp</code>.</p>
-                    </div>
-                </div>
+                <figure class="card media-card">
+                    <img src="assets/pov-detections.webp" width="640" height="360" loading="lazy"
+                         alt="Top-down view from the Eagle camera over grass, trees and a road, with three small drones each marked by a green box labelled Drone." />
+                    <figcaption>Eagle POV: the CV model boxing every drone in frame.</figcaption>
+                </figure>
+                <figure class="card media-card media-tall">
+                    <img src="assets/pov-sand.webp" width="583" height="720" loading="lazy"
+                         alt="Top-down view over pale, whitened sand. A tiny white drone near the bottom edge is marked with a green box labelled Drone." />
+                    <figcaption>The hard case: a white drone over whitened sand.</figcaption>
+                </figure>
             </div>
         </section>
 
