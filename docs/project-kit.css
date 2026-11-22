@@ -1,5 +1,5 @@
 /*
- * project-kit.css — v1
+ * project-kit.css — v1.1
  * Shared style for every project page under projects.thedylone.com/<repo>/.
  * Copy this file verbatim into each project; do not edit it per project.
  * Page-specific styles go in a separate file loaded AFTER this one and must
@@ -267,4 +267,66 @@ pre {
     .pk-header-inner { gap: 0.75rem; }
     .pk-nav { gap: 0.9rem; }
     .pk-brand { font-size: 0.98rem; }
+}
+
+/* ---------- Section bar (v1.1, optional) ----------
+ * For pages with 4+ sections only; at most 7 links. Place directly after the
+ * hero, inside <main>. It sits in the flow under the hero, then sticks below
+ * the header. project-kit.js highlights the current section.
+ */
+:root { --subnav-height: 2.75rem; }
+html:has(.pk-subnav) { scroll-padding-top: calc(var(--header-height) + var(--subnav-height) + 1rem); }
+.pk-subnav {
+    position: sticky;
+    top: var(--header-height);
+    z-index: 90;
+    height: var(--subnav-height);
+    margin-top: 2.5rem;
+    background: rgba(249, 249, 246, 0.82);
+    backdrop-filter: blur(14px) saturate(1.1);
+    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+    border-block: 1px solid var(--color-hairline);
+}
+.pk-subnav-inner {
+    height: 100%;
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+.pk-subnav ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.pk-subnav ul::-webkit-scrollbar { display: none; }
+.pk-subnav li { flex: none; }
+.pk-subnav li + li { margin: 0; }
+.pk-subnav a {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--color-text-faint);
+    padding-block: 0.2rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+.pk-subnav a:hover, .pk-subnav a:focus-visible { color: var(--color-navy); }
+.pk-subnav a[aria-current="true"] { color: var(--color-navy); border-bottom-color: var(--color-gold); }
+@media (max-width: 640px) {
+    .pk-subnav-inner { padding-inline: 0; }
+    .pk-subnav ul {
+        padding-inline: var(--gutter);
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 1rem, #000 calc(100% - 1.5rem), transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 1rem, #000 calc(100% - 1.5rem), transparent);
+    }
 }
